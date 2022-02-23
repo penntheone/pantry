@@ -1,4 +1,4 @@
-package com.fireside.pantry.apis;
+package com.fireside.pantry.app.api;
 
 import java.util.List;
 

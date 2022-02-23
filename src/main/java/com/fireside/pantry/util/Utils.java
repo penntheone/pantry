@@ -1,12 +1,20 @@
-package com.fireside.pantry.utils;
+package com.fireside.pantry.util;
 
-import com.fireside.pantry.apis.APIConfig;
-import com.google.gson.*;
+import com.fireside.pantry.app.api.APIConfig;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class JsonUtils {
+public class Utils {
+
+    public static InputStream loadResource(String path) {
+        return Utils.class.getClassLoader().getResourceAsStream(path);
+    }
 
     public static String prettify(String json) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -19,7 +27,7 @@ public class JsonUtils {
 
     public static APIConfig loadAPIConfig(String apiName) {
         JsonReader reader = new JsonReader(new InputStreamReader(
-                ResourceUtils.loadResource(String.format("apis/%s.json", apiName))));
+                loadResource(String.format("apis/%s.json", apiName))));
         return new Gson().fromJson(reader, APIConfig.class);
     }
 }

@@ -1,6 +1,6 @@
-package com.fireside.pantry.apis;
+package com.fireside.pantry.app.api;
 
-import com.fireside.pantry.utils.JsonUtils;
+import com.fireside.pantry.util.Utils;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -15,7 +15,7 @@ public class FoodDataCentral {
     private final APIConfig config;
 
     private FoodDataCentral() {
-        this.config = JsonUtils.loadAPIConfig("FoodDataCentral");
+        this.config = Utils.loadAPIConfig("FoodDataCentral");
     }
 
     private URL buildQuery(String apiPath) throws MalformedURLException {
