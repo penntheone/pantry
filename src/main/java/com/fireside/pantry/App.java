@@ -10,8 +10,4 @@ public class App extends JFrame {
         this.setPreferredSize(new Dimension(800, 400));
         this.setVisible(true);
     }
-
-    public void hello() {
-
-    }
 }

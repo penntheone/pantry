@@ -1,6 +1,6 @@
 package com.fireside.pantry.util;
 
-import com.fireside.pantry.app.api.APIConfig;
+import com.fireside.pantry.db.api.utils.APIConfig;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;

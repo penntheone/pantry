@@ -1,0 +1,7 @@
+{
+  "key": "1",
+  "url": "https://www.themealdb.com/api/json/v1",
+  "paths": [
+    {"name": "listByFirstLetter", "path": "/search.php?f=%s"}
+  ]
+}
