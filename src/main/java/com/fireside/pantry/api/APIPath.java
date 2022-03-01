@@ -1,4 +1,4 @@
-package com.fireside.pantry.db.api.utils;
+package com.fireside.pantry.api;
 
 public class APIPath {
 

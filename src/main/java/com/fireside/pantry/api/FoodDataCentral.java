@@ -1,6 +1,5 @@
-package com.fireside.pantry.db.api;
+package com.fireside.pantry.api;
 
-import com.fireside.pantry.db.api.utils.APIConfig;
 import com.fireside.pantry.util.Utils;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -10,7 +9,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class FoodDataCentral implements API {
+public class FoodDataCentral {
 
     private static FoodDataCentral instance;
     private final APIConfig config;

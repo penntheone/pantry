@@ -1,5 +1,6 @@
 package com.fireside.pantry.db.api;
 
+import com.fireside.pantry.api.TheMealDB;
 import org.junit.jupiter.api.Test;
 
 public class TheMealDBTest {

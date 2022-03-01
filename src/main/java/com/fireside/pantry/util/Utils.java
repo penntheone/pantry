@@ -1,6 +1,7 @@
 package com.fireside.pantry.util;
 
-import com.fireside.pantry.db.api.utils.APIConfig;
+import com.fireside.pantry.api.APIConfig;
+import com.fireside.pantry.db.DBConfig;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -25,9 +26,17 @@ public class Utils {
             return gson.toJson(element.getAsJsonObject());
     }
 
-    public static APIConfig loadAPIConfig(String apiName) {
-        JsonReader reader = new JsonReader(new InputStreamReader(
-                loadResource(String.format("apis/%s.json", apiName))));
+    public static APIConfig loadAPIConfig(String configName) {
+        JsonReader reader = getJsonReader(String.format("api/%s.json", configName));
         return new Gson().fromJson(reader, APIConfig.class);
+    }
+
+    public static DBConfig loadDBConfig(String configName) {
+        JsonReader reader = getJsonReader(String.format("db/%s.json", configName));
+        return new Gson().fromJson(reader, DBConfig.class);
+    }
+
+    private static JsonReader getJsonReader(String resourceName) {
+        return new JsonReader(new InputStreamReader(loadResource(resourceName)));
     }
 }
