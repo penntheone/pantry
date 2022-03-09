@@ -3,6 +3,8 @@ package com.fireside.pantry.db;
 import com.fireside.pantry.util.Utils;
 
 import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class DatabaseConnector {
 
@@ -22,21 +24,21 @@ public class DatabaseConnector {
         this.conn = null;
     }
 
-    public void query(String query) throws SQLException {
+    public List<Row> query(String query) throws SQLException {
         connect();
         Statement statement = conn.createStatement();
         ResultSet result = statement.executeQuery(query);
-
         ResultSetMetaData meta = result.getMetaData();
-
+        LinkedList<Row> rows = new LinkedList<>();
         while(result.next()) {
+            Row row = new Row();
             for (int i = 1; i <= meta.getColumnCount(); i++) {
-                System.out.printf("%s : %s\t\t", meta.getColumnName(i), result.getString(i));
+                row.add(meta.getColumnName(i), result.getString(i));
             }
-            System.out.println();
+            rows.add(row);
         }
-
         disconnect();
+        return rows;
     }
 
     public String buildUrl() {

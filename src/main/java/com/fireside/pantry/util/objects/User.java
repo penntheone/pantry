@@ -1,8 +1,11 @@
 package com.fireside.pantry.util.objects;
 
+import com.fireside.pantry.db.Row;
+import com.google.gson.Gson;
+
 public class User {
 
-    private final int userId;
+    private final int id;
     private final String username;
     private final String email;
     private final String firstName;
@@ -10,11 +13,11 @@ public class User {
     private final String birthday;
     private final String authString;
 
-    public User(int userId,
+    public User(int id,
                 String username, String email,
                 String firstName, String lastName,
                 String birthday, String authString) {
-        this.userId = userId;
+        this.id = id;
         this.username = username;
         this.email = email;
         this.firstName = firstName;
@@ -23,8 +26,22 @@ public class User {
         this.authString = authString;
     }
 
-    public int getUserId() {
-        return userId;
+    public User(Row row) throws IllegalArgumentException {
+        try {
+            this.id = Integer.parseInt(row.get("id"));
+            this.username = row.get("username");
+            this.email = row.get("email");
+            this.firstName = row.get("first_name");
+            this.lastName = row.get("last_name");
+            this.birthday = row.get("birthday");
+            this.authString = row.get("auth_string");
+        } catch (Exception exception) {
+            throw new IllegalArgumentException(exception);
+        }
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getUsername() {
@@ -53,13 +70,6 @@ public class User {
 
     @Override
     public String toString() {
-        return String.format("%s:%s:%s:%s:%s:%s",
-                userId,
-                username,
-                email,
-                firstName,
-                lastName,
-                birthday
-        );
+        return new Gson().toJson(this);
     }
 }

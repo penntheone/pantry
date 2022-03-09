@@ -1,5 +1,6 @@
-package com.fireside.pantry.api;
+package com.fireside.pantry.api.mealdb;
 
+import com.fireside.pantry.api.APIConfig;
 import com.fireside.pantry.util.Utils;
 
 import javax.net.ssl.HttpsURLConnection;
