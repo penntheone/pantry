@@ -15,6 +15,14 @@ public class RecipeManager {
         return getRecipes("SELECT * FROM pantry.recipes");
     }
 
+    public static List<Recipe> getRangeOfRecipes(int start, int end) {
+        List<Recipe> recipes = new ArrayList<>();
+        for (int i = start; i < end + 1; i++) {
+            recipes.add(getRecipeByID(i));
+        }
+        return recipes;
+    }
+
     public static Recipe getRecipeByID(int recipeId) {
         String query = String.format("SELECT * FROM pantry.recipes WHERE id='%d'", recipeId);
         List<Recipe> recipes = getRecipes(query);
