@@ -1,7 +1,8 @@
-package com.fireside.pantry.api.mealdb;
+package com.fireside.pantry.app.api.mealdb;
 
-import com.fireside.pantry.api.APIConfig;
+import com.fireside.pantry.app.api.APIConfig;
 import com.fireside.pantry.util.Utils;
+import com.google.gson.Gson;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -9,6 +10,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class TheMealDB {
 
@@ -19,9 +23,36 @@ public class TheMealDB {
         this.config = Utils.loadAPIConfig("TheMealDB");
     }
 
+    public List<MealDBRecipe> getAllRecipes() {
+        LinkedList<MealDBRecipe> allRecipes = new LinkedList<>();
+
+        for (char c = 'a'; c <= 'z'; c++) {
+            if (c == 'q' || c == 'u' || c == 'x' || c == 'z')
+                continue;
+            String result = getRecipesByFirstLetter(c);
+            MealDBRecipe[] recipes = new Gson().fromJson(
+                    result.substring(9, result.length() - 1),
+                    MealDBRecipe[].class
+            );
+
+            allRecipes.addAll(Arrays.asList(recipes));
+        }
+        return allRecipes;
+    }
+
     public String getRecipesByFirstLetter(char letter) {
         try {
             URL query = buildQueryWithParams(config.getPath("listByFirstLetter"), String.valueOf(letter));
+            return executeQuery(query);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getRecipeByName(String name) {
+        try {
+            URL query = buildQueryWithParams(config.getPath("recipeByName"), name);
             return executeQuery(query);
         } catch (Exception exception) {
             exception.printStackTrace();

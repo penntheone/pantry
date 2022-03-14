@@ -1,6 +1,10 @@
-package com.fireside.pantry.api.mealdb;
+package com.fireside.pantry.app.api.mealdb;
 
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MealDBRecipe {
 
@@ -118,6 +122,81 @@ public class MealDBRecipe {
         this.strMeasure19 = strMeasure19;
         this.strMeasure20 = strMeasure20;
         this.strSource = strSource;
+    }
+
+    public List<String> getIngredients() {
+        LinkedList<String> ingredients = new LinkedList<>();
+        ingredients.add(strIngredient1);
+        ingredients.add(strIngredient2);
+        ingredients.add(strIngredient3);
+        ingredients.add(strIngredient4);
+        ingredients.add(strIngredient5);
+        ingredients.add(strIngredient6);
+        ingredients.add(strIngredient7);
+        ingredients.add(strIngredient8);
+        ingredients.add(strIngredient9);
+        ingredients.add(strIngredient10);
+        ingredients.add(strIngredient11);
+        ingredients.add(strIngredient12);
+        ingredients.add(strIngredient13);
+        ingredients.add(strIngredient14);
+        ingredients.add(strIngredient15);
+        ingredients.add(strIngredient16);
+        ingredients.add(strIngredient17);
+        ingredients.add(strIngredient18);
+        ingredients.add(strIngredient19);
+        ingredients.add(strIngredient20);
+
+        while (ingredients.contains(null)) {
+            ingredients.remove(null);
+        }
+
+        while (ingredients.contains("")) {
+            ingredients.remove("");
+        }
+
+        while (ingredients.contains(" ")) {
+            ingredients.remove(" ");
+        }
+
+        return ingredients;
+    }
+
+    public List<String> getMeasures() {
+        LinkedList<String> measures = new LinkedList<>();
+        measures.add(strMeasure1);
+        measures.add(strMeasure2);
+        measures.add(strMeasure3);
+        measures.add(strMeasure4);
+        measures.add(strMeasure5);
+        measures.add(strMeasure6);
+        measures.add(strMeasure7);
+        measures.add(strMeasure8);
+        measures.add(strMeasure9);
+        measures.add(strMeasure10);
+        measures.add(strMeasure11);
+        measures.add(strMeasure12);
+        measures.add(strMeasure13);
+        measures.add(strMeasure14);
+        measures.add(strMeasure15);
+        measures.add(strMeasure16);
+        measures.add(strMeasure17);
+        measures.add(strMeasure18);
+        measures.add(strMeasure19);
+        measures.add(strMeasure20);
+
+        while (measures.contains(null)) {
+            measures.remove(null);
+        }
+
+        while (measures.contains("")) {
+            measures.remove("");
+        }
+
+        while (measures.contains(" ")) {
+            measures.remove(" ");
+        }
+        return measures;
     }
 
     @Override

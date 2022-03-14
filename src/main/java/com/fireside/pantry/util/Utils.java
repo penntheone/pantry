@@ -1,6 +1,6 @@
 package com.fireside.pantry.util;
 
-import com.fireside.pantry.api.APIConfig;
+import com.fireside.pantry.app.api.APIConfig;
 import com.fireside.pantry.db.DBConfig;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -38,5 +38,22 @@ public class Utils {
 
     private static JsonReader getJsonReader(String resourceName) {
         return new JsonReader(new InputStreamReader(loadResource(resourceName)));
+    }
+
+    public static boolean isPrintable(String str) {
+        if (str == null) {
+            return false;
+        }
+        int sz = str.length();
+        for (int i = 0; i < sz; i++) {
+            if (!isAsciiPrintable(str.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isAsciiPrintable(char ch) {
+        return ch >= 32 && ch < 127;
     }
 }
