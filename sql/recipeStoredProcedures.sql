@@ -50,9 +50,10 @@ BEGIN
     FROM pantry.Recipes;
 END;
 
-CALL spGetAllRecipes();
+
 /*
 Example sps calls
+CALL spGetAllRecipes();
 CALL spGetAllRecipes();
 CALL spGetRecipeIDByName('Braised Beef Chilli');
 CALL spGetRecipeByRegion('Mexican');
