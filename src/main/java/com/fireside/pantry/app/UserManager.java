@@ -12,7 +12,29 @@ import java.util.List;
 public class UserManager {
 
     public static List<User> getAllUsers() {
-        return getUsers("select * from pantry.users;");
+        return getUsers("CALL spGetAllUsers();");
+    }
+
+    public static User getUserByFirstName(String firstName) {
+        return getUser(String.format("CALL spGetUserByFName('%s');", firstName));
+    }
+
+    public static User getUserByLastName(String lastName) {
+        return getUser(String.format("CALL spGetUserByLName('%s');", lastName));
+    }
+
+    // -------------- Private methods --------------
+
+    private static User getUser(String query) {
+        try {
+            List<Row> rows = new DatabaseConnector().query(query);
+            if (rows.size() == 0)
+                return new User();
+            return new User(rows.get(0));
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return new User();
+        }
     }
 
     private static List<User> getUsers(String query) {

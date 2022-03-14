@@ -13,6 +13,16 @@ public class User {
     private final String birthday;
     private final String authString;
 
+    public User() {
+        this.id = -1;
+        this.username = "";
+        this.email = "";
+        this.firstName = "";
+        this.lastName = "";
+        this.birthday = "";
+        this.authString = "";
+    }
+
     public User(int id,
                 String username, String email,
                 String firstName, String lastName,
