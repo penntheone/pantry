@@ -2,6 +2,6 @@
   "host": "localhost",
   "port": "3306",
   "database": "pantry",
-  "user": "pantry",
-  "password": "pantry!123"
+  "user": "root",
+  "password": "password"
 }

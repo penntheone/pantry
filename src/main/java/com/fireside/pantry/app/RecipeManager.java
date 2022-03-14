@@ -12,7 +12,8 @@ import java.util.List;
 public class RecipeManager {
 
     public static List<Recipe> getAllRecipes() {
-        return getRecipes("SELECT * FROM pantry.recipes");
+
+        return getRecipes("CALL spGetAllRecipes();");
     }
 
     public static List<Recipe> getRangeOfRecipes(int start, int end) {
