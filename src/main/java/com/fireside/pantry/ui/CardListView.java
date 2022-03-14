@@ -5,7 +5,6 @@ import com.fireside.pantry.util.objects.Recipe;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.VBox;
@@ -13,7 +12,7 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListView {
+public class CardListView {
 
     public static Scene build() {
         List<Recipe> recipes = RecipeManager.getRangeOfRecipes(1, 10);
@@ -26,7 +25,6 @@ public class ListView {
             if (i < recipes.size() - 1)
                 nodes.add(new Separator(Orientation.HORIZONTAL));
         }
-
         pane.getChildren().addAll(nodes);
 
         ScrollPane scrollPane = new ScrollPane();
