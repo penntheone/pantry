@@ -6,6 +6,7 @@ import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.VBox;
 
@@ -16,24 +17,21 @@ public class ListView {
 
     public static Scene build() {
         List<Recipe> recipes = RecipeManager.getRangeOfRecipes(1, 10);
-
+        VBox pane = new VBox();
         List<Node> nodes = new ArrayList<>();
         for (int i = 0; i < recipes.size(); i++) {
             Recipe recipe = recipes.get(i);
-            List<Node> cardNodes = new ArrayList<>();
-            cardNodes.add(new Label(recipe.getTitle()));
-            cardNodes.add(new Label(recipe.getCategory()));
-            cardNodes.add(new Label(recipe.getInstructions()));
-            VBox box = new VBox();
-            box.getChildren().addAll(cardNodes);
-            nodes.add(box);
+            RecipeCard recipeCard = new RecipeCard(recipe);
+            nodes.add(recipeCard);
             if (i < recipes.size() - 1)
                 nodes.add(new Separator(Orientation.HORIZONTAL));
         }
 
-        VBox pane = new VBox();
         pane.getChildren().addAll(nodes);
 
-        return new Scene(pane, 1100, 600);
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setContent(pane);
+
+        return new Scene(scrollPane, 1100, 600);
     }
 }
