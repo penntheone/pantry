@@ -17,8 +17,10 @@ CREATE  PROCEDURE spGetUserByLName(IN last_name varchar(50))
 BEGIN
     SELECT * from pantry.Users u WHERE last_name = u.last_name;
 END;
-
+/*
+Used to call sps:
 CALL spGetUserByLName('Tomala');
 CALL spGetUserByFName('Kenon');
 CALL spGetAllUsers();
+ */
 
