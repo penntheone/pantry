@@ -1,4 +1,4 @@
-package com.fireside.pantry.feature;
+package com.fireside.pantry.ui;
 
 import com.fireside.pantry.app.RecipeManager;
 import com.fireside.pantry.util.objects.Recipe;

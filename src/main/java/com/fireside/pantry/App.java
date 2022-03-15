@@ -1,6 +1,6 @@
 package com.fireside.pantry;
 
-import com.fireside.pantry.feature.CardListView;
+import com.fireside.pantry.ui.CardListView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
