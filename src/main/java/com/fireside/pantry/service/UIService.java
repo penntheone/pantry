@@ -24,5 +24,4 @@ public class UIService {
         stage.setScene(scene);
         stage.show();
     }
-
 }

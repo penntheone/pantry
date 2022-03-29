@@ -22,8 +22,7 @@ public class Utils {
         JsonElement element = JsonParser.parseString(json);
         if (json.charAt(0) == '[')
             return gson.toJson(element.getAsJsonArray());
-        else
-            return gson.toJson(element.getAsJsonObject());
+        return gson.toJson(element.getAsJsonObject());
     }
 
     public static APIConfig loadAPIConfig(String configName) {
