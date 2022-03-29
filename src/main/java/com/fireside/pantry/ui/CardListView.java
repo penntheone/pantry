@@ -15,7 +15,7 @@ import java.util.List;
 public class CardListView {
 
     public static Scene build() {
-        List<Recipe> recipes = RecipeManager.getRangeOfRecipes(1, 10);
+        List<Recipe> recipes = RecipeManager.getRangeOfRecipes(50, 65);
         VBox pane = new VBox();
         List<Node> nodes = new ArrayList<>();
         for (int i = 0; i < recipes.size(); i++) {
