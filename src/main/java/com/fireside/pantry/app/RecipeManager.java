@@ -12,7 +12,6 @@ import java.util.List;
 public class RecipeManager {
 
     public static List<Recipe> getAllRecipes() {
-
         return getRecipes("CALL spGetAllRecipes();");
     }
 
@@ -25,7 +24,7 @@ public class RecipeManager {
     }
 
     public static Recipe getRecipeByID(int recipeId) {
-        String query = String.format("SELECT * FROM pantry.recipes WHERE id='%d'", recipeId);
+        String query = String.format("CALL spGetRecipeByID(%d);", recipeId);
         List<Recipe> recipes = getRecipes(query);
         if (recipes.size() == 0)
             return new Recipe();
@@ -33,15 +32,26 @@ public class RecipeManager {
     }
 
     public static int getRecipeIDByName(String name) {
-        String query = String.format(
-                "SELECT * FROM pantry.recipes WHERE title=\"%s\"",
-                name
-        );
-
+        String query = String.format("CALL spGetRecipeIDByName('%s');", name);
         List<Recipe> recipes = getRecipes(query);
         if (recipes.size() == 0)
             return -1;
         return recipes.get(0).getId();
+    }
+
+    public static List<Recipe> getRecipesByRegion(String region) {
+        String query = String.format("CALL spGetRecipeByRegion('%s');", region);
+        return getRecipes(query);
+    }
+
+    public static List<Recipe> getRecipesByCategory(String category) {
+        String query = String.format("CALL spGetRecipeByCategory('%s');", category);
+        return getRecipes(query);
+    }
+
+    public static List<Recipe> getRecipesByTitle(String title) {
+        String query = String.format("CALL spGetRecipeByTitle('%s');", title);
+        return getRecipes(query);
     }
 
     private static List<Recipe> getRecipes(String query) {
