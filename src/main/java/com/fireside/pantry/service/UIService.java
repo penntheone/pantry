@@ -3,8 +3,6 @@ package com.fireside.pantry.service;
 import com.fireside.pantry.app.RecipeManager;
 import com.fireside.pantry.util.objects.Recipe;
 import com.fireside.pantry.ui.CardListView;
-import com.fireside.pantry.ui.basicSearchBar;
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
