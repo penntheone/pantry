@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import javafx.stage.Stage;
 import java.util.List;
 
-public class basicSearchBar {
+public class BasicSearchBar {
     public static Scene build() {
         List<Recipe> recipes = RecipeManager.getRangeOfRecipes(1, 10);
         VBox pane = new VBox();
