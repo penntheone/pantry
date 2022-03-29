@@ -15,14 +15,7 @@ public class IngredientManager {
     }
 
     public static List<Ingredient> getRecipeIngredients(int recipeId) {
-        String query = String.format(
-                "SELECT i.id, i.name, ri.measure " +
-                        "FROM ingredients i " +
-                        "JOIN recipeingredients ri ON i.id = ri.ingredient_id " +
-                        "JOIN recipes r ON ri.recipe_id = r.id " +
-                        "WHERE r.id = %d",
-                recipeId
-        );
+        String query = String.format("CALL spGetIngredientsByRecID(%d);", recipeId);
         try {
             List<Row> rows = new DatabaseConnector().query(query);
             ArrayList<Ingredient> ingredients = new ArrayList<>();
