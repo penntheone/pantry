@@ -8,14 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.VBox;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class CardListView {
 
-    public static Scene build() {
-        List<Recipe> recipes = RecipeManager.getRangeOfRecipes(50, 65);
+    public static Scene build(List<Recipe> recipes) {
         VBox pane = new VBox();
         List<Node> nodes = new ArrayList<>();
         for (int i = 0; i < recipes.size(); i++) {
