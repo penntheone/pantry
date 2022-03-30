@@ -59,9 +59,7 @@ public class RecipeManager {
             List<Row> rows = new DatabaseConnector().query(query);
             LinkedList<Recipe> recipes = new LinkedList<>();
             for (Row row : rows) {
-                Recipe recipe = new Recipe(row);
-                recipe.setIngredients(IngredientManager.getRecipeIngredients(recipe.getId()));
-                recipes.add(recipe);
+                recipes.add(new Recipe(row));
             }
             return recipes;
         } catch (Exception exception) {
