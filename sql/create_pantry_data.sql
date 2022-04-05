@@ -1,39 +1,4 @@
-DROP DATABASE IF EXISTS pantry;
-CREATE DATABASE pantry;
-USE pantry;
-
-CREATE TABLE Users (
-    id              INT             NOT NULL    PRIMARY KEY,
-    username        VARCHAR(50)     NOT NULL,
-    email           VARCHAR(50)     NOT NULL,
-    first_name      VARCHAR(50)     NOT NULL,
-    last_name       VARCHAR(50)     NOT NULL,
-    birthday        VARCHAR(50)     NOT NULL,
-    auth_string     VARCHAR(100)    NOT NULL
-);
-
-CREATE TABLE Ingredients (
-    id          INT             NOT NULL    PRIMARY KEY,
-    name        VARCHAR(100)    NOT NULL
-);
-
-CREATE TABLE Recipes (
-    id              INT             NOT NULL    PRIMARY KEY,
-    title           VARCHAR(100)    NOT NULL,
-    category        VARCHAR(50)     NOT NULL,
-    region          VARCHAR(50)     NOT NULL,
-    instructions    VARCHAR(5000)   NOT NULL,
-    thumb_url       VARCHAR(100)    NOT NULL,
-    youtube_url     VARCHAR(100)    NOT NULL
-);
-
-CREATE TABLE RecipeIngredients (
-    recipe_id       INT             NOT NULL,
-    ingredient_id   INT             NOT NULL,
-    measure         VARCHAR(200)     NOT NULL,
-    CONSTRAINT FOREIGN KEY (recipe_id)      REFERENCES Recipes(id)      ON DELETE CASCADE   ON UPDATE CASCADE,
-    CONSTRAINT FOREIGN KEY (ingredient_id)  REFERENCES Ingredients(id)  ON DELETE CASCADE   ON UPDATE CASCADE
-);
+-- |----- Insert Data ----------------------------------------
 
 insert into Users (id, username, email, first_name, last_name, birthday, auth_string) values (1, 'atomala0', 'atomala0@whitehouse.gov', 'Adria', 'Tomala', '1992-10-14', 'vnXN8k');
 insert into Users (id, username, email, first_name, last_name, birthday, auth_string) values (2, 'klongforth1', 'klongforth1@tiny.cc', 'Kenon', 'Longforth', '1997-06-01', '3x5BwC101Dy');

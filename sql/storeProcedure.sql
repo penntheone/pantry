@@ -1,1 +1,0 @@
-SELECT username, id FROM pantry.Users WHERE id > 40
