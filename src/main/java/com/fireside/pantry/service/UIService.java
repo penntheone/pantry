@@ -1,7 +1,7 @@
 package com.fireside.pantry.service;
 
 import com.fireside.pantry.App;
-import com.fireside.pantry.app.RecipeManager;
+import com.fireside.pantry.app.control.RecipeManager;
 import com.fireside.pantry.ui.DatabaseUI;
 import com.fireside.pantry.ui.views.RecipeDetailView;
 import com.fireside.pantry.ui.views.RecipeListView;

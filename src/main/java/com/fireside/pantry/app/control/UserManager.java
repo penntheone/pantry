@@ -1,5 +1,4 @@
-package com.fireside.pantry.app;
-
+package com.fireside.pantry.app.control;
 
 import com.fireside.pantry.db.DatabaseConnector;
 import com.fireside.pantry.db.Row;
@@ -21,6 +20,10 @@ public class UserManager {
 
     public static User getUserByLastName(String lastName) {
         return getUser(String.format("CALL spGetUserByLName('%s');", lastName));
+    }
+
+    public static User getUserByUsername(String username) {
+        return getUser(String.format("CALL spGetUserByUsername('%s');", username));
     }
 
     // -------------- Private methods --------------

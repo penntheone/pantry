@@ -1,8 +1,7 @@
-package com.fireside.pantry.app;
+package com.fireside.pantry.app.control;
 
 import com.fireside.pantry.db.DatabaseConnector;
 import com.fireside.pantry.db.Row;
-import com.fireside.pantry.util.objects.Ingredient;
 import com.fireside.pantry.util.objects.Recipe;
 
 import java.util.ArrayList;
@@ -10,10 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class RecipeManager {
-
-    public static List<Recipe> getAllRecipes() {
-        return getRecipes("CALL spGetAllRecipes();");
-    }
 
     public static List<Recipe> getRangeOfRecipes(int start, int end) {
         List<Recipe> recipes = new ArrayList<>();
