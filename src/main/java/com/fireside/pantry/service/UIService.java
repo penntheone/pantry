@@ -48,6 +48,6 @@ public class UIService {
      */
     public static void handleRecipeSelect(Recipe recipe) {
         DatabaseUI ui = DatabaseUI.getInstance();
-        ui.getRecipeDetailView().refreshDetailView(recipe);
+        ui.getRecipeDetailView().getDetailCard().refreshDetailCard(recipe);
     }
 }

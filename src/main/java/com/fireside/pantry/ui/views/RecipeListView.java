@@ -12,6 +12,7 @@ import java.util.List;
 
 public class RecipeListView extends ScrollPane {
     VBox content;
+
     public RecipeListView(List<Recipe> recipes) {
         content = new VBox();
         populateListView(recipes);
