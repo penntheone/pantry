@@ -63,6 +63,11 @@ public class DatabaseUI {
         return recipeListView;
     }
 
+    public RecipeDetailView getRecipeDetailView() {
+        return recipeDetailView;
+    }
+
+
     // |----- Setters ----------
 
     public void setRecipeListView(RecipeListView recipeListView) {

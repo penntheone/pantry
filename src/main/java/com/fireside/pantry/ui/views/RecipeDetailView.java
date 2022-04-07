@@ -14,9 +14,18 @@ import java.util.List;
 
 public class RecipeDetailView extends GridPane {
 
+    static final int DIMENSION = 200;
+
+    VBox imagePane;
+    Label titleNode;
+    Label subtitleNode;
+    Label descriptionNode;
+    GridPane ingredientGrid;
+    Label instruction;
+
     public RecipeDetailView(Recipe recipe) {
         // Hero Image ------------------------------------------------
-        VBox imagePane = new VBox();
+        imagePane = new VBox();
         imagePane.setStyle("-fx-padding: 0;" +
                 "-fx-border-style: solid inside;" +
                 "-fx-border-width: 2;" +
@@ -24,35 +33,26 @@ public class RecipeDetailView extends GridPane {
                 "-fx-border-radius: 0;" +
                 "-fx-border-color: black;");
 
-        int dimension = 200;
-        imagePane.setPrefSize(dimension, dimension);
-        imagePane.setMaxSize(dimension, dimension);
-        imagePane.setMinSize(dimension, dimension);
+        imagePane.setPrefSize(DIMENSION, DIMENSION);
+        imagePane.setMaxSize(DIMENSION, DIMENSION);
+        imagePane.setMinSize(DIMENSION, DIMENSION);
 
-        Image thumbnail = new Image(recipe.getThumb_url());
-        BackgroundImage bImg = new BackgroundImage(thumbnail,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.DEFAULT,
-                new BackgroundSize(dimension, dimension,
-                        false, false, false, false));
-        Background bGround = new Background(bImg);
-        imagePane.setBackground(bGround);
+        setThumbnail(imagePane, recipe);
         setConstraints(imagePane, 0, 0);
 
         // Header  ------------------------------------------------
         VBox headerPane = new VBox();
 
-        Label titleNode = new Label(recipe.getTitle());
+        titleNode = new Label(recipe.getTitle());
         titleNode.setFont(new Font("Arial Bold", 25));
 
-        Label subtitleNode = new Label(recipe.getCategory() + "     |     " + recipe.getRegion());
+        subtitleNode = new Label(recipe.getCategory() + "     |     " + recipe.getRegion());
         subtitleNode.setFont(new Font("Arial Bold Italic", 15));
 
         Region spacer = new Region();
         VBox.setMargin(spacer, new Insets(10, 0, 0, 0));
 
-        Label descriptionNode = new Label("[Description] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices in iaculis nunc sed augue lacus viverra vitae.");
+        descriptionNode = new Label("[Description] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices in iaculis nunc sed augue lacus viverra vitae.");
         descriptionNode.setWrapText(true);
 
         headerPane.getChildren().addAll(titleNode, subtitleNode, spacer, descriptionNode);
@@ -64,37 +64,10 @@ public class RecipeDetailView extends GridPane {
         Label ingredientHeader = new Label("Ingredients");
         ingredientHeader.setFont(new Font("Arial Bold", 18));
 
-        HBox ingredientsList = new HBox();
+        ingredientGrid = new GridPane();
+        setIngredientGrid(ingredientGrid, recipe);
 
-        try {
-            VBox ingredientNamesCol = new VBox();
-            List<Node> ingredientNamesNodes = new ArrayList<>();
-
-            VBox ingredientMeasuresCol = new VBox();
-            List<Node> ingredientMeasureNodes = new ArrayList<>();
-
-            for (Ingredient i : recipe.getIngredients()) {
-                Label iName = new Label(i.getName());
-                iName.setFont(new Font("Arial Bold", 11));
-                iName.setPrefHeight(20);
-                ingredientNamesNodes.add(iName);
-
-                Label iMeasure = new Label(i.getName());
-                iMeasure.setFont(new Font("Arial Bold", 11));
-                iMeasure.setPrefHeight(20);
-                ingredientMeasureNodes.add(iMeasure);
-            }
-
-            ingredientNamesCol.getChildren().addAll(ingredientNamesNodes);
-            ingredientMeasuresCol.getChildren().addAll(ingredientMeasureNodes);
-
-            ingredientsList.getChildren().addAll(ingredientNamesCol, ingredientMeasuresCol);
-        } catch (Exception e) {
-            Label noIngredientsLabel = new Label("[No Ingredients]");
-            ingredientsList.getChildren().add(noIngredientsLabel);
-        }
-
-        ingredientPane.getChildren().addAll(ingredientHeader, ingredientsList);
+        ingredientPane.getChildren().addAll(ingredientHeader, ingredientGrid);
         setConstraints(ingredientPane, 0, 1);
 
         // Instructions  ------------------------------------------------
@@ -103,7 +76,7 @@ public class RecipeDetailView extends GridPane {
         Label instructionHeader = new Label("Instruction");
         instructionHeader.setFont(new Font("Arial Bold", 18));
 
-        Label instruction = new Label(recipe.getInstructions());
+        instruction = new Label(recipe.getInstructions());
         instruction.setWrapText(true);
 
         instructionPane.getChildren().addAll(instructionHeader, instruction);
@@ -121,5 +94,53 @@ public class RecipeDetailView extends GridPane {
         setHgap(20);
         setVgap(20);
         getChildren().addAll(imagePane, headerPane, ingredientPane, instructionPane);
+    }
+
+    public void refreshDetailView(Recipe recipe) {
+        setThumbnail(imagePane, recipe);
+        titleNode.setText(recipe.getTitle());
+        subtitleNode.setText(recipe.getCategory() + "     |     " + recipe.getRegion());
+//        descriptionNode.setText("");
+        setIngredientGrid(ingredientGrid, recipe);
+        instruction.setText(recipe.getInstructions());
+    }
+
+    private static void setIngredientGrid(GridPane ingredientGrid, Recipe recipe) {
+        ingredientGrid.getChildren().clear();
+        try {
+            List<Ingredient> ingredientsMatrix = recipe.getIngredients();
+            for (int i = 0; i < ingredientsMatrix.size(); i++) {
+                Ingredient iIngredient = ingredientsMatrix.get(i);
+
+                Label iName = new Label(iIngredient.getName());
+                iName.setFont(new Font("Arial Bold", 11));
+                iName.setPrefHeight(20);
+
+                Label iMeasure = new Label(iIngredient.getMeasure());
+                iMeasure.setFont(new Font("Arial Bold", 11));
+                iMeasure.setPrefHeight(20);
+
+                ingredientGrid.getChildren().addAll(iName, iMeasure);
+                setConstraints(iName, 0, i/2);
+                setConstraints(iMeasure, 1, i/2);
+            }
+            ingredientGrid.setHgap(20);
+            ingredientGrid.setVgap(20);
+        } catch (Exception ignored) {
+            Label noIngredientsLabel = new Label("[No Ingredients]");
+            ingredientGrid.getChildren().add(noIngredientsLabel);
+        }
+    }
+
+    private static void setThumbnail(VBox imagePane, Recipe recipe) {
+        BackgroundImage bImg = new BackgroundImage(
+                new Image(recipe.getThumb_url()),
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT,
+                new BackgroundSize(DIMENSION, DIMENSION,
+                        false, false, false, false));
+        Background bGround = new Background(bImg);
+        imagePane.setBackground(bGround);
     }
 }
