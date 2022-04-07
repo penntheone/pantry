@@ -36,11 +36,13 @@ public class UIService {
     public static void handleSearch() {
         DatabaseUI ui = DatabaseUI.getInstance();
         String search = ui.getSearchBar().getText();
-        List<Recipe> recipes = RecipeManager.getRecipesByTitle(search);
-        ui.setRecipeListView(new RecipeListView(recipes));
-        if (recipes.size() > 0)
-            ui.setRecipeDetailView(new RecipeDetailView(recipes.get(0)));
-        App.updateScene(ui.build());
+        if (!search.isBlank()) {
+            List<Recipe> recipes = RecipeManager.getRecipesByTitle(search);
+            ui.setRecipeListView(new RecipeListView(recipes));
+            if (recipes.size() > 0)
+                ui.setRecipeDetailView(new RecipeDetailView(recipes.get(0)));
+            App.updateScene(ui.build());
+        }
     }
 
     /**
