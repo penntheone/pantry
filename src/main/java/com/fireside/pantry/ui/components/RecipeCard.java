@@ -2,27 +2,12 @@ package com.fireside.pantry.ui.components;
 
 import com.fireside.pantry.service.UIService;
 import com.fireside.pantry.util.objects.Recipe;
-import javafx.event.EventHandler;
-import javafx.event.EventTarget;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
 public class RecipeCard extends HBox {
-
-    private static class SelectHandler implements EventHandler<MouseEvent> {
-        @Override
-        public void handle(MouseEvent event) {
-            EventTarget target = event.getTarget();
-            if (target.getClass() == RecipeCard.class) {
-                RecipeCard card = (RecipeCard) target;
-                UIService.handleRecipeSelect(card.getRecipe());
-            }
-        }
-    }
-
     private final Recipe recipe;
 
     public RecipeCard(Recipe recipe) {
@@ -81,11 +66,11 @@ public class RecipeCard extends HBox {
                 "-fx-border-width: 2;" +
                 "-fx-border-insets: 5;" +
                 "-fx-border-radius: 5;" +
-                "-fx-border-color: black;");
-
-        this.setOnMouseClicked(new SelectHandler());
+                "-fx-border-color: black;" +
+                "-fx-background-color: white");
 
         getChildren().addAll(left, padding, right);
+        setOnMouseClicked((click) -> UIService.handleRecipeSelect(this.getRecipe()));
     }
 
     public Recipe getRecipe() {

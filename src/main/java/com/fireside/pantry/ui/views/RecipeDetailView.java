@@ -3,9 +3,9 @@ package com.fireside.pantry.ui.views;
 import com.fireside.pantry.util.objects.Recipe;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
-public class RecipeDetailView extends VBox {
+public class RecipeDetailView extends HBox {
 
     private final Label title;
     private final Label category;

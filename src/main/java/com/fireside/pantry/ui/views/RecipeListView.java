@@ -11,11 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeListView extends ScrollPane {
-
-    private List<Recipe> recipes;
-
     public RecipeListView(List<Recipe> recipes) {
-        this.recipes = recipes;
         VBox content = new VBox();
         List<Node> cards = new ArrayList<>();
         for (int i = 0; i < recipes.size(); i++) {
