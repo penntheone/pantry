@@ -1,4 +1,4 @@
-package com.fireside.pantry.ui.components;
+package com.fireside.pantry.ui.widgets;
 
 import com.fireside.pantry.service.UIService;
 import javafx.scene.control.TextField;
