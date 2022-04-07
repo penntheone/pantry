@@ -1,6 +1,7 @@
 package com.fireside.pantry.service;
 
 import com.fireside.pantry.App;
+import com.fireside.pantry.app.control.IngredientManager;
 import com.fireside.pantry.app.control.RecipeManager;
 import com.fireside.pantry.ui.DatabaseUI;
 import com.fireside.pantry.ui.views.RecipeDetailView;
@@ -36,13 +37,15 @@ public class UIService {
     public static void handleSearch() {
         DatabaseUI ui = DatabaseUI.getInstance();
         String search = ui.getSearchBar().getText();
-        if (!search.isBlank()) {
-            List<Recipe> recipes = RecipeManager.getRecipesByTitle(search);
-            ui.setRecipeListView(new RecipeListView(recipes));
-            if (recipes.size() > 0)
-                ui.setRecipeDetailView(new RecipeDetailView(recipes.get(0)));
-            App.updateScene(ui.build());
+        if (search.isBlank()) return;
+        List<Recipe> recipes = RecipeManager.getRecipesByTitle(search);
+        for (Recipe recipe : recipes) {
+            recipe.setIngredients(IngredientManager.getRecipeIngredients(recipe.getId()));
         }
+        ui.setRecipeListView(new RecipeListView(recipes));
+        if (recipes.size() > 0)
+            ui.setRecipeDetailView(new RecipeDetailView(recipes.get(0)));
+        App.updateScene(ui.build());
     }
 
     /**
