@@ -67,10 +67,12 @@ public class RecipeCard extends HBox {
                 "-fx-border-insets: 5;" +
                 "-fx-border-radius: 5;" +
                 "-fx-border-color: black;" +
-                "-fx-background-color: white");
+                "-fx-background-color: white;" +
+                "-fx-focus-color: transparent;" +
+                "-fx-faint-focus-color: transparent");
 
         getChildren().addAll(left, padding, right);
-        setOnMouseClicked((click) -> UIService.handleRecipeSelect(this.getRecipe()));
+        setOnMouseClicked(click -> UIService.handleRecipeSelect(this.getRecipe()));
     }
 
     public Recipe getRecipe() {

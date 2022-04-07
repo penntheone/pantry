@@ -20,6 +20,8 @@ public class RecipeListView extends ScrollPane {
                 cards.add(new Separator(Orientation.HORIZONTAL));
         }
         content.getChildren().addAll(cards);
-        this.setContent(content);
+        setContent(content);
+        setStyle("-fx-focus-color: transparent;" +
+                "-fx-faint-focus-color: transparent");
     }
 }

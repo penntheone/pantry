@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
 
-public class RecipeDetailView extends HBox {
+public class RecipeDetailView extends VBox {
 
     private final Label title;
     private final Label category;
