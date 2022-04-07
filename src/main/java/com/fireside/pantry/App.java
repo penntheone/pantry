@@ -18,7 +18,7 @@ public class App extends Application {
         App.stage = stage;
         Scene scene = DatabaseUI.getInstance().build();
 
-        stage.setWidth(1100);
+        stage.setWidth(1300);
         stage.setHeight(600);
         stage.setTitle("Pantry");
         stage.setScene(scene);
