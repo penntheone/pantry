@@ -23,5 +23,6 @@ public class RecipeListView extends ScrollPane {
         setContent(content);
         setStyle("-fx-focus-color: transparent;" +
                 "-fx-faint-focus-color: transparent");
+        setVbarPolicy(ScrollBarPolicy.NEVER);
     }
 }

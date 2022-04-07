@@ -41,7 +41,7 @@ public class SearchBar extends HBox {
                 "-fx-cursor: hand;");
         searchButton.setOnAction(action -> UIService.handleSearch());
 
-        setStyle("-fx-padding: 10;" +
+        setStyle("-fx-padding: 5;" +
                 "-fx-border-style: solid inside;" +
                 "-fx-border-width: 2;" +
                 "-fx-border-insets: 5;" +

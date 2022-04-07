@@ -48,6 +48,7 @@ public class DatabaseUI {
         BorderPane pane = new BorderPane();
         pane.setLeft(menu);
         pane.setCenter(recipeDetailView);
+        // TODO Hide faint gray separator.
 
         return new Scene(pane);
     }
