@@ -1,4 +1,4 @@
-package com.fireside.pantry.ui.components;
+package com.fireside.pantry.ui.widgets;
 
 import com.fireside.pantry.service.UIService;
 import javafx.scene.control.TextField;
@@ -19,7 +19,7 @@ public class SearchBar extends HBox {
         searchField.setStyle(
                 "-fx-focus-color: transparent;" +
                 "-fx-faint-focus-color: transparent;" +
-                "-fx-background-color: white");
+                "-fx-background-color: transparent");
         searchField.setPromptText("Enter Recipe Name");
         searchField.setPrefWidth(400);
         searchField.setOnKeyPressed(event -> {

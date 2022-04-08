@@ -1,11 +1,8 @@
 package com.fireside.pantry.service;
 
-import com.fireside.pantry.App;
 import com.fireside.pantry.app.control.IngredientManager;
 import com.fireside.pantry.app.control.RecipeManager;
 import com.fireside.pantry.ui.DatabaseUI;
-import com.fireside.pantry.ui.views.RecipeDetailView;
-import com.fireside.pantry.ui.views.RecipeListView;
 import com.fireside.pantry.util.objects.Recipe;
 import javafx.scene.Scene;
 
@@ -42,10 +39,7 @@ public class UIService {
         for (Recipe recipe : recipes) {
             recipe.setIngredients(IngredientManager.getRecipeIngredients(recipe.getId()));
         }
-        ui.setRecipeListView(new RecipeListView(recipes));
-        if (recipes.size() > 0)
-            ui.setRecipeDetailView(new RecipeDetailView(recipes.get(0)));
-        App.updateScene(ui.build());
+        ui.getRecipeListView().populateListView(recipes);
     }
 
     /**
@@ -54,7 +48,6 @@ public class UIService {
      */
     public static void handleRecipeSelect(Recipe recipe) {
         DatabaseUI ui = DatabaseUI.getInstance();
-        ui.setRecipeDetailView(new RecipeDetailView(recipe));
-        App.updateScene(ui.build());
+        ui.getRecipeDetailView().getDetailCard().refreshDetailCard(recipe);
     }
 }

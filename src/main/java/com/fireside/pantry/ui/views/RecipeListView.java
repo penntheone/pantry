@@ -11,8 +11,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeListView extends ScrollPane {
+    VBox content;
+
     public RecipeListView(List<Recipe> recipes) {
-        VBox content = new VBox();
+        content = new VBox();
+        populateListView(recipes);
+        setContent(content);
+        setStyle("-fx-focus-color: transparent;" +
+                "-fx-faint-focus-color: transparent;" +
+                "-fx-background-color: white");
+        setVbarPolicy(ScrollBarPolicy.NEVER);
+    }
+
+    public void populateListView(List<Recipe> recipes) {
+        content.getChildren().clear();
         List<Node> cards = new ArrayList<>();
         for (int i = 0; i < recipes.size(); i++) {
             cards.add(new RecipeCard(recipes.get(i)));
@@ -20,9 +32,5 @@ public class RecipeListView extends ScrollPane {
                 cards.add(new Separator(Orientation.HORIZONTAL));
         }
         content.getChildren().addAll(cards);
-        setContent(content);
-        setStyle("-fx-focus-color: transparent;" +
-                "-fx-faint-focus-color: transparent");
-        setVbarPolicy(ScrollBarPolicy.NEVER);
     }
 }

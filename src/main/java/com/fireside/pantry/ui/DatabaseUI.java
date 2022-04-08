@@ -1,7 +1,7 @@
 package com.fireside.pantry.ui;
 
 import com.fireside.pantry.service.UIService;
-import com.fireside.pantry.ui.components.SearchBar;
+import com.fireside.pantry.ui.widgets.SearchBar;
 import com.fireside.pantry.ui.views.RecipeDetailView;
 import com.fireside.pantry.ui.views.RecipeListView;
 import com.fireside.pantry.util.objects.Recipe;
@@ -62,6 +62,11 @@ public class DatabaseUI {
     public RecipeListView getRecipeListView() {
         return recipeListView;
     }
+
+    public RecipeDetailView getRecipeDetailView() {
+        return recipeDetailView;
+    }
+
 
     // |----- Setters ----------
 
