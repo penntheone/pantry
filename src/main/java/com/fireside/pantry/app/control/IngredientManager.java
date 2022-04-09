@@ -1,4 +1,4 @@
-package com.fireside.pantry.app;
+package com.fireside.pantry.app.control;
 
 import com.fireside.pantry.db.DatabaseConnector;
 import com.fireside.pantry.db.Row;

@@ -1,22 +1,24 @@
 package com.fireside.pantry.ui.views;
 
+import com.fireside.pantry.ui.components.RecipeDetailCard;
 import com.fireside.pantry.util.objects.Recipe;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.VBox;
 
-public class RecipeDetailView extends VBox {
+import javafx.scene.control.ScrollPane;
 
-    private final Label title;
-    private final Label category;
-    private final Label region;
-    private final TextArea instructions;
+public class RecipeDetailView extends ScrollPane {
+    RecipeDetailCard detailCard;
 
     public RecipeDetailView(Recipe recipe) {
-        this.title = new Label(recipe.getTitle());
-        this.category = new Label(recipe.getCategory());
-        this.region = new Label(recipe.getRegion());
-        this.instructions = new TextArea(recipe.getInstructions());
-        this.getChildren().addAll(title, category, region, instructions);
+        this.detailCard = new RecipeDetailCard(recipe);
+        setContent(detailCard);
+        setStyle("-fx-focus-color: transparent;" +
+                "-fx-faint-focus-color: transparent;" +
+                "-fx-background-color: white");
+        setVbarPolicy(ScrollBarPolicy.NEVER);
+        setFitToWidth(true);
+    }
+
+    public RecipeDetailCard getDetailCard() {
+        return detailCard;
     }
 }

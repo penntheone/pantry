@@ -39,6 +39,14 @@ BEGIN
     WHERE id = u.id;
 END;
 
+DROP PROCEDURE IF EXISTS spGetUserByUsername;
+CREATE PROCEDURE spGetUserByUsername(IN username VARCHAR(50))
+BEGIN
+    SELECT *
+    FROM pantry.Users u
+    WHERE username = u.username;
+END;
+
 /*
 Example sps calls
 CALL spGetUserFullName(6);
