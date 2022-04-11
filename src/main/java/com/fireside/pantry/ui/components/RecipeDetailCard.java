@@ -1,5 +1,6 @@
 package com.fireside.pantry.ui.components;
 
+import com.fireside.pantry.app.control.IngredientManager;
 import com.fireside.pantry.util.objects.Ingredient;
 import com.fireside.pantry.util.objects.Recipe;
 import javafx.geometry.Insets;
@@ -106,10 +107,10 @@ public class RecipeDetailCard extends GridPane {
     private static void setIngredientGrid(GridPane ingredientGrid, Recipe recipe) {
         ingredientGrid.getChildren().clear();
         try {
-            List<Ingredient> ingredientsMatrix = recipe.getIngredients();
+            List<Ingredient> ingredientsMatrix = IngredientManager.getRecipeIngredients(recipe.getId());
             for (int i = 0; i < ingredientsMatrix.size(); i++) {
                 Ingredient iIngredient = ingredientsMatrix.get(i);
-
+                System.out.println(iIngredient.getName());
                 Label iName = new Label(iIngredient.getName());
                 iName.setFont(new Font("Arial Bold", 11));
                 iName.setPrefHeight(20);
@@ -119,8 +120,8 @@ public class RecipeDetailCard extends GridPane {
                 iMeasure.setPrefHeight(20);
 
                 ingredientGrid.getChildren().addAll(iName, iMeasure);
-                setConstraints(iName, 0, i/2);
-                setConstraints(iMeasure, 1, i/2);
+                setConstraints(iName, 0, i);
+                setConstraints(iMeasure, 1, i);
             }
             ingredientGrid.setHgap(20);
             ingredientGrid.setVgap(20);
