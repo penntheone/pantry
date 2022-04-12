@@ -110,7 +110,6 @@ public class RecipeDetailCard extends GridPane {
             List<Ingredient> ingredientsMatrix = IngredientManager.getRecipeIngredients(recipe.getId());
             for (int i = 0; i < ingredientsMatrix.size(); i++) {
                 Ingredient iIngredient = ingredientsMatrix.get(i);
-                System.out.println(iIngredient.getName());
                 Label iName = new Label(iIngredient.getName());
                 iName.setFont(new Font("Arial Bold", 11));
                 iName.setPrefHeight(20);

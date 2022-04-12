@@ -50,6 +50,20 @@ BEGIN
     FROM pantry.Recipes;
 END;
 
+DROP PROCEDURE IF EXISTS spGetRecipesByIngredient;
+CREATE PROCEDURE spGetRecipesByIngredient(IN input VARCHAR(100))
+ BEGIN
+     SELECT DISTINCT *
+         FROM Recipes
+            JOIN RecipeIngredients RI ON Recipes.id = RI.recipe_id
+            JOIN Ingredients I ON RI.ingredient_id = I.id
+        WHERE
+              I.name LIKE CONCAT('%', input, '%');
+ END;
+
+CALL spGetRecipesByIngredient('Onion')
+
+
 /*
 Example sps calls
 CALL spGetAllRecipes(); *

@@ -18,6 +18,11 @@ public class RecipeManager {
         return recipes;
     }
 
+    public static List<Recipe> getRecipesByIngredient(String ingredient) {
+        String query = String.format("CALL spGetRecipesByIngredient('%s');", ingredient);
+        return getRecipes(query);
+    }
+
     public static Recipe getRecipeByID(int recipeId) {
         String query = String.format("CALL spGetRecipeByID(%d);", recipeId);
         List<Recipe> recipes = getRecipes(query);
