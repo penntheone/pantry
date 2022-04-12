@@ -34,8 +34,18 @@ public class UIService {
     public static void handleSearch() {
         DatabaseUI ui = DatabaseUI.getInstance();
         String search = ui.getSearchBar().getText();
-        if (search.isBlank()) return;
-        List<Recipe> recipes = RecipeManager.getRecipesByTitle(search);
+        String filters = ui.getSearchBar().getFilters();
+        if (search.isBlank() || filters.equals("Select search option")) return;
+        List<Recipe> recipes = null;
+        if (filters.equals("Recipe Title")) {
+            recipes = RecipeManager.getRecipesByTitle(search);
+        } else if (filters.equals("Ingredient")) {
+           recipes = RecipeManager.getRecipesByIngredient(search);
+        } else if (filters.equals("Region")) {
+            recipes = RecipeManager.getRecipesByRegion(search);
+        } else {
+            recipes = RecipeManager.getRecipesByCategory(search);
+        }
         for (Recipe recipe : recipes) {
             recipe.setIngredients(IngredientManager.getRecipeIngredients(recipe.getId()));
         }

@@ -1,6 +1,7 @@
 package com.fireside.pantry.ui.widgets;
 
 import com.fireside.pantry.service.UIService;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,6 +13,7 @@ import javafx.scene.layout.Region;
 
 public class SearchBar extends HBox {
     private final TextField searchField;
+    private final ChoiceBox<String> filters;
 
     public SearchBar() {
         // Search Field ------------------------------------------------
@@ -25,6 +27,17 @@ public class SearchBar extends HBox {
         searchField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) UIService.handleSearch();
         });
+
+        // Filter choice box ---------------------------------------
+        this.filters = new ChoiceBox<String>();
+        filters.getItems().add("Select search option");
+        filters.getItems().add("Recipe Title");
+        filters.getItems().add("Ingredient");
+        filters.getItems().add("Region");
+        filters.getItems().add("Type");
+
+        // Default value
+        filters.setValue("Select search option");
 
         // Spacer ------------------------------------------------
         Region spacer = new Region();
@@ -48,7 +61,7 @@ public class SearchBar extends HBox {
                 "-fx-border-radius: 30;" +
                 "-fx-border-color: black;" +
                 "-fx-background-color: white");
-        getChildren().addAll(searchField, spacer, searchButton);
+        getChildren().addAll(searchField, spacer, filters, searchButton);
         setMinWidth(200);
         setMaxWidth(500);
     }
@@ -56,4 +69,6 @@ public class SearchBar extends HBox {
     public String getText() {
         return this.searchField.getText();
     }
+
+    public String getFilters() {return this.filters.getValue();}
 }
