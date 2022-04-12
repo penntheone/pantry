@@ -53,16 +53,18 @@ END;
 DROP PROCEDURE IF EXISTS spGetRecipesByIngredient;
 CREATE PROCEDURE spGetRecipesByIngredient(IN input VARCHAR(100))
  BEGIN
-     SELECT DISTINCT *
-         FROM Recipes
-            JOIN RecipeIngredients RI ON Recipes.id = RI.recipe_id
+     SELECT
+        r.id, r.title, r.category, r.region, r.instructions, r.thumb_url, r.youtube_url
+         FROM Recipes r
+            JOIN RecipeIngredients RI ON r.id = RI.recipe_id
             JOIN Ingredients I ON RI.ingredient_id = I.id
         WHERE
               I.name LIKE CONCAT('%', input, '%');
  END;
 
-CALL spGetRecipesByIngredient('Onion')
+CALL spGetRecipesByIngredient('Onion');
 
+SELECT * from RecipeIngredients;
 
 /*
 Example sps calls
