@@ -1,4 +1,4 @@
-package com.fireside.pantry.app.control;
+package com.fireside.pantry.app;
 
 import com.fireside.pantry.db.DatabaseConnector;
 import com.fireside.pantry.db.Row;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class IngredientManager {
+public class IngredientController {
 
     public static List<Ingredient> getAllIngredients() {
         return getIngredients("SELECT * FROM pantry.ingredients");

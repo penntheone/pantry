@@ -7,36 +7,41 @@ USE pantry;
 -- |----- Create Tables ----------------------------------------
 
 CREATE TABLE Users (
-                       id              INT             NOT NULL    PRIMARY KEY,
-                       username        VARCHAR(50)     NOT NULL,
-                       email           VARCHAR(50)     NOT NULL,
-                       first_name      VARCHAR(50)     NOT NULL,
-                       last_name       VARCHAR(50)     NOT NULL,
-                       birthday        VARCHAR(50)     NOT NULL,
-                       auth_string     VARCHAR(100)    NOT NULL
+    id              INT             NOT NULL    PRIMARY KEY,
+    username        VARCHAR(50)     NOT NULL,
+    email           VARCHAR(50)     NOT NULL,
+    first_name      VARCHAR(50)     NOT NULL,
+    last_name       VARCHAR(50)     NOT NULL,
+    birthday        VARCHAR(50)     NOT NULL,
+    auth_string     VARCHAR(100)    NOT NULL
 );
 
 CREATE TABLE Ingredients (
-                             id          INT             NOT NULL    PRIMARY KEY,
-                             name        VARCHAR(100)    NOT NULL
+    id              INT             NOT NULL    PRIMARY KEY,
+    name            VARCHAR(100)    NOT NULL
 );
 
 CREATE TABLE Recipes (
-                         id              INT             NOT NULL    PRIMARY KEY,
-                         title           VARCHAR(100)    NOT NULL,
-                         category        VARCHAR(50)     NOT NULL,
-                         region          VARCHAR(50)     NOT NULL,
-                         instructions    VARCHAR(5000)   NOT NULL,
-                         thumb_url       VARCHAR(100)    NOT NULL,
-                         youtube_url     VARCHAR(100)    NOT NULL
+    id              INT             NOT NULL    PRIMARY KEY,
+    title           VARCHAR(100)    NOT NULL,
+    category        VARCHAR(50)     NOT NULL,
+    region          VARCHAR(50)     NOT NULL,
+    instructions    VARCHAR(5000)   NOT NULL,
+    thumb_url       VARCHAR(100)    NOT NULL,
+    youtube_url     VARCHAR(100)    NOT NULL
 );
 
 CREATE TABLE RecipeIngredients (
-                                   recipe_id       INT             NOT NULL,
-                                   ingredient_id   INT             NOT NULL,
-                                   measure         VARCHAR(200)     NOT NULL,
-                                   CONSTRAINT FOREIGN KEY (recipe_id)      REFERENCES Recipes(id)      ON DELETE CASCADE   ON UPDATE CASCADE,
-                                   CONSTRAINT FOREIGN KEY (ingredient_id)  REFERENCES Ingredients(id)  ON DELETE CASCADE   ON UPDATE CASCADE
+    recipe_id       INT             NOT NULL,
+    ingredient_id   INT             NOT NULL,
+    measure         VARCHAR(200)    NOT NULL,
+    CONSTRAINT FOREIGN KEY (recipe_id)      REFERENCES Recipes(id)      ON DELETE CASCADE   ON UPDATE CASCADE,
+    CONSTRAINT FOREIGN KEY (ingredient_id)  REFERENCES Ingredients(id)  ON DELETE CASCADE   ON UPDATE CASCADE
+);
+
+CREATE TABLE RecipeImages (
+    recipe_id       INT             NOT NULL    PRIMARY KEY,
+    image           MEDIUMBLOB      NOT NULL
 );
 
 -- |----- Create Stored Procedures ----------------------------------------

@@ -1,5 +1,6 @@
 package com.fireside.pantry.ui;
 
+import com.fireside.pantry.service.RecipeService;
 import com.fireside.pantry.service.UIService;
 import com.fireside.pantry.ui.widgets.SearchBar;
 import com.fireside.pantry.ui.views.RecipeDetailView;
@@ -34,7 +35,7 @@ public class DatabaseUI {
     // |----- Constructors ----------
 
     private DatabaseUI() {
-        List<Recipe> recipes = UIService.getDefaultRecipes();
+        List<Recipe> recipes = RecipeService.getHomeRecipes();
         this.titleBar = new TitleBar("Database");
         this.recipeListView = new RecipeListView(recipes);
         this.recipeDetailView = new RecipeDetailView(recipes.get(0));

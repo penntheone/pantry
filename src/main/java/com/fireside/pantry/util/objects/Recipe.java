@@ -2,6 +2,7 @@ package com.fireside.pantry.util.objects;
 
 import com.fireside.pantry.db.Row;
 import com.google.gson.Gson;
+import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ public class Recipe {
     private final String thumb_url;
     private final String youtube_url;
     private List<Ingredient> ingredients;
+    private Image image;
 
     public Recipe() {
         this.id = -1;
@@ -73,11 +75,11 @@ public class Recipe {
         return instructions;
     }
 
-    public String getThumb_url() {
+    public String getThumbUrl() {
         return thumb_url;
     }
 
-    public String getYoutube_url() {
+    public String getYoutubeUrl() {
         return youtube_url;
     }
 
@@ -85,8 +87,16 @@ public class Recipe {
         return ingredients;
     }
 
+    public Image getImage() {
+        return image;
+    }
+
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     @Override

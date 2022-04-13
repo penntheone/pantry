@@ -1,4 +1,4 @@
-package com.fireside.pantry.app.control;
+package com.fireside.pantry.app;
 
 import com.fireside.pantry.db.DatabaseConnector;
 import com.fireside.pantry.db.Row;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class UserManager {
+public class UserController {
 
     public static List<User> getAllUsers() {
         return getUsers("CALL spGetAllUsers();");

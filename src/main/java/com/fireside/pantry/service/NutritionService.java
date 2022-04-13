@@ -9,27 +9,8 @@ import java.util.List;
 
 public class NutritionService {
 
-    public static void match(Recipe recipe) {
-
-        System.out.println("|---- Recipe Ingredients ----------------------------------------");
-
-        List<Ingredient> recipeIngredients = recipe.getIngredients();
-        for (Ingredient ingredient : recipeIngredients) {
-            System.out.println(ingredient.getName());
-        }
-
-        System.out.println();
-        System.out.println("|---- FDC Ingredients ----------------------------------------");
-
-        JsonArray matching = NutritionService.findMatchingFoods(recipe);
-
-        JsonObject food = matching.get(0).getAsJsonObject();
-        String[] ingredients = NutritionService.parseIngredientString(food.get("ingredients").getAsString());
-        for (String ingredient : ingredients) {
-            System.out.println(ingredient);
-        }
-
-        // System.out.println(Utils.prettify(food.toString()));
+    public static JsonObject match(Recipe recipe) {
+        return NutritionService.findBestMatch(recipe, NutritionService.findMatchingFoods(recipe));
     }
 
     private static JsonArray findMatchingFoods(Recipe recipe) {
@@ -44,27 +25,34 @@ public class NutritionService {
             if (foodObj.get("ingredients") == null) filter = true;
             if (!filter) filtered.add(foodObj);
         }
+        System.out.println("Matching : " + filtered.size());
         return filtered;
     }
 
-    /**
-     * Does not work yet!
-     *
-     * @param recipe
-     * @param array
-     * @return
-     */
     private static JsonObject findBestMatch(Recipe recipe, JsonArray array) {
         List<Ingredient> recipeIngredients = recipe.getIngredients();
-        JsonObject bestMatch;
-        int bestMatchStat = 0;
-        for (int i = 0; i < array.size(); i++) {
+        JsonObject bestMatch = array.get(0).getAsJsonObject();
+        int bestMatchStat = NutritionService.getMatchStat(recipeIngredients, bestMatch);
+        for (int i = 1; i < array.size(); i++) {
             JsonObject food = array.get(i).getAsJsonObject();
-            String[] ingredients = NutritionService.parseIngredientString(food.get("ingredients").getAsString());
-            int foodStat = 0;
-
+            int foodStat = NutritionService.getMatchStat(recipeIngredients, food);
+            if (foodStat > bestMatchStat) {
+                bestMatchStat = foodStat;
+                bestMatch = food;
+            }
         }
-        return array.get(0).getAsJsonObject();
+        System.out.println(bestMatchStat);
+        return bestMatch;
+    }
+
+    private static int getMatchStat(List<Ingredient> recipeIngredients, JsonObject food) {
+        String[] ingredients = NutritionService.parseIngredientString(food.get("ingredients").getAsString());
+        int foodStat = 0;
+        for (Ingredient ingredient : recipeIngredients)
+            for (String ingredientName : ingredients)
+                if (ingredient.getName().equalsIgnoreCase(ingredientName))
+                    foodStat++;
+        return foodStat;
     }
 
     private static String[] parseIngredientString(String ingredients) {

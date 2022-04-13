@@ -1,11 +1,11 @@
 package com.fireside.pantry.ui.components;
 
-import com.fireside.pantry.app.control.IngredientManager;
+import com.fireside.pantry.app.ImageController;
+import com.fireside.pantry.app.IngredientController;
 import com.fireside.pantry.util.objects.Ingredient;
 import com.fireside.pantry.util.objects.Recipe;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
@@ -15,12 +15,12 @@ public class RecipeDetailCard extends GridPane {
 
     static final int DIMENSION = 250;
 
-    VBox imagePane;
-    Label titleNode;
-    Label subtitleNode;
-    Label descriptionNode;
-    GridPane ingredientGrid;
-    Label instruction;
+    private final VBox imagePane;
+    private final Label titleNode;
+    private final Label subtitleNode;
+    private final Label descriptionNode;
+    private final GridPane ingredientGrid;
+    private final Label instruction;
 
     public RecipeDetailCard(Recipe recipe) {
         // Hero Image ------------------------------------------------
@@ -107,7 +107,7 @@ public class RecipeDetailCard extends GridPane {
     private static void setIngredientGrid(GridPane ingredientGrid, Recipe recipe) {
         ingredientGrid.getChildren().clear();
         try {
-            List<Ingredient> ingredientsMatrix = IngredientManager.getRecipeIngredients(recipe.getId());
+            List<Ingredient> ingredientsMatrix = IngredientController.getRecipeIngredients(recipe.getId());
             for (int i = 0; i < ingredientsMatrix.size(); i++) {
                 Ingredient iIngredient = ingredientsMatrix.get(i);
                 Label iName = new Label(iIngredient.getName());
@@ -132,7 +132,7 @@ public class RecipeDetailCard extends GridPane {
 
     private static void setThumbnail(VBox imagePane, Recipe recipe) {
         BackgroundImage bImg = new BackgroundImage(
-                new Image(recipe.getThumb_url()),
+                ImageController.getInstance().getRecipeImage(recipe),
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT,
