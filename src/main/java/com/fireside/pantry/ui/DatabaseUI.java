@@ -4,15 +4,14 @@ import com.fireside.pantry.service.UIService;
 import com.fireside.pantry.ui.widgets.SearchBar;
 import com.fireside.pantry.ui.views.RecipeDetailView;
 import com.fireside.pantry.ui.views.RecipeListView;
+import com.fireside.pantry.ui.widgets.TitleBar;
 import com.fireside.pantry.util.objects.Recipe;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class DatabaseUI {
 
     // |----- Components ----------
 
-    private final SearchBar searchBar;
+    private final TitleBar titleBar;
     private RecipeListView recipeListView;
     private RecipeDetailView recipeDetailView;
 
@@ -35,7 +34,7 @@ public class DatabaseUI {
 
     private DatabaseUI() {
         List<Recipe> recipes = UIService.getDefaultRecipes();
-        this.searchBar = new SearchBar();
+        this.titleBar = new TitleBar("Database");
         this.recipeListView = new RecipeListView(recipes);
         this.recipeDetailView = new RecipeDetailView(recipes.get(0));
     }
@@ -43,31 +42,14 @@ public class DatabaseUI {
     // |----- Methods ----------
 
     public Scene build() {
-        VBox menu = new VBox();
-        menu.getChildren().addAll(recipeListView);
-
-
-        ImageView searchIcon = new ImageView(new Image("asset/icon/bar.png"));
-        searchIcon.setFitHeight(20); searchIcon.setFitWidth(20);
-        Button searchButton = new Button("", searchIcon);
-
-        HBox bur = new HBox(searchButton);
-        bur.setAlignment(Pos.BASELINE_LEFT);
-
-        HBox searchBar = new HBox(
-                bur,
-                new SearchBar()
-        );
-        searchBar.setAlignment(Pos.BASELINE_RIGHT);
-
-
-        searchBar.setStyle("-fx-background-color: white");
+        VBox left = new VBox();
+        left.getChildren().addAll(recipeListView);
 
         // Align menu view to left side
         // Align detail view to right side
         BorderPane pane = new BorderPane();
-        pane.setTop(searchBar);
-        pane.setLeft(menu);
+        pane.setTop(titleBar);
+        pane.setLeft(left);
         pane.setCenter(recipeDetailView);
         // TODO Hide faint gray separator.
 
@@ -77,7 +59,7 @@ public class DatabaseUI {
     // |----- Getters ----------
 
     public SearchBar getSearchBar() {
-        return searchBar;
+        return titleBar.getSearchBar();
     }
 
     public RecipeListView getRecipeListView() {
