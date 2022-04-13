@@ -33,7 +33,7 @@ public class SearchBar extends HBox {
         this.filters = new ChoiceBox<>();
         filters.setPrefWidth(150);
 //        filters.getItems().add("Select Options");
-        filters.getItems().add("Recipe Title");
+        filters.getItems().add("Title");
         filters.getItems().add("Ingredient");
         filters.getItems().add("Region");
         filters.getItems().add("Type");
