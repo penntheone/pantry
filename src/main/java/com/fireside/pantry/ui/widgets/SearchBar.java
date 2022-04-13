@@ -1,6 +1,7 @@
 package com.fireside.pantry.ui.widgets;
 
 import com.fireside.pantry.service.UIService;
+import javafx.geometry.Pos;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -23,21 +24,22 @@ public class SearchBar extends HBox {
                 "-fx-faint-focus-color: transparent;" +
                 "-fx-background-color: transparent");
         searchField.setPromptText("Enter Recipe Name");
-        searchField.setPrefWidth(400);
+        searchField.setPrefWidth(320);
         searchField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) UIService.handleSearch();
         });
 
         // Filter choice box ---------------------------------------
-        this.filters = new ChoiceBox<String>();
-        filters.getItems().add("Select search option");
-        filters.getItems().add("Recipe Title");
+        this.filters = new ChoiceBox<>();
+        filters.setPrefWidth(150);
+//        filters.getItems().add("Select Options");
+        filters.getItems().add("Title");
         filters.getItems().add("Ingredient");
         filters.getItems().add("Region");
         filters.getItems().add("Type");
 
         // Default value
-        filters.setValue("Select search option");
+        filters.setValue("Options");
 
         // Spacer ------------------------------------------------
         Region spacer = new Region();
@@ -57,13 +59,16 @@ public class SearchBar extends HBox {
         setStyle("-fx-padding: 5;" +
                 "-fx-border-style: solid inside;" +
                 "-fx-border-width: 2;" +
-                "-fx-border-insets: 5;" +
+                "-fx-border-insets: 2;" +
                 "-fx-border-radius: 30;" +
                 "-fx-border-color: black;" +
                 "-fx-background-color: white");
+        setAlignment(Pos.CENTER_LEFT);
         getChildren().addAll(searchField, spacer, filters, searchButton);
-        setMinWidth(200);
+        setMinWidth(300);
         setMaxWidth(500);
+        setMinHeight(35);
+        setMaxHeight(55);
     }
 
     public String getText() {

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class RecipeDetailCard extends GridPane {
 
-    static final int DIMENSION = 200;
+    static final int DIMENSION = 250;
 
     VBox imagePane;
     Label titleNode;
@@ -115,7 +115,7 @@ public class RecipeDetailCard extends GridPane {
                 iName.setPrefHeight(20);
 
                 Label iMeasure = new Label(iIngredient.getMeasure());
-                iMeasure.setFont(new Font("Arial Bold", 11));
+                iMeasure.setFont(new Font("Arial", 11));
                 iMeasure.setPrefHeight(20);
 
                 ingredientGrid.getChildren().addAll(iName, iMeasure);
@@ -123,7 +123,7 @@ public class RecipeDetailCard extends GridPane {
                 setConstraints(iMeasure, 1, i);
             }
             ingredientGrid.setHgap(20);
-            ingredientGrid.setVgap(20);
+            ingredientGrid.setVgap(0);
         } catch (Exception ignored) {
             Label noIngredientsLabel = new Label("[No Ingredients]");
             ingredientGrid.getChildren().add(noIngredientsLabel);
