@@ -17,6 +17,7 @@ public class App extends Application {
     public void start(Stage stage) {
         App.stage = stage;
         Scene scene = DatabaseUI.getInstance().build();
+        scene.getStylesheets().add("style.css");
 
         stage.setWidth(1300);
         stage.setHeight(600);

@@ -9,6 +9,7 @@ import com.fireside.pantry.util.objects.Recipe;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -45,10 +46,14 @@ public class DatabaseUI {
         VBox left = new VBox();
         left.getChildren().addAll(recipeListView);
 
+        VBox top = new VBox(titleBar);
+        Separator sep = new Separator();
+        top.getChildren().add(sep);
+
         // Align menu view to left side
         // Align detail view to right side
         BorderPane pane = new BorderPane();
-        pane.setTop(titleBar);
+        pane.setTop(top);
         pane.setLeft(left);
         pane.setCenter(recipeDetailView);
         // TODO Hide faint gray separator.
