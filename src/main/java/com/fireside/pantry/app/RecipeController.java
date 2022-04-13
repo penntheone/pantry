@@ -10,6 +10,10 @@ import java.util.List;
 
 public class RecipeController {
 
+    public static List<Recipe> getAllRecipes() {
+        return getRecipes("CALL spGetAllRecipes()");
+    }
+
     public static List<Recipe> getRangeOfRecipes(int start, int end) {
         List<Recipe> recipes = new ArrayList<>();
         for (int i = start; i < end + 1; i++) {

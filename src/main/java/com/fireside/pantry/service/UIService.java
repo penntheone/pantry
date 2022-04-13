@@ -18,7 +18,7 @@ public class UIService {
         String filter = ui.getSearchBar().getFilters();
         if (search.isBlank()) return;
         List<Recipe> recipes = switch (filter) {
-            case "Recipe Title", "Select search option" -> RecipeController.getRecipesByTitle(search);
+            case "Title", "Select search option" -> RecipeController.getRecipesByTitle(search);
             case "Ingredient" -> RecipeController.getRecipesByIngredient(search);
             case "Region" -> RecipeController.getRecipesByRegion(search);
             default -> RecipeController.getRecipesByCategory(search);
