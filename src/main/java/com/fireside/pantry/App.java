@@ -20,6 +20,7 @@ public class App extends Application {
         scene.getStylesheets().add("style.css");
 
         stage.setWidth(1300);
+        stage.setMinWidth(1200);
         stage.setHeight(600);
         stage.setTitle("Pantry");
         stage.setScene(scene);

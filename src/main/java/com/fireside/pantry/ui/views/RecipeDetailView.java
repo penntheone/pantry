@@ -13,7 +13,8 @@ public class RecipeDetailView extends ScrollPane {
         setContent(detailCard);
         setStyle("-fx-focus-color: transparent;" +
                 "-fx-faint-focus-color: transparent;" +
-                "-fx-background-color: white");
+                "-fx-background-color: white;" +
+                "-fx-background-insets: 0, 0, 0, 0");
         setVbarPolicy(ScrollBarPolicy.NEVER);
         setFitToWidth(true);
     }

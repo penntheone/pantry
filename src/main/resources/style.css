@@ -1,6 +1,7 @@
 .separator .line {
     -fx-border-color: black;
     -fx-border-width: 1;
+    -fx-background-insets: 0, 0, 0, 0
 }
 
 .choice-box {
@@ -12,4 +13,8 @@
     -fx-background-color: white;
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent
+}
+
+.root {
+    -fx-focus-color: transparent;
 }

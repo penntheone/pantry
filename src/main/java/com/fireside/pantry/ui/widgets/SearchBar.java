@@ -59,7 +59,7 @@ public class SearchBar extends HBox {
         setStyle("-fx-padding: 5;" +
                 "-fx-border-style: solid inside;" +
                 "-fx-border-width: 2;" +
-                "-fx-border-insets: 5;" +
+                "-fx-border-insets: 2;" +
                 "-fx-border-radius: 30;" +
                 "-fx-border-color: black;" +
                 "-fx-background-color: white");

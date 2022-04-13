@@ -26,7 +26,8 @@ public class RecipeListView extends ScrollPane {
         setMinWidth(500);
         setStyle("-fx-focus-color: transparent;" +
                 "-fx-faint-focus-color: transparent;" +
-                "-fx-background-color: white;");
+                "-fx-background-color: white;" +
+                "-fx-background-insets: 0, 0, 0, 0");
         setVbarPolicy(ScrollBarPolicy.NEVER);
     }
 
