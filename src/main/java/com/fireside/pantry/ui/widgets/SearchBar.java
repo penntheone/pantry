@@ -23,13 +23,13 @@ public class SearchBar extends HBox {
                 "-fx-faint-focus-color: transparent;" +
                 "-fx-background-color: transparent");
         searchField.setPromptText("Enter Recipe Name");
-        searchField.setPrefWidth(400);
+        searchField.setPrefWidth(320);
         searchField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) UIService.handleSearch();
         });
 
         // Filter choice box ---------------------------------------
-        this.filters = new ChoiceBox<String>();
+        this.filters = new ChoiceBox<>();
         filters.getItems().add("Select search option");
         filters.getItems().add("Recipe Title");
         filters.getItems().add("Ingredient");
@@ -62,8 +62,10 @@ public class SearchBar extends HBox {
                 "-fx-border-color: black;" +
                 "-fx-background-color: white");
         getChildren().addAll(searchField, spacer, filters, searchButton);
-        setMinWidth(200);
+        setMinWidth(300);
         setMaxWidth(500);
+        setMinHeight(35);
+        setMaxHeight(55);
     }
 
     public String getText() {
