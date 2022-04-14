@@ -18,7 +18,7 @@ public class ImageController {
     private ImageCache imageCache;
 
     private ImageController() {
-        this.imageCache = new ImageCache(20);
+        this.imageCache = new ImageCache(50);
     }
 
     public Image getRecipeImage(Recipe recipe) {
