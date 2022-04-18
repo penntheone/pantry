@@ -1,0 +1,8 @@
+{
+  "db": {
+    "host": "localhost",
+    "database": "pantry",
+    "user": "root",
+    "password": "password"
+  }
+}

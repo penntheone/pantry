@@ -1,10 +1,14 @@
 package com.fireside.pantry.db;
 
 import com.fireside.pantry.util.Utils;
+import javafx.scene.image.Image;
 
+import java.io.InputStream;
 import java.sql.*;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class DatabaseConnector {
 
@@ -39,6 +43,29 @@ public class DatabaseConnector {
         }
         disconnect();
         return rows;
+    }
+
+    public Map<Integer, InputStream> getImages(String query) throws SQLException {
+        connect();
+
+        Statement statement = conn.createStatement();
+        ResultSet result = statement.executeQuery(query);
+
+        Map<Integer, InputStream> images = new HashMap<>();
+        while (result.next()) {
+            images.put(result.getInt(1), result.getBinaryStream(2));
+        }
+        disconnect();
+        return images;
+    }
+
+    public void addImage(int recipeId, InputStream inputStream) throws SQLException {
+        connect();
+        PreparedStatement statement = conn.prepareStatement("INSERT INTO recipeimages(recipe_id, image) VALUES(?, ?);");
+        statement.setInt(1, recipeId);
+        statement.setBinaryStream(2, inputStream);
+        statement.executeUpdate();
+        disconnect();
     }
 
     public String buildUrl() {

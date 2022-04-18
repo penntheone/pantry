@@ -1,5 +1,6 @@
 package com.fireside.pantry.ui.components;
 
+import com.fireside.pantry.app.ImageController;
 import com.fireside.pantry.service.UIService;
 import com.fireside.pantry.util.objects.Recipe;
 import javafx.scene.control.Label;
@@ -27,15 +28,18 @@ public class RecipeCard extends HBox {
         left.setMaxSize(dimension, dimension);
         left.setMinSize(dimension, dimension);
 
-        Image thumbnail = new Image(recipe.getThumb_url());
-        BackgroundImage bImg = new BackgroundImage(thumbnail,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.DEFAULT,
-                new BackgroundSize(dimension, dimension,
-                        false, false, false, false));
-        Background bGround = new Background(bImg);
-        left.setBackground(bGround);
+        Image image = recipe.getImage();
+        if (image != null) {
+            BackgroundImage bImg = new BackgroundImage(
+                    image,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundPosition.DEFAULT,
+                    new BackgroundSize(dimension, dimension,
+                            false, false, false, false));
+            Background bGround = new Background(bImg);
+            left.setBackground(bGround);
+        }
 
         // Padding --------------------------------------------------
 
