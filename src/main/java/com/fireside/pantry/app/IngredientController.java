@@ -10,10 +10,19 @@ import java.util.List;
 
 public class IngredientController {
 
+    /**
+     * Returns the list of all the ingredients
+     * @return every ingredient in the app
+     */
     public static List<Ingredient> getAllIngredients() {
         return getIngredients("SELECT * FROM pantry.ingredients");
     }
 
+    /**
+     * Returns all the ingredients for a specific recipe
+     * @param recipeId id of the recipe in question
+     * @return all the ingredients of the recipe
+     */
     public static List<Ingredient> getRecipeIngredients(int recipeId) {
         String query = String.format("CALL spGetIngredientsByRecID(%d);", recipeId);
         try {
@@ -33,6 +42,11 @@ public class IngredientController {
         }
     }
 
+    /**
+     * Gets the ingredient id based on the ingredient name
+     * @param name the specified ingredient name
+     * @return the id of said ingredient
+     */
     public static int getIngredientIDByName(String name) {
         String query = String.format(
                 "SELECT * FROM pantry.ingredients WHERE name='%s'",
@@ -45,6 +59,11 @@ public class IngredientController {
         return ingredients.get(0).getId();
     }
 
+    /**
+     * Gets ingredients based on a search query
+     * @param query The specific search query
+     * @return The list of ingredients as a result
+     */
     private static List<Ingredient> getIngredients(String query) {
         try {
             List<Row> rows = new DatabaseConnector().query(query);

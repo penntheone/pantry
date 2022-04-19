@@ -60,6 +60,21 @@ public class MealDBRecipe {
 
     public String strSource;
 
+    /**
+     * This method is the constructor for the object, putting all the necessary
+     * information into it
+     * @param idMeal
+     * @param strMeal
+     * @param strCategory
+     * @param strArea
+     * @param strInstructions
+     * @param strMealThumb
+     * @param strTages
+     * @param strYoutube
+     * @param strIngredient1-20
+     * @param strMeasure1-20
+     * @param strSource
+     */
     public MealDBRecipe(String idMeal, String strMeal, String strCategory, String strArea, String strInstructions,
                         String strMealThumb, String strTages, String strYoutube,
                         String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4,
@@ -124,6 +139,10 @@ public class MealDBRecipe {
         this.strSource = strSource;
     }
 
+    /**
+     * The getter for all the ingredients
+     * @return All the ingredients for the recipe
+     */
     public List<String> getIngredients() {
         LinkedList<String> ingredients = new LinkedList<>();
         ingredients.add(strIngredient1);
@@ -162,6 +181,10 @@ public class MealDBRecipe {
         return ingredients;
     }
 
+    /**
+     * The getter method for all the recipe's measures
+     * @return list of all measures
+     */
     public List<String> getMeasures() {
         LinkedList<String> measures = new LinkedList<>();
         measures.add(strMeasure1);
@@ -199,6 +222,10 @@ public class MealDBRecipe {
         return measures;
     }
 
+    /**
+     * Converts the object to a string
+     * @return The object in string form
+     */
     @Override
     public String toString() {
         return new Gson().toJson(this);

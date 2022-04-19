@@ -17,10 +17,20 @@ public class ImageController {
 
     private ImageCache imageCache;
 
+    /**
+     * A constructor method which creates an imageCache of size 50
+     */
     private ImageController() {
         this.imageCache = new ImageCache(50);
     }
 
+    /**
+     * Will either return the image immediately if it is in the cache,
+     * otherwise it will find the recipe id and image, store it in the cache, and then
+     * return the image
+     * @param recipe the specified recipe
+     * @return the image of the respective recipe
+     */
     public Image getRecipeImage(Recipe recipe) {
         // First check to see if the image is already stored in the cache
         if (imageCache.contains(recipe.getId()))
@@ -43,6 +53,10 @@ public class ImageController {
         }
     }
 
+    /**
+     * Returns the object itself
+     * @return the object itself
+     */
     public static ImageController getInstance() {
         if (ImageController.instance == null)
             ImageController.instance = new ImageController();

@@ -23,6 +23,10 @@ public class TheMealDB {
         this.config = Utils.loadAPIConfig("TheMealDB");
     }
 
+    /**
+     * Gets all recipes in the database
+     * @return All the recipes
+     */
     public List<MealDBRecipe> getAllRecipes() {
         LinkedList<MealDBRecipe> allRecipes = new LinkedList<>();
 
@@ -40,6 +44,11 @@ public class TheMealDB {
         return allRecipes;
     }
 
+    /**
+     * Gets all recipes based on the first letter as the parameter
+     * @param letter The letter that is inputted by the use
+     * @return The recipes starting with said letter
+     */
     public String getRecipesByFirstLetter(char letter) {
         try {
             URL query = buildQueryWithParams(config.getPath("listByFirstLetter"), String.valueOf(letter));
@@ -50,6 +59,11 @@ public class TheMealDB {
         return null;
     }
 
+    /**
+     * Gets recipes based on the name in the param
+     * @param name The name or phrase inputted by the user
+     * @return The search results based on the param
+     */
     public String getRecipeByName(String name) {
         try {
             URL query = buildQueryWithParams(config.getPath("recipeByName"), name);
@@ -60,6 +74,12 @@ public class TheMealDB {
         return null;
     }
 
+    /**
+     * Creates a search query based on the path
+     * @param apiPath The Path selected by the user
+     * @return A query url based on those results
+     * @throws MalformedURLException
+     */
     private URL buildQuery(String apiPath) throws MalformedURLException {
         return new URL(String.format("%s/%s%s",
                 config.getUrl(),
@@ -68,10 +88,23 @@ public class TheMealDB {
         ));
     }
 
+    /**
+     * Creates a search query based on the path and a specified query parameter
+     * @param apiPath The Path selected by the user
+     * @param query The specific parameter chosen by the user
+     * @return A query based on the user specified parameters
+     * @throws MalformedURLException
+     */
     private URL buildQueryWithParams(String apiPath, String query) throws MalformedURLException {
         return new URL(String.format(buildQuery(apiPath).toString(), query));
     }
 
+    /**
+     * executes the search based on the built query
+     * @param queryUrl The URL built based on what the user is searching for
+     * @return the search results
+     * @throws IOException
+     */
     private String executeQuery(URL queryUrl) throws IOException {
         HttpsURLConnection connection = (HttpsURLConnection) queryUrl.openConnection();
         connection.setRequestMethod("GET");
@@ -87,6 +120,10 @@ public class TheMealDB {
         return response.toString();
     }
 
+    /**
+     * Gets the object itself
+     * @return The object
+     */
     public static TheMealDB getInstance() {
         if (TheMealDB.instance == null)
             TheMealDB.instance = new TheMealDB();
