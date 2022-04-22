@@ -5,6 +5,8 @@ import com.fireside.pantry.AppScene;
 import com.fireside.pantry.ui.pages.AdvanceSearchPage;
 import com.fireside.pantry.ui.pages.DatabasePage;
 import com.fireside.pantry.ui.pages.MealPlanningPage;
+import com.fireside.pantry.ui.pages.UserPage;
+import com.fireside.pantry.ui.widgets.TitleBar;
 import com.fireside.pantry.ui.widgets.UniversalMenu;
 import com.fireside.pantry.util.objects.Recipe;
 
@@ -17,6 +19,8 @@ public class UIService {
      * recipe list view, and the recipe detail view if there are results
      */
     public static void handleSearch() {
+        handlePageSelection("Database");
+
         AppScene ui = AppScene.getInstance();
         String search = ui.getSearchBar().getText();
         String filter = ui.getSearchBar().getFilters();
@@ -40,11 +44,19 @@ public class UIService {
         DatabasePage.getInstance().getRecipeDetailView().getDetailCard().refreshDetailCard(recipe);
     }
 
-    public static void handleMenuSelection() {
+    public static void closeMenu() {
         UniversalMenu cur = UniversalMenu.getInstance();
+        if (cur.isActivated()) {
+            cur.setActivated(false);
+            cur.getMenuTranslation().setRate(-1);
+            cur.getMenuTranslation().play();
+        }
+    }
 
-        int value = cur.flipActivated() ? -1 : 1;
-        cur.getMenuTranslation().setRate(value);
+    public static void openMenu() {
+        UniversalMenu cur = UniversalMenu.getInstance();
+        cur.setActivated(true);
+        cur.getMenuTranslation().setRate(1);
         cur.getMenuTranslation().play();
     }
 
@@ -53,7 +65,9 @@ public class UIService {
             case "Database" -> AppScene.getInstance().setContent(DatabasePage.getInstance().build());
             case "Advance Search" -> AppScene.getInstance().setContent(AdvanceSearchPage.getInstance().build());
             case "Meal Planning" -> AppScene.getInstance().setContent(MealPlanningPage.getInstance().build());
+            case "User" -> AppScene.getInstance().setContent(UserPage.getInstance().build());
         }
-        handleMenuSelection();
+        TitleBar.getInstance().setTitle(page);
+        closeMenu();
     }
 }

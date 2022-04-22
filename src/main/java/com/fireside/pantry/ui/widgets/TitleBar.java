@@ -28,7 +28,7 @@ public class TitleBar extends HBox {
                         "-fx-focus-color: transparent;" +
                         "-fx-faint-focus-color: transparent;" +
                         "-fx-cursor: hand;");
-        menuButton.setOnAction(action -> UIService.handleMenuSelection());
+        menuButton.setOnAction(action -> UIService.openMenu());
 
         HBox sep = new HBox();
         sep.setPrefWidth(10);
@@ -55,7 +55,6 @@ public class TitleBar extends HBox {
 
     public void setTitle(String title) {
         titleLabel.setText(title);
-
     }
 
     public SearchBar getSearchBar() {

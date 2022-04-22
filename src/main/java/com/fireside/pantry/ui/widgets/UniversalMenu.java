@@ -5,9 +5,10 @@ import javafx.animation.TranslateTransition;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 public class UniversalMenu extends VBox {
@@ -15,38 +16,42 @@ public class UniversalMenu extends VBox {
 
     private static final double MENU_WIDTH = 300;
 
-    String currentPage;
     boolean activated;
     TranslateTransition menuTranslation;
 
     private UniversalMenu() {
-        currentPage = "Database";
         activated = false;
-
-
 
         ImageView exitIcon = new ImageView(new Image("asset/icon/cross.png"));
         exitIcon.setFitHeight(25); exitIcon.setFitWidth(25);
         Button exitButton = new Button("", exitIcon);
-        exitButton.setOnAction(action -> UIService.handleMenuSelection());
+        exitButton.setOnAction(action -> UIService.closeMenu());
 
         Button databaseButton = new Button("Database");
         Button advanceSearchButton = new Button("Advance Search");
         Button mealPlanningButton = new Button("Meal Planning");
 
-        databaseButton.setFont(new Font("Arial", 25));
-        advanceSearchButton.setFont(new Font("Arial", 25));
-        mealPlanningButton.setFont(new Font("Arial", 25));
-
         databaseButton.setOnAction(action -> UIService.handlePageSelection("Database"));
         advanceSearchButton.setOnAction(action -> UIService.handlePageSelection("Advance Search"));
         mealPlanningButton.setOnAction(action -> UIService.handlePageSelection("Meal Planning"));
 
-        Region spacer = new Region();
-        spacer.setPrefHeight(40);
+        Region topSpacer = new Region();
+        topSpacer.setPrefHeight(40);
+
+        Region bottomSpacer = new Region();
+        VBox.setVgrow(bottomSpacer, Priority.ALWAYS);
+
+
+
+        ImageView userIcon = new ImageView(new Image("asset/icon/user.png"));
+        userIcon.setFitHeight(30); userIcon.setFitWidth(30);
+        Button userButton = new Button("", userIcon);
+        userButton.setOnAction(action -> UIService.handlePageSelection("User"));
+
+        getChildren().addAll(exitButton, topSpacer, databaseButton, advanceSearchButton, mealPlanningButton, bottomSpacer, userButton);
 
         setPrefWidth(MENU_WIDTH);
-        getChildren().addAll(exitButton, spacer, databaseButton, advanceSearchButton, mealPlanningButton);
+
         setTranslateX(-MENU_WIDTH - 3);
 
 
@@ -65,29 +70,16 @@ public class UniversalMenu extends VBox {
                 "-fx-faint-focus-color: transparent");
     }
 
-    public String getCurrentPage() {
-        return currentPage;
-    }
-
     public boolean isActivated() {
         return activated;
     }
 
-    public boolean flipActivated() {
-        activated = !activated;
-        return !activated;
+    public void setActivated(boolean activated) {
+        this.activated = activated;
     }
 
     public TranslateTransition getMenuTranslation() {
         return menuTranslation;
-    }
-
-    public void setCurrentPage(String currentPage) {
-        this.currentPage = currentPage;
-    }
-
-    public void setActivated(boolean activated) {
-        this.activated = activated;
     }
 
     public void setMenuTranslation(TranslateTransition menuTranslation) {
