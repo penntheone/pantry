@@ -1,6 +1,7 @@
 package com.fireside.pantry;
 
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -19,6 +20,7 @@ public class App extends Application {
         stage.setTitle("Pantry");
         stage.setScene(scene);
         stage.show();
+        stage.getIcons().add(new Image("asset/appIcon/pantry.png"));
     }
     
     public static void main(String[] args) {

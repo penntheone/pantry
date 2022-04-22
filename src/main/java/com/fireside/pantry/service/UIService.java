@@ -69,11 +69,11 @@ public class UIService {
      */
     public static void handlePageSelection(String page) {
         switch (page) {
-            case "Database" -> AppScene.getInstance().setContent(DatabasePage.getInstance().build());
-            case "Advance Search" -> AppScene.getInstance().setContent(AdvanceSearchPage.getInstance().build());
-            case "Meal Planning" -> AppScene.getInstance().setContent(MealPlanningPage.getInstance().build());
-            case "About" -> AppScene.getInstance().setContent(AboutPage.getInstance().build());
-            case "User" -> AppScene.getInstance().setContent(UserPage.getInstance().build());
+            case "Database"         -> AppScene.getInstance().setContent(DatabasePage.getInstance().build());
+            case "Advance Search"   -> AppScene.getInstance().setContent(AdvanceSearchPage.getInstance().build());
+            case "Meal Planning"    -> AppScene.getInstance().setContent(MealPlanningPage.getInstance().build());
+            case "About"            -> AppScene.getInstance().setContent(AboutPage.getInstance().build());
+            case "User"             -> AppScene.getInstance().setContent(UserPage.getInstance().build());
         }
         TitleBar.getInstance().setTitle(page);
         closeMenu();
