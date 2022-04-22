@@ -2,7 +2,9 @@ package com.fireside.pantry.service;
 
 import com.fireside.pantry.app.RecipeController;
 import com.fireside.pantry.AppScene;
+import com.fireside.pantry.ui.pages.AdvanceSearchPage;
 import com.fireside.pantry.ui.pages.DatabasePage;
+import com.fireside.pantry.ui.pages.MealPlanningPage;
 import com.fireside.pantry.ui.widgets.UniversalMenu;
 import com.fireside.pantry.util.objects.Recipe;
 
@@ -44,5 +46,14 @@ public class UIService {
         int value = cur.flipActivated() ? -1 : 1;
         cur.getMenuTranslation().setRate(value);
         cur.getMenuTranslation().play();
+    }
+
+    public static void handlePageSelection(String page) {
+        switch (page) {
+            case "Database" -> AppScene.getInstance().setContent(DatabasePage.getInstance().build());
+            case "Advance Search" -> AppScene.getInstance().setContent(AdvanceSearchPage.getInstance().build());
+            case "Meal Planning" -> AppScene.getInstance().setContent(MealPlanningPage.getInstance().build());
+        }
+        handleMenuSelection();
     }
 }

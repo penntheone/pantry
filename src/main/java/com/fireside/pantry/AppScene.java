@@ -3,6 +3,7 @@ package com.fireside.pantry;
 import com.fireside.pantry.ui.widgets.SearchBar;
 import com.fireside.pantry.ui.widgets.TitleBar;
 import com.fireside.pantry.ui.widgets.UniversalMenu;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.*;
@@ -29,8 +30,8 @@ public class AppScene {
 
     private AppScene() {
         this.titleBar = TitleBar.getInstance();
-        this.content = new BorderPane();
         this.menu = UniversalMenu.getInstance();
+        this.content = new BorderPane();
         this.root = new Pane();
     }
 
@@ -59,6 +60,10 @@ public class AppScene {
 
     public SearchBar getSearchBar() {
         return titleBar.getSearchBar();
+    }
+
+    public void setContent(Node node) {
+        content.setCenter(node);
     }
 
     // |----- Static Methods ----------

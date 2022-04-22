@@ -38,6 +38,10 @@ public class UniversalMenu extends VBox {
         advanceSearchButton.setFont(new Font("Arial", 25));
         mealPlanningButton.setFont(new Font("Arial", 25));
 
+        databaseButton.setOnAction(action -> UIService.handlePageSelection("Database"));
+        advanceSearchButton.setOnAction(action -> UIService.handlePageSelection("Advance Search"));
+        mealPlanningButton.setOnAction(action -> UIService.handlePageSelection("Meal Planning"));
+
         Region spacer = new Region();
         spacer.setPrefHeight(40);
 
