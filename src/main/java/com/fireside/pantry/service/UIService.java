@@ -44,6 +44,9 @@ public class UIService {
         DatabasePage.getInstance().getRecipeDetailView().getDetailCard().refreshDetailCard(recipe);
     }
 
+    /**
+     * Closes the menu only if menu is activated.
+     */
     public static void closeMenu() {
         UniversalMenu cur = UniversalMenu.getInstance();
         if (cur.isActivated()) {
@@ -53,6 +56,9 @@ public class UIService {
         }
     }
 
+    /**
+     * Opens the menu.
+     */
     public static void openMenu() {
         UniversalMenu cur = UniversalMenu.getInstance();
         cur.setActivated(true);
@@ -60,6 +66,11 @@ public class UIService {
         cur.getMenuTranslation().play();
     }
 
+    /**
+     * Switch to the requested page, update the title,
+     * then close the menu if needed.
+     * @param page the requested page
+     */
     public static void handlePageSelection(String page) {
         switch (page) {
             case "Database" -> AppScene.getInstance().setContent(DatabasePage.getInstance().build());

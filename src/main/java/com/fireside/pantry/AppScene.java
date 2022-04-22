@@ -9,16 +9,22 @@ import javafx.scene.control.Separator;
 import javafx.scene.layout.*;
 import com.fireside.pantry.ui.pages.DatabasePage;
 
+/**
+ * The main scene of the app, which includes the title bar on top,
+ * the content of the page center, and a menu out of sight on the
+ * left ready to be summoned. The title changed depending on the
+ * current page.
+ */
 public class AppScene {
 
     private static AppScene instance;
 
-    // |----- Constants ----------
+    // ============================================================= Constants
 
     private static final double DATABASE_UI_WIDTH = 1000;
     private static final double DATABASE_UI_HEIGHT = 600;
 
-    // |----- Components ----------
+    // ============================================================= Components
 
     private final TitleBar titleBar;
     private final UniversalMenu menu;
@@ -26,7 +32,7 @@ public class AppScene {
 
     private final Pane root;
 
-    // |----- Constructors ----------
+    // ============================================================= Constructors
 
     private AppScene() {
         this.titleBar = TitleBar.getInstance();
@@ -35,28 +41,32 @@ public class AppScene {
         this.root = new Pane();
     }
 
-    // |----- Methods ----------
+    // ============================================================= Build method
 
     public Scene build() {
+        // ---------------------- Visible
         BorderPane pane = new BorderPane();
         pane.prefHeightProperty().bind(root.heightProperty());
         pane.prefWidthProperty().bind(root.widthProperty());
 
+        // ---------------------- Top: Title bar
         VBox top = new VBox(titleBar);
         Separator sep = new Separator();
         top.getChildren().add(sep);
         pane.setTop(top);
 
+        // ---------------------- Center: Content
         content.setCenter(DatabasePage.getInstance().build());
         pane.setCenter(content);
 
+        // ---------------------- Menu styling
         menu.prefHeightProperty().bind(root.heightProperty());
-
         root.getChildren().addAll(pane, menu);
+
         return new Scene(root);
     }
 
-    // |----- Getters ----------
+    // ============================================================= Getters / Setters
 
     public SearchBar getSearchBar() {
         return titleBar.getSearchBar();
@@ -66,7 +76,7 @@ public class AppScene {
         content.setCenter(node);
     }
 
-    // |----- Static Methods ----------
+    // ============================================================= Static instance access
 
     public static AppScene getInstance() {
         if (AppScene.instance == null)

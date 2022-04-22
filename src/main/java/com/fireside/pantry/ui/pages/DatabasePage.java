@@ -1,12 +1,10 @@
 package com.fireside.pantry.ui.pages;
 
-import com.fireside.pantry.AppScene;
 import com.fireside.pantry.service.RecipeService;
 import com.fireside.pantry.ui.views.RecipeDetailView;
 import com.fireside.pantry.ui.views.RecipeListView;
 import com.fireside.pantry.util.objects.Recipe;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 
 import java.util.List;
 

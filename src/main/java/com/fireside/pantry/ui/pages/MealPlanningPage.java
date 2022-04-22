@@ -6,6 +6,7 @@ public class MealPlanningPage extends BorderPane {
     private static MealPlanningPage instance;
 
     private MealPlanningPage() {
+
     }
 
     public BorderPane build() {
