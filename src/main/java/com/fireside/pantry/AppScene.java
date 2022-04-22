@@ -20,13 +20,13 @@ public class AppScene {
     // |----- Components ----------
 
     private final TitleBar titleBar;
-    private final BorderPane content;
     private final UniversalMenu menu;
+    private final BorderPane content;
 
     // |----- Constructors ----------
 
     private AppScene() {
-        this.titleBar = new TitleBar("Database");
+        this.titleBar = TitleBar.getInstance();
         this.content = new BorderPane();
         this.menu = UniversalMenu.getInstance();
     }
@@ -34,21 +34,19 @@ public class AppScene {
     // |----- Methods ----------
 
     public Scene build() {
-        Pane root = new Pane();
-        root.setPrefSize(400, 300);
-
+        BorderPane pane = new BorderPane();
 
         VBox top = new VBox(titleBar);
         Separator sep = new Separator();
         top.getChildren().add(sep);
-
-        // Align menu view to left side
-        // Align detail view to right side
-        BorderPane pane = new BorderPane();
         pane.setTop(top);
-        pane.setCenter(content);
 
         content.setCenter(DatabasePage.getInstance().build());
+        pane.setCenter(content);
+
+        Pane root = new Pane();
+        pane.prefHeightProperty().bind(root.heightProperty());
+        pane.prefWidthProperty().bind(root.widthProperty());
 
         root.getChildren().addAll(pane, menu);
         return new Scene(root);

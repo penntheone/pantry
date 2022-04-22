@@ -41,7 +41,7 @@ public class UIService {
     public static void handleMenuSelection() {
         UniversalMenu cur = UniversalMenu.getInstance();
 
-        if (cur.isActivated())  cur.getMenuTranslation().setRate(1);
+        if (!cur.isActivated())  cur.getMenuTranslation().setRate(1);
         else                    cur.getMenuTranslation().setRate(-1);
         cur.flipActivated();
         cur.getMenuTranslation().play();

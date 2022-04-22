@@ -12,11 +12,12 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Font;
 
 public class TitleBar extends HBox {
-    String title;
+    private static TitleBar instance;
+
+    Label titleLabel;
     SearchBar searchBar;
 
-    public TitleBar(String title) {
-        this.title = title;
+    private TitleBar() {
         this.searchBar = new SearchBar();
         // Button
         ImageView menuIcon = new ImageView(new Image("asset/icon/bar.png"));
@@ -32,7 +33,7 @@ public class TitleBar extends HBox {
         HBox sep = new HBox();
         sep.setPrefWidth(10);
 
-        Label titleLabel = new Label(title);
+        titleLabel = new Label("Database");
         titleLabel.setFont(new Font("Arial", 25));
 
         // ============================================================= Spacer
@@ -52,11 +53,17 @@ public class TitleBar extends HBox {
                 "-fx-background-color: white");
     }
 
-    public String getTitle() {
-        return title;
+    public void setTitle(String title) {
+        titleLabel.setText(title);
     }
 
     public SearchBar getSearchBar() {
         return searchBar;
+    }
+
+    public static TitleBar getInstance() {
+        if (instance == null)
+            instance = new TitleBar();
+        return instance;
     }
 }
