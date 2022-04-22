@@ -1,48 +1,63 @@
 package com.fireside.pantry.ui.widgets;
 
-import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
-import javafx.fxml.Initializable;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.animation.TranslateTransition;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import com.jfoenix.controls.JFXHamburger;
+import javafx.util.Duration;
 
-import java.awt.event.MouseEvent;
-import java.net.URL;
-import java.util.ResourceBundle;
+public class UniversalMenu extends VBox {
+    private static UniversalMenu instance;
 
-public class UniversalMenu implements Initializable {
+    String currentPage;
+    boolean activated;
+    TranslateTransition menuTranslation;
 
-    private JFXHamburger hamburger;
+    private UniversalMenu() {
+        currentPage = "Database";
+        activated = false;
+        this.setId("menu");
+        this.setPrefWidth(200);
 
-    private JFXDrawer drawer;
+        this.getChildren().addAll(new Button("Database"), new Button("Advance Search"), new Button("Meal Planning"));
+        this.setTranslateX(-200);
 
-    public UniversalMenu(JFXHamburger hamburger, JFXDrawer drawer) {
-        this.hamburger = hamburger;
-        this.drawer = drawer;
+        menuTranslation = new TranslateTransition(Duration.millis(500), this);
+
+        menuTranslation.setFromX(-200);
+        menuTranslation.setToX(0);
     }
 
-    /**
-     * Allows the adjustment of the draw to be opened or closed alongside with the
-     * hamburger changing
-     * @param location
-     * @param resources
-     */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
-        transition.setRate(-1);
-        hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
-            transition.setRate(transition.getRate() * -1);
-            transition.play();
+    public String getCurrentPage() {
+        return currentPage;
+    }
 
-            if (drawer.isOpened()) {
-                drawer.close();
-            } else {
-                drawer.open();
-            }
-        });
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void flipActivated() {
+        activated = !activated;
+    }
+
+    public TranslateTransition getMenuTranslation() {
+        return menuTranslation;
+    }
+
+    public void setCurrentPage(String currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
+    }
+
+    public void setMenuTranslation(TranslateTransition menuTranslation) {
+        this.menuTranslation = menuTranslation;
+    }
+
+    public static UniversalMenu getInstance() {
+        if (UniversalMenu.instance == null)
+            UniversalMenu.instance = new UniversalMenu();
+        return UniversalMenu.instance;
     }
 }

@@ -1,22 +1,20 @@
 package com.fireside.pantry;
 
-import com.fireside.pantry.ui.DatabaseUI;
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class App extends Application {
 
     private static Stage stage;
 
-    public static void updateScene(Scene newScene) {
+    public static void updateScene(javafx.scene.Scene newScene) {
         App.stage.setScene(newScene);
     }
 
     @Override
     public void start(Stage stage) {
         App.stage = stage;
-        Scene scene = DatabaseUI.getInstance().build();
+        javafx.scene.Scene scene = AppScene.getInstance().build();
         scene.getStylesheets().add("style.css");
 
         stage.setWidth(1300);
