@@ -25,6 +25,7 @@ public class TitleBar extends HBox {
     // ============================================================= Constructors
 
     private TitleBar() {
+        searchBar = SearchBar.getInstance();
         // ---------------------- Menu button
         ImageView menuIcon = new ImageView(new Image("asset/icon/bar.png"));
         menuIcon.setFitHeight(25); menuIcon.setFitWidth(25);
