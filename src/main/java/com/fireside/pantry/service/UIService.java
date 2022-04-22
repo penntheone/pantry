@@ -78,4 +78,8 @@ public class UIService {
         TitleBar.getInstance().setTitle(page);
         closeMenu();
     }
+
+    public static void handleLogin() {
+
+    }
 }
