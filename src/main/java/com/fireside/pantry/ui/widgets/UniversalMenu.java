@@ -45,10 +45,12 @@ public class UniversalMenu extends VBox {
         Button databaseButton = new Button("Database");
         Button advanceSearchButton = new Button("Advance Search");
         Button mealPlanningButton = new Button("Meal Planning");
+        Button aboutButton = new Button("About");
 
         databaseButton.setOnAction(action -> UIService.handlePageSelection("Database"));
         advanceSearchButton.setOnAction(action -> UIService.handlePageSelection("Advance Search"));
         mealPlanningButton.setOnAction(action -> UIService.handlePageSelection("Meal Planning"));
+        aboutButton.setOnAction(action -> UIService.handlePageSelection("About"));
 
         // ---------------------- Lower spacer to bottom
         Region bottomSpacer = new Region();
@@ -56,13 +58,13 @@ public class UniversalMenu extends VBox {
 
         // ---------------------- User button
         ImageView userIcon = new ImageView(new Image("asset/icon/user.png"));
-        userIcon.setFitHeight(30); userIcon.setFitWidth(30);
+        userIcon.setFitHeight(35); userIcon.setFitWidth(35);
         Button userButton = new Button("", userIcon);
         userButton.setOnAction(action -> UIService.handlePageSelection("User"));
 
         getChildren().addAll(
                 exitButton, topSpacer,
-                databaseButton, advanceSearchButton, mealPlanningButton,
+                databaseButton, advanceSearchButton, mealPlanningButton, aboutButton,
                 bottomSpacer, userButton);
 
         // ---------------------- Menu translation controller
