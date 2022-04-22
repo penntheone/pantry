@@ -23,18 +23,23 @@ public class AppScene {
     private final UniversalMenu menu;
     private final BorderPane content;
 
+    private final Pane root;
+
     // |----- Constructors ----------
 
     private AppScene() {
         this.titleBar = TitleBar.getInstance();
         this.content = new BorderPane();
         this.menu = UniversalMenu.getInstance();
+        this.root = new Pane();
     }
 
     // |----- Methods ----------
 
     public Scene build() {
         BorderPane pane = new BorderPane();
+        pane.prefHeightProperty().bind(root.heightProperty());
+        pane.prefWidthProperty().bind(root.widthProperty());
 
         VBox top = new VBox(titleBar);
         Separator sep = new Separator();
@@ -44,9 +49,7 @@ public class AppScene {
         content.setCenter(DatabasePage.getInstance().build());
         pane.setCenter(content);
 
-        Pane root = new Pane();
-        pane.prefHeightProperty().bind(root.heightProperty());
-        pane.prefWidthProperty().bind(root.widthProperty());
+        menu.prefHeightProperty().bind(root.heightProperty());
 
         root.getChildren().addAll(pane, menu);
         return new Scene(root);

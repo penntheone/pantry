@@ -1,5 +1,6 @@
 package com.fireside.pantry.ui.views;
 
+import com.fireside.pantry.AppScene;
 import com.fireside.pantry.ui.components.RecipeDetailCard;
 import com.fireside.pantry.util.objects.Recipe;
 

@@ -7,10 +7,6 @@ public class App extends Application {
 
     private static Stage stage;
 
-    public static void updateScene(javafx.scene.Scene newScene) {
-        App.stage.setScene(newScene);
-    }
-
     @Override
     public void start(Stage stage) {
         App.stage = stage;

@@ -55,6 +55,7 @@ public class TitleBar extends HBox {
 
     public void setTitle(String title) {
         titleLabel.setText(title);
+
     }
 
     public SearchBar getSearchBar() {

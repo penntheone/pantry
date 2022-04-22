@@ -1,12 +1,19 @@
 package com.fireside.pantry.ui.widgets;
 
+import com.fireside.pantry.service.UIService;
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 public class UniversalMenu extends VBox {
     private static UniversalMenu instance;
+
+    private static final double MENU_WIDTH = 300;
 
     String currentPage;
     boolean activated;
@@ -15,16 +22,43 @@ public class UniversalMenu extends VBox {
     private UniversalMenu() {
         currentPage = "Database";
         activated = false;
-        this.setId("menu");
-        this.setPrefWidth(200);
 
-        this.getChildren().addAll(new Button("Database"), new Button("Advance Search"), new Button("Meal Planning"));
-        this.setTranslateX(-200);
 
-        menuTranslation = new TranslateTransition(Duration.millis(500), this);
 
-        menuTranslation.setFromX(-200);
+        ImageView exitIcon = new ImageView(new Image("asset/icon/cross.png"));
+        exitIcon.setFitHeight(25); exitIcon.setFitWidth(25);
+        Button exitButton = new Button("", exitIcon);
+        exitButton.setOnAction(action -> UIService.handleMenuSelection());
+
+        Button databaseButton = new Button("Database");
+        Button advanceSearchButton = new Button("Advance Search");
+        Button mealPlanningButton = new Button("Meal Planning");
+
+        databaseButton.setFont(new Font("Arial", 25));
+        advanceSearchButton.setFont(new Font("Arial", 25));
+        mealPlanningButton.setFont(new Font("Arial", 25));
+
+        Region spacer = new Region();
+        spacer.setPrefHeight(40);
+
+        setPrefWidth(MENU_WIDTH);
+        getChildren().addAll(exitButton, spacer, databaseButton, advanceSearchButton, mealPlanningButton);
+        setTranslateX(-MENU_WIDTH - 3);
+
+
+        menuTranslation = new TranslateTransition(Duration.millis(200), this);
+
+        menuTranslation.setFromX(-MENU_WIDTH - 3);
         menuTranslation.setToX(0);
+
+        setStyle("-fx-padding: 20;" +
+                "-fx-border-style: solid outside;" +
+                "-fx-border-width: 2;" +
+                "-fx-border-insets: 0;" +
+                "-fx-border-color: black;" +
+                "-fx-background-color: white;" +
+                "-fx-focus-color: transparent;" +
+                "-fx-faint-focus-color: transparent");
     }
 
     public String getCurrentPage() {
@@ -35,8 +69,9 @@ public class UniversalMenu extends VBox {
         return activated;
     }
 
-    public void flipActivated() {
+    public boolean flipActivated() {
         activated = !activated;
+        return !activated;
     }
 
     public TranslateTransition getMenuTranslation() {
