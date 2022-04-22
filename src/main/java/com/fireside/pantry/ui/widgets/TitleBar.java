@@ -28,7 +28,7 @@ public class TitleBar extends HBox {
         searchBar = SearchBar.getInstance();
         // ---------------------- Menu button
         ImageView menuIcon = new ImageView(new Image("asset/icon/bar.png"));
-        menuIcon.setFitHeight(25); menuIcon.setFitWidth(25);
+        menuIcon.setFitHeight(25); menuIcon.setFitWidth(27);
         Button menuButton = new Button("", menuIcon);
         menuButton.setStyle(
                 "-fx-background-color: transparent;" +
