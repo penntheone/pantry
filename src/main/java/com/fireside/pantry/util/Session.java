@@ -1,6 +1,7 @@
 package com.fireside.pantry.util;
 
 import com.fireside.pantry.app.UserController;
+import com.fireside.pantry.service.AuthService;
 import com.fireside.pantry.util.objects.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,18 +19,6 @@ public class Session {
 
     private Session() {
         this.sessionStart = LocalDateTime.now();
-    }
-
-    public boolean authorizeUser(String username, String password) throws Exception {
-        User user = UserController.getUserByUsername(username);
-        if (user.getUsername().equals(""))
-            throw new NullPointerException("User does not exist");
-        if (user.getAuthString().equals(AuthUtils.getHash(password))) {
-            logger.info("Authorized user -> " + user.toString());
-            this.user = user;
-            return true;
-        }
-        return false;
     }
 
     public void end() {
