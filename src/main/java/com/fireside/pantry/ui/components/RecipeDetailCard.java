@@ -5,6 +5,7 @@ import com.fireside.pantry.app.IngredientController;
 import com.fireside.pantry.util.objects.Ingredient;
 import com.fireside.pantry.util.objects.Recipe;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
@@ -54,7 +55,27 @@ public class RecipeDetailCard extends GridPane {
         descriptionNode = new Label("[Description] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices in iaculis nunc sed augue lacus viverra vitae.");
         descriptionNode.setWrapText(true);
 
-        headerPane.getChildren().addAll(titleNode, subtitleNode, spacer, descriptionNode);
+        Region spacer2 = new Region();
+        spacer2.setPrefHeight(15);
+
+        // ---------------------- Nutrition pane
+        VBox caloriesBox    = generateNutritionLabel("Calories",    "830kcal");
+        VBox proteinBox     = generateNutritionLabel("Protein",     "75g");
+        VBox carbBox        = generateNutritionLabel("Carb",        "32g");
+        VBox fatBox         = generateNutritionLabel("Fat",         "220g");
+
+        Label nutritionTitleLabel = new Label("Key Nutrition Facts | Per Serving");
+        nutritionTitleLabel.setFont(new Font("Arial Bold", 13));
+
+        HBox nutritionInfo = new HBox(caloriesBox, proteinBox, carbBox, fatBox);
+        nutritionInfo.setSpacing(20);
+
+        VBox nutritionPane = new VBox(nutritionTitleLabel, nutritionInfo);
+        nutritionPane.setSpacing(5);
+        nutritionPane.setAlignment(Pos.TOP_CENTER);
+        nutritionInfo.setAlignment(Pos.BASELINE_CENTER);
+
+        headerPane.getChildren().addAll(titleNode, subtitleNode, spacer, descriptionNode, spacer2, nutritionPane);
         setConstraints(headerPane, 1, 0);
 
         // Ingredients  ------------------------------------------------
@@ -128,6 +149,19 @@ public class RecipeDetailCard extends GridPane {
             Label noIngredientsLabel = new Label("[No Ingredients]");
             ingredientGrid.getChildren().add(noIngredientsLabel);
         }
+    }
+
+    private static VBox generateNutritionLabel(String nutrition, String count) {
+        Label nutritionLabel = new Label(nutrition);
+        nutritionLabel.setFont(new Font("Arial", 13));
+
+        Label countLabel = new Label(count);
+        countLabel.setFont(new Font("Arial Bold", 17));
+
+        VBox nutritionBox = new VBox(nutritionLabel, countLabel);
+        nutritionBox.setAlignment(Pos.TOP_CENTER);
+
+        return nutritionBox;
     }
 
     private static void setThumbnail(VBox imagePane, Recipe recipe) {

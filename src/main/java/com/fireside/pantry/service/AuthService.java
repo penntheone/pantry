@@ -1,10 +1,19 @@
-package com.fireside.pantry.util;
+package com.fireside.pantry.service;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
-public class AuthUtils {
+public class AuthService {
+
+    private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
+
+    public static void authorize(String username, String password) {
+        logger.info("Username: " + username + ", Password: " + password);
+    }
 
     public static String getHash(String input) throws Exception {
         MessageDigest md = MessageDigest.getInstance("SHA-256");

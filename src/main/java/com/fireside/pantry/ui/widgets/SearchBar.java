@@ -12,12 +12,22 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 
+/**
+ * The search bar, which lays dormant on the title bar and
+ * will switch page to "Database" is a query is entered.
+ */
 public class SearchBar extends HBox {
+    private static SearchBar instance;
+
+    // ============================================================= Components
+
     private final TextField searchField;
     private final ChoiceBox<String> filters;
 
-    public SearchBar() {
-        // Search Field ------------------------------------------------
+    // ============================================================= Constructors
+
+    private SearchBar() {
+        // ---------------------- Search field
         this.searchField = new TextField();
         searchField.setStyle(
                 "-fx-focus-color: transparent;" +
@@ -29,23 +39,22 @@ public class SearchBar extends HBox {
             if (event.getCode() == KeyCode.ENTER) UIService.handleSearch();
         });
 
-        // Filter choice box ---------------------------------------
-        this.filters = new ChoiceBox<>();
+        // ---------------------- Filter choice box
+        filters = new ChoiceBox<>();
         filters.setPrefWidth(150);
-//        filters.getItems().add("Select Options");
         filters.getItems().add("Title");
         filters.getItems().add("Ingredient");
         filters.getItems().add("Region");
         filters.getItems().add("Type");
 
-        // Default value
+        // ---------------------- Default value
         filters.setValue("Options");
 
-        // Spacer ------------------------------------------------
+        // ---------------------- Spacer until Right
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        // Search Button ------------------------------------------------
+        // ---------------------- Search button
         ImageView searchIcon = new ImageView(new Image("asset/icon/magnifying-glass.png"));
         searchIcon.setFitHeight(20); searchIcon.setFitWidth(20);
         Button searchButton = new Button("", searchIcon);
@@ -56,6 +65,7 @@ public class SearchBar extends HBox {
                 "-fx-cursor: hand;");
         searchButton.setOnAction(action -> UIService.handleSearch());
 
+        // ---------------------- Styling
         setStyle("-fx-padding: 5;" +
                 "-fx-border-style: solid inside;" +
                 "-fx-border-width: 2;" +
@@ -71,9 +81,20 @@ public class SearchBar extends HBox {
         setMaxHeight(55);
     }
 
+    // ============================================================= Getters / Setters
+
     public String getText() {
         return this.searchField.getText();
     }
 
-    public String getFilters() {return this.filters.getValue();}
+    public String getFilters() {
+        return this.filters.getValue();
+    }
+
+    // ============================================================= Static instance access
+
+    public static SearchBar getInstance() {
+        if (instance == null) instance = new SearchBar();
+        return instance;
+    }
 }

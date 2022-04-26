@@ -11,31 +11,41 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Font;
 
+/**
+ * The title bar of the app, which always float on top at all times.
+ */
 public class TitleBar extends HBox {
-    String title;
+    private static TitleBar instance;
+
+    // ============================================================= Components
+
+    Label titleLabel;
     SearchBar searchBar;
 
-    public TitleBar(String title) {
-        this.title = title;
-        this.searchBar = new SearchBar();
-        // Button
+    // ============================================================= Constructors
+
+    private TitleBar() {
+        searchBar = SearchBar.getInstance();
+        // ---------------------- Menu button
         ImageView menuIcon = new ImageView(new Image("asset/icon/bar.png"));
-        menuIcon.setFitHeight(25); menuIcon.setFitWidth(25);
+        menuIcon.setFitHeight(25); menuIcon.setFitWidth(27);
         Button menuButton = new Button("", menuIcon);
         menuButton.setStyle(
                 "-fx-background-color: transparent;" +
                         "-fx-focus-color: transparent;" +
                         "-fx-faint-focus-color: transparent;" +
                         "-fx-cursor: hand;");
-        menuButton.setOnAction(action -> UIService.handleSearch());
+        menuButton.setOnAction(action -> UIService.openMenu());
 
+        // ---------------------- Spacer 10px
         HBox sep = new HBox();
         sep.setPrefWidth(10);
 
-        Label titleLabel = new Label(title);
+        // ---------------------- Title
+        titleLabel = new Label("Database");
         titleLabel.setFont(new Font("Arial", 25));
 
-        // ============================================================= Spacer
+        // ---------------------- Spacer until Right
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
@@ -46,17 +56,28 @@ public class TitleBar extends HBox {
                 spacer,
                 searchBar
         );
+
+        // ---------------------- Styling
         setAlignment(Pos.CENTER_LEFT);
-//        setAlignment(Pos.BASELINE_CENTER);
         setStyle("-fx-padding: 10;" +
                 "-fx-background-color: white");
     }
 
-    public String getTitle() {
-        return title;
+    // ============================================================= Getters / Setters
+
+    public void setTitle(String title) {
+        titleLabel.setText(title);
     }
 
     public SearchBar getSearchBar() {
         return searchBar;
+    }
+
+    // ============================================================= Static instance access
+
+    public static TitleBar getInstance() {
+        if (instance == null)
+            instance = new TitleBar();
+        return instance;
     }
 }
