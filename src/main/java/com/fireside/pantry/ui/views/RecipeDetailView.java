@@ -1,13 +1,13 @@
 package com.fireside.pantry.ui.views;
 
-import com.fireside.pantry.AppScene;
 import com.fireside.pantry.ui.components.RecipeDetailCard;
 import com.fireside.pantry.util.objects.Recipe;
 
 import javafx.scene.control.ScrollPane;
 
 public class RecipeDetailView extends ScrollPane {
-    RecipeDetailCard detailCard;
+
+    public final RecipeDetailCard detailCard;
 
     public RecipeDetailView(Recipe recipe) {
         this.detailCard = new RecipeDetailCard(recipe);

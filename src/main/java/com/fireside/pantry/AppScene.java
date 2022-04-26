@@ -3,11 +3,11 @@ package com.fireside.pantry;
 import com.fireside.pantry.ui.widgets.SearchBar;
 import com.fireside.pantry.ui.widgets.TitleBar;
 import com.fireside.pantry.ui.widgets.UniversalMenu;
+import com.fireside.pantry.ui.pages.DatabasePage;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.*;
-import com.fireside.pantry.ui.pages.DatabasePage;
 
 /**
  * The main scene of the app, which includes the title bar on top,

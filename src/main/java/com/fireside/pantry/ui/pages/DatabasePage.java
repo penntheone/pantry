@@ -24,13 +24,13 @@ public class DatabasePage extends BorderPane {
         BorderPane pane = new BorderPane();
         pane.setLeft(recipeListView);
         pane.setCenter(recipeDetailView);
-
         return pane;
     }
 
     public RecipeListView getRecipeListView() {
         return recipeListView;
     }
+
     public RecipeDetailView getRecipeDetailView() {
         return recipeDetailView;
     }

@@ -18,5 +18,4 @@ public class MealPlanningPage extends BorderPane {
         if (instance == null) instance = new MealPlanningPage();
         return instance;
     }
-
 }
