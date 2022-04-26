@@ -32,7 +32,7 @@ public class UniversalMenu extends VBox {
         activated = false;
 
         // ---------------------- Exit button
-        ImageView exitIcon = new ImageView(new Image("asset/icon/bar.png"));
+        ImageView exitIcon = new ImageView(new Image("asset/icon/cross.png"));
         exitIcon.setFitHeight(25); exitIcon.setFitWidth(25);
         Button exitButton = new Button("", exitIcon);
         exitButton.setOnAction(action -> UIService.closeMenu());
@@ -57,7 +57,7 @@ public class UniversalMenu extends VBox {
         VBox.setVgrow(bottomSpacer, Priority.ALWAYS);
 
         // ---------------------- User button
-        ImageView userIcon = new ImageView(new Image("asset/icon/bar.png"));
+        ImageView userIcon = new ImageView(new Image("asset/icon/user.png"));
         userIcon.setFitHeight(35); userIcon.setFitWidth(35);
         Button userButton = new Button("", userIcon);
         userButton.setOnAction(action -> UIService.handlePageSelection("User"));
