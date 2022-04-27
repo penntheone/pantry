@@ -37,7 +37,7 @@ public class ImageController {
             return imageCache.retrieve(recipe.getId());
 
         String query = String.format(
-                "SELECT * from recipeimages WHERE recipe_id='%s';",
+                "SELECT * from RecipeImages WHERE recipe_id='%s';",
                 recipe.getId()
         );
         try {
