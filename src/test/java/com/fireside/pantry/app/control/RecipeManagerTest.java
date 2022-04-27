@@ -1,8 +1,7 @@
 package com.fireside.pantry.app.control;
 
-import com.fireside.pantry.app.RecipeController;
 import com.fireside.pantry.app.api.FoodDataCentral;
-import com.fireside.pantry.util.objects.Recipe;
+import com.fireside.pantry.app.model.Recipe;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

@@ -1,8 +1,8 @@
-package com.fireside.pantry.app;
+package com.fireside.pantry.app.control;
 
 import com.fireside.pantry.app.cache.ImageCache;
 import com.fireside.pantry.db.DatabaseConnector;
-import com.fireside.pantry.util.objects.Recipe;
+import com.fireside.pantry.app.model.Recipe;
 import javafx.scene.image.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,8 +1,7 @@
 package com.fireside.pantry.ui.components;
 
-import com.fireside.pantry.app.ImageController;
 import com.fireside.pantry.service.UIService;
-import com.fireside.pantry.util.objects.Recipe;
+import com.fireside.pantry.app.model.Recipe;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;

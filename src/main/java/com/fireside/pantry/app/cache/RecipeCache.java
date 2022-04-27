@@ -1,6 +1,6 @@
 package com.fireside.pantry.app.cache;
 
-import com.fireside.pantry.util.objects.Recipe;
+import com.fireside.pantry.app.model.Recipe;
 
 public class RecipeCache extends ObjectCache {
 

@@ -1,8 +1,8 @@
 package com.fireside.pantry.service;
 
-import com.fireside.pantry.app.IngredientController;
-import com.fireside.pantry.app.RecipeController;
-import com.fireside.pantry.util.objects.Recipe;
+import com.fireside.pantry.app.control.IngredientController;
+import com.fireside.pantry.app.control.RecipeController;
+import com.fireside.pantry.app.model.Recipe;
 import com.google.gson.JsonObject;
 import org.junit.jupiter.api.Test;
 

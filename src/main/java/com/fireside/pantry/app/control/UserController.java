@@ -1,8 +1,8 @@
-package com.fireside.pantry.app;
+package com.fireside.pantry.app.control;
 
 import com.fireside.pantry.db.DatabaseConnector;
 import com.fireside.pantry.db.Row;
-import com.fireside.pantry.util.objects.User;
+import com.fireside.pantry.app.model.User;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

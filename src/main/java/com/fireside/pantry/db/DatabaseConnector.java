@@ -1,7 +1,6 @@
 package com.fireside.pantry.db;
 
-import com.fireside.pantry.util.Utils;
-import javafx.scene.image.Image;
+import com.fireside.pantry.app.Utils;
 
 import java.io.InputStream;
 import java.sql.*;

@@ -1,11 +1,11 @@
 package com.fireside.pantry.service;
 
-import com.fireside.pantry.app.RecipeController;
+import com.fireside.pantry.app.control.RecipeController;
 import com.fireside.pantry.AppScene;
 import com.fireside.pantry.ui.pages.*;
 import com.fireside.pantry.ui.widgets.TitleBar;
 import com.fireside.pantry.ui.widgets.UniversalMenu;
-import com.fireside.pantry.util.objects.Recipe;
+import com.fireside.pantry.app.model.Recipe;
 
 import java.util.List;
 
