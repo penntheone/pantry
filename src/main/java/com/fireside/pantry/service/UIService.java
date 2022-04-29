@@ -1,8 +1,12 @@
 package com.fireside.pantry.service;
 
+import com.fireside.pantry.App;
 import com.fireside.pantry.app.control.RecipeController;
 import com.fireside.pantry.AppScene;
 import com.fireside.pantry.ui.pages.*;
+import com.fireside.pantry.ui.pages.users.AdminPage;
+import com.fireside.pantry.ui.pages.users.LoginPage;
+import com.fireside.pantry.ui.pages.users.ProfilePage;
 import com.fireside.pantry.ui.widgets.TitleBar;
 import com.fireside.pantry.ui.widgets.UniversalMenu;
 import com.fireside.pantry.app.model.Recipe;
@@ -23,9 +27,9 @@ public class UIService {
         String filter = ui.getSearchBar().getFilters();
         if (search.isBlank()) return;
         List<Recipe> recipes = switch (filter) {
-            case "Ingredient" -> RecipeController.getRecipesByIngredient(search);
-            case "Region" -> RecipeController.getRecipesByRegion(search);
-            default -> RecipeController.getRecipesByTitle(search);
+            case "Ingredient"   -> RecipeController.getRecipesByIngredient(search);
+            case "Region"       -> RecipeController.getRecipesByRegion(search);
+            default             -> RecipeController.getRecipesByTitle(search);
         };
         RecipeService.loadImages(recipes);
         DatabasePage.getInstance().getRecipeListView().populateListView(recipes);
@@ -73,13 +77,25 @@ public class UIService {
             case "Advance Search"   -> AppScene.getInstance().setContent(AdvanceSearchPage.getInstance().build());
             case "Meal Planning"    -> AppScene.getInstance().setContent(MealPlanningPage.getInstance().build());
             case "About"            -> AppScene.getInstance().setContent(AboutPage.getInstance().build());
-            case "User"             -> AppScene.getInstance().setContent(UserPage.getInstance().build());
+
+            case "Login"             -> AppScene.getInstance().setContent(LoginPage.getInstance().build());
+            case "Admin"            -> AppScene.getInstance().setContent(AdminPage.getInstance().build());
+            case "Profile"             -> AppScene.getInstance().setContent(ProfilePage.getInstance().build());
         }
         TitleBar.getInstance().setTitle(page);
         closeMenu();
     }
 
-    public static void handleLogin() {
+    public static void handleProfilePageSelection() {
+        switch (App.getLoginStatus()) {
+            case "None"     -> handlePageSelection("Login");
+            case "Admin"    -> handlePageSelection("Admin");
+            case "User"     -> handlePageSelection("Profile");
+        }
+    }
 
+    public static void handleLogin() {
+        AuthService.authorize(LoginPage.getUsername(), LoginPage.getPassword());
+        LoginPage.setStatus("Wrong password. Try again.");
     }
 }
