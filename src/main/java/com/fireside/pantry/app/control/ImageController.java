@@ -1,8 +1,8 @@
-package com.fireside.pantry.app;
+package com.fireside.pantry.app.control;
 
 import com.fireside.pantry.app.cache.ImageCache;
 import com.fireside.pantry.db.DatabaseConnector;
-import com.fireside.pantry.util.objects.Recipe;
+import com.fireside.pantry.app.model.Recipe;
 import javafx.scene.image.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +37,7 @@ public class ImageController {
             return imageCache.retrieve(recipe.getId());
 
         String query = String.format(
-                "SELECT * from recipeimages WHERE recipe_id='%s';",
+                "SELECT * from RecipeImages WHERE recipe_id='%s';",
                 recipe.getId()
         );
         try {

@@ -1,6 +1,6 @@
 package com.fireside.pantry;
 
-import com.fireside.pantry.util.Session;
+import com.fireside.pantry.app.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,8 +1,6 @@
-package com.fireside.pantry.util;
+package com.fireside.pantry.app;
 
-import com.fireside.pantry.app.UserController;
-import com.fireside.pantry.service.AuthService;
-import com.fireside.pantry.util.objects.User;
+import com.fireside.pantry.app.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -7,12 +7,15 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     private static Stage stage;
+    private static String loginStatus;
 
     @Override
     public void start(Stage stage) {
         App.stage = stage;
         javafx.scene.Scene scene = AppScene.getInstance().build();
         scene.getStylesheets().add("style.css");
+
+        loginStatus = "None";
 
         stage.setWidth(1300);
         stage.setMinWidth(1200);
@@ -23,7 +26,15 @@ public class App extends Application {
         stage.show();
         stage.getIcons().add(new Image("asset/appIcon/pantry.png"));
     }
-    
+
+    public static String getLoginStatus() {
+        return loginStatus;
+    }
+
+    public static void setLoginStatus(String loginStatus) {
+        App.loginStatus = loginStatus;
+    }
+
     public static void main(String[] args) {
         launch();
     }

@@ -1,7 +1,6 @@
 package com.fireside.pantry.db;
 
-import com.fireside.pantry.util.Utils;
-import javafx.scene.image.Image;
+import com.fireside.pantry.app.Utils;
 
 import java.io.InputStream;
 import java.sql.*;
@@ -19,11 +18,11 @@ public class DatabaseConnector {
         this.config = Utils.loadDBConfig("MySQL");
     }
 
-    private void connect() throws SQLException {
+    public void connect() throws SQLException {
         this.conn = DriverManager.getConnection(buildUrl());
     }
 
-    private void disconnect() throws SQLException {
+    public void disconnect() throws SQLException {
         this.conn.close();
         this.conn = null;
     }
@@ -60,12 +59,10 @@ public class DatabaseConnector {
     }
 
     public void addImage(int recipeId, InputStream inputStream) throws SQLException {
-        connect();
-        PreparedStatement statement = conn.prepareStatement("INSERT INTO recipeimages(recipe_id, image) VALUES(?, ?);");
+        PreparedStatement statement = conn.prepareStatement("INSERT INTO RecipeImages(recipe_id, image) VALUES(?, ?);");
         statement.setInt(1, recipeId);
         statement.setBinaryStream(2, inputStream);
         statement.executeUpdate();
-        disconnect();
     }
 
     public String buildUrl() {

@@ -1,14 +1,11 @@
 package com.fireside.pantry.ui.views;
 
 import com.fireside.pantry.ui.components.RecipeCard;
-import com.fireside.pantry.util.objects.Recipe;
-import javafx.geometry.Orientation;
+import com.fireside.pantry.app.model.Recipe;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Separator;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;

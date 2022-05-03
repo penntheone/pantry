@@ -23,6 +23,10 @@ public class Row {
         return data.get(column);
     }
 
+    public String[] getColumns() {
+        return this.data.keySet().toArray(new String[0]);
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

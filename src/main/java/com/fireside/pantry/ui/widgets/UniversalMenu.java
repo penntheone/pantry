@@ -60,7 +60,7 @@ public class UniversalMenu extends VBox {
         ImageView userIcon = new ImageView(new Image("asset/icon/user.png"));
         userIcon.setFitHeight(35); userIcon.setFitWidth(35);
         Button userButton = new Button("", userIcon);
-        userButton.setOnAction(action -> UIService.handlePageSelection("User"));
+        userButton.setOnAction(action -> UIService.handleProfilePageSelection());
 
         getChildren().addAll(
                 exitButton, topSpacer,

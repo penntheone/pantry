@@ -1,7 +1,7 @@
 package com.fireside.pantry.ui.views;
 
 import com.fireside.pantry.ui.components.RecipeDetailCard;
-import com.fireside.pantry.util.objects.Recipe;
+import com.fireside.pantry.app.model.Recipe;
 
 import javafx.scene.control.ScrollPane;
 
