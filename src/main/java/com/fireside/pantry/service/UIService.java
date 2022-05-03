@@ -78,9 +78,14 @@ public class UIService {
             case "Meal Planning"    -> AppScene.getInstance().setContent(MealPlanningPage.getInstance().build());
             case "About"            -> AppScene.getInstance().setContent(AboutPage.getInstance().build());
 
-            case "Login"             -> AppScene.getInstance().setContent(LoginPage.getInstance().build());
+            case "Login"            -> AppScene.getInstance().setContent(LoginPage.getInstance().build());
             case "Admin"            -> AppScene.getInstance().setContent(AdminPage.getInstance().build());
-            case "Profile"             -> AppScene.getInstance().setContent(ProfilePage.getInstance().build());
+            case "Profile"          -> AppScene.getInstance().setContent(ProfilePage.getInstance().build());
+
+            default -> {
+                closeMenu();
+                return;
+            }
         }
         TitleBar.getInstance().setTitle(page);
         closeMenu();

@@ -19,7 +19,7 @@ public class AboutPage extends BorderPane {
         Label title = new Label("Pantry App");
         title.setFont(new Font("Arial Bold", 20));
 
-        Label subtitle = new Label("©2022. Developed for CSE 201  Miami University\nby the following fine people:");
+        Label subtitle = new Label("©2022 | Developed for CSE 201 at Miami University\nby the following fine people:");
 
         Region space = new Region();
         space.setPrefHeight(15);
