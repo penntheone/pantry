@@ -5,19 +5,15 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-
-import java.util.Stack;
 
 
 public class MealPlanningPage extends BorderPane {
@@ -33,20 +29,44 @@ public class MealPlanningPage extends BorderPane {
 
     public BorderPane build() {
         //left side
+        this.leftSide = leftSideTable();
+
+        //right side table
+
+        this.table = rightSideTable();
+
+        //table resize and value
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        leftSide.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+
+        //borderpane
+        BorderPane pane = new BorderPane();
+        BorderPane.setMargin(pane, new Insets(5,5,5,5));
+        pane.setCenter(table);
+        pane.setLeft(leftSide);
+
+        return pane;
+    }
+
+    public TableView leftSideTable(){
+
+        TableView leftSideTable = new TableView();
+
         TableColumn leftC = new TableColumn<tableCell,String>("Days & Three Meals");
         leftC.setCellValueFactory(new PropertyValueFactory<>("stPane"));
-        leftSide.getColumns().addAll(leftC);
-        leftSide.setFixedCellSize(100);
+        leftSideTable.getColumns().addAll(leftC);
+        leftSideTable.setFixedCellSize(100);
 
 
-        leftSide.setStyle(
+        leftSideTable.setStyle(
                 "-fx-border-style: solid outside;" + "-fx-border-insets: 5;" +
                         "-fx-border-width: 2;" +
                         "-fx-border-radius: 5;" +
                         "-fx-border-color: black;"+
                         "-fx-background-color: white;"
         );
-        leftSide.setMaxWidth(211);
+        leftSideTable.setMaxWidth(211);
         leftC.setStyle(
                 "-fx-border-style: solid outside;" +
                         "-fx-padding: 5;" +
@@ -63,11 +83,15 @@ public class MealPlanningPage extends BorderPane {
         fourCell.add(new tableCell(null, "Lunch",0,stPane));
         fourCell.add(new tableCell(null, "Dinner",0,stPane));
         fourCell.add(new tableCell(null, "Daily Calories",0,stPane));
-        leftSide.getItems().addAll(fourCell);
+        leftSideTable.getItems().addAll(fourCell);
 
+        return leftSideTable;
+    }
 
+    public TableView rightSideTable(){
 
-        //right side table
+        TableView rightSideTable = new TableView();
+
         String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
         TableColumn[] colu = new TableColumn[7];
 
@@ -76,31 +100,17 @@ public class MealPlanningPage extends BorderPane {
             TableColumn curr = CreatColumn(days[i]);
             colu[i] = curr;
         }
-        table.getColumns().addAll(colu);
+        rightSideTable.getColumns().addAll(colu);
 
-        table.setStyle(
+        rightSideTable.setStyle(
                 "-fx-border-style: solid outside;" + "-fx-border-insets: 5;" +
                         "-fx-border-width: 2;" +
                         "-fx-border-radius: 5;" +
                         "-fx-border-color: black;" +
                         "-fx-background-color: white;"
         );
-
-        //table resize and value
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        leftSide.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
-
-        //borderpane
-        BorderPane pane = new BorderPane();
-        BorderPane.setMargin(pane, new Insets(5,5,5,5));
-        pane.setCenter(table);
-        pane.setLeft(leftSide);
-
-        return pane;
+        return rightSideTable;
     }
-
-
 
     public static MealPlanningPage getInstance() {
         if (instance == null) instance = new MealPlanningPage();
