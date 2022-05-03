@@ -1,11 +1,9 @@
 package com.fireside.pantry;
 
 import com.fireside.pantry.service.UIService;
-import com.fireside.pantry.ui.pages.users.ProfilePage;
 import com.fireside.pantry.ui.widgets.SearchBar;
 import com.fireside.pantry.ui.widgets.TitleBar;
 import com.fireside.pantry.ui.widgets.UniversalMenu;
-import com.fireside.pantry.ui.pages.DatabasePage;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Separator;
@@ -58,7 +56,7 @@ public class AppScene {
         pane.setTop(top);
 
         // ---------------------- Center: Content
-        UIService.handlePageSelection("Database");
+        UIService.handlePageSelection("Profile");
         pane.setCenter(content);
 
         // ---------------------- Menu styling
