@@ -75,6 +75,11 @@ public class UserController {
 
     // -------------- Private methods --------------
 
+    /**
+     * retrieves a user based on query
+     * @param query the search query
+     * @return the user
+     */
     private static User getUser(String query) {
         try {
             List<Row> rows = new DatabaseConnector().query(query);
@@ -87,6 +92,11 @@ public class UserController {
         }
     }
 
+    /**
+     * retrieves users based on query
+     * @param query the search query
+     * @return the users
+     */
     private static List<User> getUsers(String query) {
         try {
             List<Row> rows = new DatabaseConnector().query(query);

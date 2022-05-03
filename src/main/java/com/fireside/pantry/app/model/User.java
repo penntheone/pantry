@@ -13,6 +13,9 @@ public class User {
     private final String birthday;
     private final String authString;
 
+    /**
+     * Default constructor
+     */
     public User() {
         this.id = -1;
         this.username = "";
@@ -23,6 +26,16 @@ public class User {
         this.authString = "";
     }
 
+    /**
+     * Workhorse constructor
+     * @param id user id
+     * @param username the username
+     * @param email user email
+     * @param firstName user first name
+     * @param lastName user last name
+     * @param birthday user birthday
+     * @param authString user authString
+     */
     public User(int id,
                 String username, String email,
                 String firstName, String lastName,
@@ -36,6 +49,11 @@ public class User {
         this.authString = authString;
     }
 
+    /**
+     * Constructor based on row
+     * @param row row user is based on
+     * @throws IllegalArgumentException
+     */
     public User(Row row) throws IllegalArgumentException {
         try {
             this.id = Integer.parseInt(row.get("id"));
@@ -50,34 +68,66 @@ public class User {
         }
     }
 
+    /**
+     * retrieves id
+     * @return the id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * retrieves username
+     * @return the username
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * retrieves email
+     * @return the email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * retrieves first name
+     * @return the first name
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * retrieves last name
+     * @return the last name
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * retrieves birthday
+     * @return the birthday
+     */
     public String getBirthday() {
         return birthday;
     }
 
+    /**
+     * retrieves authString
+     * @return the authString
+     */
     public String getAuthString() {
         return authString;
     }
 
+    /**
+     * Converts user to string
+     * @return user as string
+     */
     @Override
     public String toString() {
         return new Gson().toJson(this);

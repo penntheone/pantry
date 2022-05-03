@@ -3,6 +3,7 @@ package com.fireside.pantry.app.model;
 import com.fireside.pantry.db.Row;
 import com.google.gson.Gson;
 
+
 public class RecipeRequests {
     private int id = -1;
     private int user_id;
@@ -19,6 +20,9 @@ public class RecipeRequests {
     private String comments;
     private boolean isAdded;
 
+    /**
+     * Default constructor
+     */
     public RecipeRequests() {
         this.id = -1;
         this.user_id = -1;
@@ -30,6 +34,16 @@ public class RecipeRequests {
         this.video_url = "";
     }
 
+    /**
+     * Workhorse constructor
+     * @param id request id
+     * @param title request title
+     * @param category request category
+     * @param region request region
+     * @param instructions request instructions
+     * @param thumb_url request thumb url
+     * @param youtube_url request youtube url
+     */
     public RecipeRequests(int user_id, String title, String category, String region, String instructions,
                           String image_url, String video_url) {
         this.user_id = user_id;
@@ -41,6 +55,11 @@ public class RecipeRequests {
         this.video_url = video_url;
     }
 
+    /**
+     * Constructor based on row
+     * @param row row request is based on
+     * @throws IllegalArgumentException
+     */
     public RecipeRequests(Row row) throws IllegalArgumentException {
         try {
             this.id = Integer.parseInt(row.get("request_id"));
@@ -74,6 +93,10 @@ public class RecipeRequests {
         }
     }
 
+    /**
+     * Converts request to string
+     * @return request as string
+     */
     @Override
     public String toString() {
         return new Gson().toJson(this);

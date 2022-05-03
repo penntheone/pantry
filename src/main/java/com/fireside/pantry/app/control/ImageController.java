@@ -54,7 +54,7 @@ public class ImageController {
     }
 
     /**
-     * Returns the object itself
+     * Returns the object itself if created, will create if not
      * @return the object itself
      */
     public static ImageController getInstance() {

@@ -90,6 +90,11 @@ public class RequestController {
     }
 
 
+    /**
+     * retrieves a request based on query
+     * @param query the search query
+     * @return the recipe request
+     */
     private static RecipeRequests getRequest(String query) {
         try {
             List<Row> rows = new DatabaseConnector().query(query);
@@ -102,6 +107,11 @@ public class RequestController {
         }
     }
 
+    /**
+     * retrieves requests based on query
+     * @param query the search query
+     * @return the recipe requests
+     */
     private static List<RecipeRequests> getRequests(String query) {
         try {
             List<Row> rows = new DatabaseConnector().query(query);
