@@ -43,12 +43,12 @@ public class UniversalMenu extends VBox {
 
         // ---------------------- Page buttons
         Button databaseButton = new Button("Database");
-        Button advanceSearchButton = new Button("Advance Search");
+//        Button advanceSearchButton = new Button("Advance Search");
         Button mealPlanningButton = new Button("Meal Planning");
         Button aboutButton = new Button("About");
 
         databaseButton.setOnAction(action -> UIService.handlePageSelection("Database"));
-        advanceSearchButton.setOnAction(action -> UIService.handlePageSelection("Advance Search"));
+//        advanceSearchButton.setOnAction(action -> UIService.handlePageSelection("Advance Search"));
         mealPlanningButton.setOnAction(action -> UIService.handlePageSelection("Meal Planning"));
         aboutButton.setOnAction(action -> UIService.handlePageSelection("About"));
 
@@ -64,7 +64,9 @@ public class UniversalMenu extends VBox {
 
         getChildren().addAll(
                 exitButton, topSpacer,
-                databaseButton, advanceSearchButton, mealPlanningButton, aboutButton,
+                databaseButton,
+//                advanceSearchButton,
+                mealPlanningButton, aboutButton,
                 bottomSpacer, userButton);
 
         // ---------------------- Menu translation controller
