@@ -53,6 +53,33 @@ public class RecipeController {
         return getRecipes(query);
     }
 
+    /**
+     * Default parameters as an empty string ("") if empty
+     * @param recipeName - name of recipe
+     * @param region - region
+     * @param category - category
+     * @return list of filtered recipes
+     */
+    public static List<Recipe> basicAdvancedSearch(String recipeName, String region, String category) {
+        String query = String.format("CALL spBasicAdvancedSearch('%s', '%s', '%s');", recipeName, region, category);
+        return getRecipes(query);
+    }
+
+    /**
+     * This will filter recipes that contain ingredients the user is allergic to
+     * UserID cannot be empty but all other fields should an empty string ("") if
+     * nothing is there
+     * @param UserId - userid of searcher
+     * @param recName - name of recipe
+     * @param region - region
+     * @param category - category
+     * @return
+     */
+    public static List<Recipe> advancedSearch(int UserId, String recName, String region, String category) {
+        String query = String.format("CALL spBasicAdvancedSearch('%d','%s', '%s', '%s');", UserId, recName, region, category);
+        return getRecipes(query);
+    }
+
     public static List<Recipe> getRecipesByTitle(String title) {
         String query = String.format("CALL spGetRecipeByTitle('%s');", title);
         return getRecipes(query);
