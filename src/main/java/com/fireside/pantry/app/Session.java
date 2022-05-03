@@ -23,7 +23,7 @@ public class Session {
         this.sessionEnd = LocalDateTime.now();
     }
 
-    // |----- Getters --------------------
+    // -- Getters
 
     public boolean userAuthorized() {
         return (user != null);
@@ -33,6 +33,12 @@ public class Session {
         if (user == null)
             throw new NullPointerException("No user has been authorized");
         return user;
+    }
+
+    // -- Setters
+
+    public void setAuthorizedUser(User user) {
+        this.user = user;
     }
 
     public static Session getInstance() {

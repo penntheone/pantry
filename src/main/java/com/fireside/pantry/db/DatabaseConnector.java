@@ -18,6 +18,8 @@ public class DatabaseConnector {
         this.config = Utils.loadDBConfig("MySQL");
     }
 
+    // -- Methods
+
     public void connect() throws SQLException {
         this.conn = DriverManager.getConnection(buildUrl());
     }
@@ -31,6 +33,20 @@ public class DatabaseConnector {
         connect();
         Statement statement = conn.createStatement();
         ResultSet result = statement.executeQuery(query);
+        List<Row> rows = parseResult(result);
+        disconnect();
+        return rows;
+    }
+
+    public void batchInsert(String[] queries) throws SQLException {
+        connect();
+        Statement statement = conn.createStatement();
+        for (String query : queries) statement.addBatch(query);
+        statement.executeBatch();
+        disconnect();
+    }
+
+    private static List<Row> parseResult(ResultSet result) throws SQLException {
         ResultSetMetaData meta = result.getMetaData();
         LinkedList<Row> rows = new LinkedList<>();
         while(result.next()) {
@@ -40,7 +56,6 @@ public class DatabaseConnector {
             }
             rows.add(row);
         }
-        disconnect();
         return rows;
     }
 
@@ -74,5 +89,11 @@ public class DatabaseConnector {
                 config.user,
                 config.password
         );
+    }
+
+    // -- Getters
+
+    public Connection getConnection() {
+        return this.conn;
     }
 }

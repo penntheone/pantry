@@ -1,8 +1,10 @@
 package com.fireside.pantry.service;
 
 import com.fireside.pantry.App;
+import com.fireside.pantry.app.Session;
 import com.fireside.pantry.app.control.RecipeController;
 import com.fireside.pantry.AppScene;
+import com.fireside.pantry.app.model.User;
 import com.fireside.pantry.ui.pages.*;
 import com.fireside.pantry.ui.pages.users.AdminPage;
 import com.fireside.pantry.ui.pages.users.LoginPage;
@@ -10,10 +12,14 @@ import com.fireside.pantry.ui.pages.users.ProfilePage;
 import com.fireside.pantry.ui.widgets.TitleBar;
 import com.fireside.pantry.ui.widgets.UniversalMenu;
 import com.fireside.pantry.app.model.Recipe;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class UIService {
+
+    private static final Logger logger = LoggerFactory.getLogger(UIService.class);
 
     /**
      * This method handles the operations to execute a search and update the ui. This method updates the
@@ -100,7 +106,16 @@ public class UIService {
     }
 
     public static void handleLogin() {
-        AuthService.authorize(LoginPage.getUsername(), LoginPage.getPassword());
-        LoginPage.setStatus("Wrong password. Try again.");
+        try {
+            AuthService.authorize(LoginPage.getUsername(), LoginPage.getPassword());
+
+            Session.getInstance().getAuthorizedUser();
+
+            UIService.handlePageSelection("Profile");
+
+        } catch (Exception exception) {
+            UIService.logger.error("Invalid login occurred", exception);
+            LoginPage.setStatus(exception.getMessage());
+        }
     }
 }
