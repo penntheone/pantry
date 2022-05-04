@@ -65,7 +65,7 @@ public class UniversalMenu extends VBox {
         getChildren().addAll(
                 exitButton, topSpacer,
                 databaseButton,
-//                advanceSearchButton,
+                advanceSearchButton,
                 mealPlanningButton, aboutButton,
                 bottomSpacer, userButton);
 

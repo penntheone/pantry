@@ -25,9 +25,13 @@ public class ProfilePage extends BorderPane {
 
     public BorderPane build() {
 //        String firstName = Session.getInstance().getAuthorizedUser().getFirstName();
-        Label welcomeLabel = new Label("Welcome, Penn");
+        Label welcomeLabel = new Label("Welcome to Pantry, Penn.");
         welcomeLabel.setFont(new Font("Arial Bold", 25));
-        VBox top = new VBox(welcomeLabel);
+
+        Label welcomeSubtitle = new Label("Manage your allergies, or request a recipe here.");
+        welcomeSubtitle.setFont(new Font("Arial", 15));
+
+        VBox top = new VBox(welcomeLabel, welcomeSubtitle);
         top.setStyle("-fx-padding: 10");
 
         Button logoutButton = AppButton.rectangularButtonWithText(
