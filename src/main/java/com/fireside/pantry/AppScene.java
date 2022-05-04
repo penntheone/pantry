@@ -6,7 +6,6 @@ import com.fireside.pantry.ui.views.AddRecipeView;
 import com.fireside.pantry.ui.widgets.SearchBar;
 import com.fireside.pantry.ui.widgets.TitleBar;
 import com.fireside.pantry.ui.widgets.UniversalMenu;
-import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Separator;
@@ -77,9 +76,16 @@ public class AppScene {
         recipeView.minWidthProperty().bind(root.widthProperty());
         recipeView.minHeightProperty().bind(root.heightProperty());
 
+        BorderPane white = new BorderPane();
+        white.setStyle("-fx-padding: 10;" +
+                "-fx-background-color: white;" +
+                "-fx-focus-color: transparent;" +
+                "-fx-faint-focus-color: transparent");
+
         stack.getChildren().addAll(
                 AddIngredientView.getInstance(),
                 AddRecipeView.getInstance(),
+                white,
                 root);
 
         Scene result = new Scene(stack);

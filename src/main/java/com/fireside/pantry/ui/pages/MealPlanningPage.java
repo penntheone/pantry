@@ -45,6 +45,10 @@ public class MealPlanningPage extends BorderPane {
         BorderPane.setMargin(pane, new Insets(5,5,5,5));
         pane.setCenter(table);
         pane.setLeft(leftSide);
+        pane.setStyle(
+                "-fx-background-color: white;" +
+                "-fx-focus-color: transparent;" +
+                "-fx-faint-focus-color: transparent");
 
         return pane;
     }
