@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 /**
@@ -42,10 +43,25 @@ public class UniversalMenu extends VBox {
         topSpacer.setPrefHeight(40);
 
         // ---------------------- Page buttons
+        String style =
+                "-fx-background-color: transparent;" +
+                "-fx-focus-color: transparent;" +
+                "-fx-faint-focus-color: transparent;" +
+                "-fx-cursor: hand;" +
+                "-fx-font-family: Arial;" +
+                "-fx-font-size: 25";
+
         Button databaseButton = new Button("Database");
+        databaseButton.setStyle(style);
+
         Button advanceSearchButton = new Button("Advance Search");
+        advanceSearchButton.setStyle(style);
+
         Button mealPlanningButton = new Button("Meal Planning");
+        mealPlanningButton.setStyle(style);
+
         Button aboutButton = new Button("About");
+        aboutButton.setStyle(style);
 
         databaseButton.setOnAction(action -> UIService.handlePageSelection("Database"));
         advanceSearchButton.setOnAction(action -> UIService.handlePageSelection("Advance Search"));

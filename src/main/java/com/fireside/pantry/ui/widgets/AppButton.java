@@ -24,16 +24,17 @@ public class AppButton {
         return button;
     }
 
-    public static Button rectangularButtonWithText(String text, String imageLoc, String borderColor) {
+    public static Button rectangularButtonWithText(String text, String imageLoc, int borderRadius) {
         ImageView icon = new ImageView(new Image(imageLoc));
         icon.setFitHeight(20); icon.setFitWidth(20);
         Button button = new Button(text, icon);
         button.setGraphicTextGap(10);
         button.setStyle(
                 "-fx-border-style: solid inside;" +
+                        "-fx-border-insets: 5;" +
                         "-fx-border-width: 2;" +
-                        "-fx-border-radius: 5;" +
-                        "-fx-border-color: " + borderColor + ";" +
+                        "-fx-border-radius: " + borderRadius + ";" +
+                        "-fx-border-color: black;" +
                         "-fx-background-color: white;" +
                         "-fx-focus-color: transparent;" +
                         "-fx-faint-focus-color: transparent;" +

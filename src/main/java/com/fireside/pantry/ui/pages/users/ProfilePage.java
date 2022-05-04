@@ -1,6 +1,8 @@
 package com.fireside.pantry.ui.pages.users;
 
+import com.fireside.pantry.app.Session;
 import com.fireside.pantry.service.RecipeService;
+import com.fireside.pantry.service.UIService;
 import com.fireside.pantry.ui.components.IngredientCell;
 import com.fireside.pantry.ui.views.AddIngredientView;
 import com.fireside.pantry.ui.views.AddRecipeView;
@@ -17,16 +19,14 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
 public class ProfilePage extends BorderPane {
-
     private static ProfilePage instance;
 
     private ProfilePage() {
-
     }
 
     public BorderPane build() {
-//        String firstName = Session.getInstance().getAuthorizedUser().getFirstName();
-        Label welcomeLabel = new Label("Welcome to Pantry, Penn.");
+        String firstName = Session.getInstance().getAuthorizedUser().getFirstName();
+        Label welcomeLabel = new Label("Welcome to Pantry, " + firstName);
         welcomeLabel.setFont(new Font("Arial Bold", 25));
 
         Label welcomeSubtitle = new Label("Manage your allergies and preferences, or request a recipe here.");
@@ -36,7 +36,8 @@ public class ProfilePage extends BorderPane {
         top.setStyle("-fx-padding: 10");
 
         Button logoutButton = AppButton.rectangularButtonWithText(
-                "Logout", "asset/icon/back-arrow.png", "black");
+                "Logout", "asset/icon/back-arrow.png", 5);
+        logoutButton.setOnMouseClicked(action -> UIService.handleLogout());
         VBox bottom = new VBox(logoutButton);
         bottom.setStyle("-fx-padding: 10");
 

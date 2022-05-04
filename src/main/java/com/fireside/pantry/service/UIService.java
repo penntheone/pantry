@@ -107,25 +107,25 @@ public class UIService {
     }
 
     public static void handleProfilePageSelection() {
-        switch (App.getLoginStatus()) {
-            case "None"     -> handlePageSelection("Login");
-            case "Admin"    -> handlePageSelection("Admin");
-            case "User"     -> handlePageSelection("Profile");
-        }
+        handlePageSelection(Session.getInstance().userAuthorized() ? "Profile" : "Login");
     }
 
     public static void handleLogin() {
         try {
             AuthService.authorize(LoginPage.getUsername(), LoginPage.getPassword());
-
             Session.getInstance().getAuthorizedUser();
-
             UIService.handlePageSelection("Profile");
 
         } catch (Exception exception) {
             UIService.logger.error("Invalid login occurred", exception);
             LoginPage.setStatus(exception.getMessage());
         }
+    }
+
+    public static void handleLogout() {
+        Session.getInstance().setAuthorizedUser(null);
+        LoginPage.setStatus("");
+        UIService.handlePageSelection("Login");
     }
 
 }
