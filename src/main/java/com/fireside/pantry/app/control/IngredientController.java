@@ -15,7 +15,7 @@ public class IngredientController {
      * @return every ingredient in the app
      */
     public static List<Ingredient> getAllIngredients() {
-        return getIngredients("SELECT * FROM pantry.ingredients");
+        return getIngredients("SELECT * FROM pantry.Ingredients");
     }
 
     /**

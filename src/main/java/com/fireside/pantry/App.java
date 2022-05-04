@@ -1,6 +1,7 @@
 package com.fireside.pantry;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -12,7 +13,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         App.stage = stage;
-        javafx.scene.Scene scene = AppScene.getInstance().build();
+        Scene scene = AppScene.getInstance().build();
         scene.getStylesheets().add("style.css");
 
         loginStatus = "None";

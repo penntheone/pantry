@@ -1,6 +1,7 @@
 package com.fireside.pantry.ui.pages.users;
 
 import com.fireside.pantry.service.RecipeService;
+import com.fireside.pantry.ui.components.IngredientCell;
 import com.fireside.pantry.ui.views.AddIngredientView;
 import com.fireside.pantry.ui.views.AddRecipeView;
 import com.fireside.pantry.ui.views.RecipeListView;
@@ -28,7 +29,7 @@ public class ProfilePage extends BorderPane {
         Label welcomeLabel = new Label("Welcome to Pantry, Penn.");
         welcomeLabel.setFont(new Font("Arial Bold", 25));
 
-        Label welcomeSubtitle = new Label("Manage your allergies, or request a recipe here.");
+        Label welcomeSubtitle = new Label("Manage your allergies and preferences, or request a recipe here.");
         welcomeSubtitle.setFont(new Font("Arial", 15));
 
         VBox top = new VBox(welcomeLabel, welcomeSubtitle);
@@ -47,7 +48,7 @@ public class ProfilePage extends BorderPane {
                 "Beef", "Rice", "Chicken", "Pork", "Fritter", "Things");
         ListView<String> allergiesListView = new ListView<>(list);
 
-        allergiesListView.setCellFactory(param -> new IngredientCell());
+        allergiesListView.setCellFactory(param -> new IngredientCell("Cross"));
         VBox center = new VBox(allergiesTitle, allergiesListView);
 
         center.setPrefWidth(600);
@@ -101,38 +102,6 @@ public class ProfilePage extends BorderPane {
 
         return new HBox(titleLabel, spacer, addButton);
     }
-
-    static class IngredientCell extends ListCell<String> {
-        HBox hbox = new HBox();
-        Label label = new Label("");
-        Region pane = new Region();
-        Button button = AppButton.circularButtonNoText("asset/icon/cross.png");
-
-        public IngredientCell() {
-            super();
-
-            button.setStyle("-fx-background-color: transparent");
-            label.setFont(new Font("Arial", 15));
-
-            hbox.getChildren().addAll(label, pane, button);
-            hbox.setAlignment(Pos.BASELINE_CENTER);
-            HBox.setHgrow(pane, Priority.ALWAYS);
-            button.setOnAction(event -> getListView().getItems().remove(getItem()));
-        }
-
-        @Override
-        protected void updateItem(String item, boolean empty) {
-            super.updateItem(item, empty);
-            setText(null);
-            setGraphic(null);
-
-            if (item != null && !empty) {
-                label.setText(item);
-                setGraphic(hbox);
-            }
-        }
-    }
-
 
     public static ProfilePage getInstance() {
         if (instance == null) instance = new ProfilePage();

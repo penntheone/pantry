@@ -2,12 +2,15 @@ package com.fireside.pantry.service;
 
 import com.fireside.pantry.App;
 import com.fireside.pantry.app.Session;
+import com.fireside.pantry.app.control.IngredientController;
 import com.fireside.pantry.app.control.RecipeController;
 import com.fireside.pantry.AppScene;
+import com.fireside.pantry.app.model.Ingredient;
 import com.fireside.pantry.ui.pages.*;
 import com.fireside.pantry.ui.pages.users.AdminPage;
 import com.fireside.pantry.ui.pages.users.LoginPage;
 import com.fireside.pantry.ui.pages.users.ProfilePage;
+import com.fireside.pantry.ui.views.AddIngredientView;
 import com.fireside.pantry.ui.widgets.TitleBar;
 import com.fireside.pantry.ui.widgets.UniversalMenu;
 import com.fireside.pantry.app.model.Recipe;
@@ -47,6 +50,13 @@ public class UIService {
     public static void handleRecipeSelect(Recipe recipe) {
         RecipeService.loadIngredients(recipe);
         DatabasePage.getInstance().getRecipeDetailView().getDetailCard().refreshDetailCard(recipe);
+    }
+
+    public static void handleIngredientSearch() {
+//        List<Ingredient> ingredients = IngredientController.getIngredients(
+//                AddIngredientView.getInstance().getSearchField().getText());
+        List<Ingredient> ingredients = IngredientController.getAllIngredients();
+        AddIngredientView.getInstance().populateListView(ingredients);
     }
 
     /**

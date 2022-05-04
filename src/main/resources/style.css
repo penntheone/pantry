@@ -25,7 +25,6 @@
     -fx-faint-focus-color: transparent;
     -fx-cursor: hand;
     -fx-font-family: Arial;
-    -fx-font-size: 25;
 }
 
 .text-field {
@@ -42,15 +41,15 @@
 
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track{
-    -fx-background-color :white;
-    -fx-border-color :transparent;
-    -fx-background-radius : 0.0em;
-    -fx-border-radius :2.0em;
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0.0em;
+    -fx-border-radius: 2.0em;
 }
 
 .scroll-bar:vertical .track-background,
 .scroll-bar:horizontal .track-background {
-    -fx-background-color: white;
+    -fx-background-color: transparent;
     -fx-background-insets: 0;
     -fx-background-radius: 0em;
 }

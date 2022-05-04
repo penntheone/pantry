@@ -6,6 +6,7 @@ import com.fireside.pantry.ui.views.AddRecipeView;
 import com.fireside.pantry.ui.widgets.SearchBar;
 import com.fireside.pantry.ui.widgets.TitleBar;
 import com.fireside.pantry.ui.widgets.UniversalMenu;
+import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Separator;
@@ -67,6 +68,14 @@ public class AppScene {
         // ---------------------- Menu styling
         menu.prefHeightProperty().bind(root.heightProperty());
         root.getChildren().addAll(pane, menu);
+
+        AddIngredientView ingredientView = AddIngredientView.getInstance();
+        ingredientView.minWidthProperty().bind(root.widthProperty());
+        ingredientView.minHeightProperty().bind(root.heightProperty());
+
+        AddRecipeView recipeView = AddRecipeView.getInstance();
+        recipeView.minWidthProperty().bind(root.widthProperty());
+        recipeView.minHeightProperty().bind(root.heightProperty());
 
         stack.getChildren().addAll(
                 AddIngredientView.getInstance(),
