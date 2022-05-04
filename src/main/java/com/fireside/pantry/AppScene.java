@@ -1,15 +1,16 @@
 package com.fireside.pantry;
 
 import com.fireside.pantry.service.UIService;
-import com.fireside.pantry.ui.pages.users.ProfilePage;
+import com.fireside.pantry.ui.views.AddIngredientView;
+import com.fireside.pantry.ui.views.AddRecipeView;
 import com.fireside.pantry.ui.widgets.SearchBar;
 import com.fireside.pantry.ui.widgets.TitleBar;
 import com.fireside.pantry.ui.widgets.UniversalMenu;
-import com.fireside.pantry.ui.pages.DatabasePage;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 /**
  * The main scene of the app, which includes the title bar on top,
@@ -33,6 +34,7 @@ public class AppScene {
     private final BorderPane content;
 
     private final Pane root;
+    private final StackPane stack;
 
     // ============================================================= Constructors
 
@@ -41,6 +43,7 @@ public class AppScene {
         this.menu = UniversalMenu.getInstance();
         this.content = new BorderPane();
         this.root = new Pane();
+        this.stack = new StackPane();
     }
 
     // ============================================================= Build method
@@ -58,14 +61,37 @@ public class AppScene {
         pane.setTop(top);
 
         // ---------------------- Center: Content
-        UIService.handlePageSelection("Database");
+        UIService.handlePageSelection("Admin");
         pane.setCenter(content);
 
         // ---------------------- Menu styling
         menu.prefHeightProperty().bind(root.heightProperty());
         root.getChildren().addAll(pane, menu);
 
-        return new Scene(root);
+        AddIngredientView ingredientView = AddIngredientView.getInstance();
+        ingredientView.minWidthProperty().bind(root.widthProperty());
+        ingredientView.minHeightProperty().bind(root.heightProperty());
+
+        AddRecipeView recipeView = AddRecipeView.getInstance();
+        recipeView.minWidthProperty().bind(root.widthProperty());
+        recipeView.minHeightProperty().bind(root.heightProperty());
+
+        BorderPane white = new BorderPane();
+        white.setStyle("-fx-padding: 10;" +
+                "-fx-background-color: white;" +
+                "-fx-focus-color: transparent;" +
+                "-fx-faint-focus-color: transparent");
+
+        stack.getChildren().addAll(
+                AddIngredientView.getInstance(),
+                AddRecipeView.getInstance(),
+                white,
+                root);
+
+        Scene result = new Scene(stack);
+        result.setFill(Color.WHITE);
+
+        return result;
     }
 
     // ============================================================= Getters / Setters

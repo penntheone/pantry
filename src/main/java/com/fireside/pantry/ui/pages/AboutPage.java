@@ -7,8 +7,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
-import static javafx.scene.layout.GridPane.setConstraints;
-
 public class AboutPage extends BorderPane {
     private static AboutPage instance;
 
