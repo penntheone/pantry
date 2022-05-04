@@ -62,12 +62,23 @@ public class IngredientController {
     public static List<Ingredient> getIngredientByName(String name) {
         String query = String.format("SELECT i.id, i.name, ri.measure FROM RecipeIngredients ri\n" +
                 "             JOIN pantry.Ingredients i ON ri.ingredient_id = i.id WHERE i.name " +
-                "LIKE '%%s%'", name);
+                "LIKE '%%%s%%'", name);
         List<Ingredient> ingredients = getIngredients(query);
 
         return ingredients; // Returns list of ingredient objects
 
         // return ingredients.get(0); // Returns one ingredient object
+    }
+
+    public static List<Ingredient> getUsersAllergies(int UserID) {
+        String query = String.format("SELECT i.id, i.name, ri.measure\n" +
+                "FROM RecipeIngredients ri\n" +
+                "JOIN pantry.Ingredients i ON ri.ingredient_id = i.id\n" +
+                "JOIN User_Preferences UP on ri.ingredient_id = UP.ingredient_id\n" +
+                "WHERE UP.user_id = '%s' && UP.isAllergic = 1;", UserID);
+        List<Ingredient> ingredients = getIngredients(query);
+
+        return ingredients;
     }
 
     /**
