@@ -15,7 +15,7 @@ public class IngredientController {
      * @return every ingredient in the app
      */
     public static List<Ingredient> getAllIngredients() {
-        return getIngredients("SELECT * FROM pantry.ingredients");
+        return getIngredients("SELECT * FROM pantry.Ingredients");
     }
 
     /**
@@ -49,7 +49,7 @@ public class IngredientController {
      */
     public static int getIngredientIDByName(String name) {
         String query = String.format(
-                "SELECT * FROM pantry.ingredients WHERE name='%s'",
+                "SELECT * FROM pantry.Ingredients WHERE name='%s'",
                 name
         );
 
@@ -57,6 +57,17 @@ public class IngredientController {
         if (ingredients.size() == 0)
             return -1;
         return ingredients.get(0).getId();
+    }
+
+    public static List<Ingredient> getIngredientByName(String name) {
+        String query = String.format("SELECT i.id, i.name, ri.measure FROM RecipeIngredients ri\n" +
+                "             JOIN pantry.Ingredients i ON ri.ingredient_id = i.id WHERE i.name " +
+                "LIKE '%%s%'", name);
+        List<Ingredient> ingredients = getIngredients(query);
+
+        return ingredients; // Returns list of ingredient objects
+
+        // return ingredients.get(0); // Returns one ingredient object
     }
 
     /**
