@@ -21,11 +21,12 @@ public class RecipeListView extends ScrollPane {
         populateListView(recipes);
         setContent(content);
         setMinWidth(500);
+        setFitToWidth(true);
         setStyle("-fx-focus-color: transparent;" +
                 "-fx-faint-focus-color: transparent;" +
                 "-fx-background-color: white;" +
                 "-fx-background-insets: 0, 0, 0, 0");
-        setVbarPolicy(ScrollBarPolicy.NEVER);
+//        setVbarPolicy(ScrollBarPolicy.NEVER);
     }
 
     public void populateListView(List<Recipe> recipes) {

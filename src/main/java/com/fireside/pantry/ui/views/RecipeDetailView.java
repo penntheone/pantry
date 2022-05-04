@@ -16,7 +16,7 @@ public class RecipeDetailView extends ScrollPane {
                 "-fx-faint-focus-color: transparent;" +
                 "-fx-background-color: white;" +
                 "-fx-background-insets: 0, 0, 0, 0");
-        setVbarPolicy(ScrollBarPolicy.NEVER);
+//        setVbarPolicy(ScrollBarPolicy.NEVER);
         setFitToWidth(true);
     }
 

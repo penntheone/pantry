@@ -4,7 +4,6 @@ import com.fireside.pantry.App;
 import com.fireside.pantry.app.Session;
 import com.fireside.pantry.app.control.RecipeController;
 import com.fireside.pantry.AppScene;
-import com.fireside.pantry.app.model.User;
 import com.fireside.pantry.ui.pages.*;
 import com.fireside.pantry.ui.pages.users.AdminPage;
 import com.fireside.pantry.ui.pages.users.LoginPage;
@@ -118,4 +117,5 @@ public class UIService {
             LoginPage.setStatus(exception.getMessage());
         }
     }
+
 }

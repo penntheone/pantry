@@ -1,6 +1,7 @@
 package com.fireside.pantry.ui.pages.users;
 
 import com.fireside.pantry.service.UIService;
+import com.fireside.pantry.ui.widgets.AppButton;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -66,21 +67,8 @@ public class LoginPage extends BorderPane {
         Region spacer = new Region();
         spacer.setPrefHeight(40);
 
-        ImageView loginIcon = new ImageView(new Image("asset/icon/arrow.png"));
-        loginIcon.setFitHeight(20); loginIcon.setFitWidth(20);
-        Button loginButton = new Button("", loginIcon);
-        loginButton.setStyle(
-                "-fx-background-radius: 5em; " +
-                "-fx-min-width: 40px; " +
-                "-fx-min-height: 40px; " +
-                "-fx-max-width: 40px; " +
-                "-fx-max-height: 40px;" +
-                "-fx-border-style: solid inside;" +
-                "-fx-border-width: 2;" +
-                "-fx-border-insets: 2;" +
-                "-fx-border-radius: 30;" +
-                "-fx-border-color: black;" +
-                "-fx-background-color: white");
+
+        Button loginButton = AppButton.circularButtonNoText("asset/icon/arrow.png");
         loginButton.setOnAction(action -> UIService.handleLogin());
 
         Region spacer2 = new Region();

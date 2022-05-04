@@ -1,6 +1,8 @@
 package com.fireside.pantry;
 
 import com.fireside.pantry.service.UIService;
+import com.fireside.pantry.ui.views.AddIngredientView;
+import com.fireside.pantry.ui.views.AddRecipeView;
 import com.fireside.pantry.ui.widgets.SearchBar;
 import com.fireside.pantry.ui.widgets.TitleBar;
 import com.fireside.pantry.ui.widgets.UniversalMenu;
@@ -8,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 /**
  * The main scene of the app, which includes the title bar on top,
@@ -31,6 +34,7 @@ public class AppScene {
     private final BorderPane content;
 
     private final Pane root;
+    private final StackPane stack;
 
     // ============================================================= Constructors
 
@@ -39,6 +43,7 @@ public class AppScene {
         this.menu = UniversalMenu.getInstance();
         this.content = new BorderPane();
         this.root = new Pane();
+        this.stack = new StackPane();
     }
 
     // ============================================================= Build method
@@ -63,7 +68,15 @@ public class AppScene {
         menu.prefHeightProperty().bind(root.heightProperty());
         root.getChildren().addAll(pane, menu);
 
-        return new Scene(root);
+        stack.getChildren().addAll(
+                AddIngredientView.getInstance(),
+                AddRecipeView.getInstance(),
+                root);
+
+        Scene result = new Scene(stack);
+        result.setFill(Color.WHITE);
+
+        return result;
     }
 
     // ============================================================= Getters / Setters
