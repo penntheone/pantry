@@ -36,13 +36,17 @@ public class AddRecipeView extends BorderPane {
         BundledBox titleBox         = new BundledBox("Title *", "black",  false);
         BundledBox regionBox        = new BundledBox("Region *", "black",  false);
         BundledBox categoryBox      = new BundledBox("Category *", "black",  false);
-        BundledBox instructionBox   = new BundledBox("Instruction *", "black",  false);
-        BundledBox ingredientsBox   = new BundledBox("Ingredients *", "black",  false);
         BundledBox imageURLBox      = new BundledBox("Image URL", "black",  true);
         BundledBox youtubeBox       = new BundledBox("Youtube URL", "black",  true);
 
+        BundledBox instructionBox   = new BundledBox("Instruction *", "black",  false);
+        instructionBox.getTextArea().setPrefHeight(100);
+        BundledBox ingredientsBox   = new BundledBox("Ingredients *", "black",  false);
+        ingredientsBox.getTextArea().setPrefHeight(100);
+
+
         ObservableList<BundledBox> boxes = FXCollections.observableArrayList(
-                titleBox, regionBox, categoryBox, instructionBox, ingredientsBox, imageURLBox, youtubeBox);
+                titleBox, regionBox, categoryBox, imageURLBox, youtubeBox, instructionBox, ingredientsBox);
 
         VBox boxesView = new VBox();
         boxesView.getChildren().addAll(boxes);
@@ -63,7 +67,7 @@ public class AddRecipeView extends BorderPane {
                 }
             }
 
-            if (!valid) status.setText("Some fields cannot be left empty. Double check again.");
+            if (!valid) status.setText("Some fields cannot be left empty.");
             else {
                 RequestController.createRequest(
                         Session.getInstance().getAuthorizedUser().getId(),
@@ -79,10 +83,15 @@ public class AddRecipeView extends BorderPane {
         });
 
         ScrollPane scrollPane = new ScrollPane(boxesView);
+        scrollPane.setFitToWidth(true);
         scrollPane.setStyle("-fx-focus-color: transparent;" +
                 "-fx-faint-focus-color: transparent;" +
                 "-fx-background-color: white;" +
                 "-fx-background-insets: 0 0 0 0");
+
+        for (BundledBox i : boxes) {
+            i.getTextArea().maxWidthProperty().bind(scrollPane.widthProperty());
+        }
 
         Region spacerCenter = new Region();
         spacerCenter.setMinHeight(20);
@@ -94,7 +103,7 @@ public class AddRecipeView extends BorderPane {
 
         card.setTop(top);
         card.setCenter(center);
-        card.setMaxWidth(553);
+        card.setMaxWidth(500); // 553
         card.setMaxHeight(500);
 
         card.setStyle("-fx-padding: 10;" +
@@ -135,6 +144,10 @@ public class AddRecipeView extends BorderPane {
 
         public String getInput() {
             return textArea.getText();
+        }
+
+        public TextArea getTextArea() {
+            return textArea;
         }
 
         public void setColor(String color) {
