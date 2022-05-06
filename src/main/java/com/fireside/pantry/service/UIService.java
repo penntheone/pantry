@@ -52,11 +52,14 @@ public class UIService {
      */
     public static void handleRecipeSelect(Recipe recipe) {
         RecipeService.loadIngredients(recipe);
-        DatabasePage.getInstance().getRecipeDetailView().getDetailCard().refreshDetailCard(recipe);
+        switch (TitleBar.getInstance().getTitle()) {
+            case "Database" -> DatabasePage.getInstance().getRecipeDetailView().getDetailCard().refreshDetailCard(recipe);
+            case "Advance Search" -> AdvanceSearchPage.getInstance().getRecipeDetailView().getDetailCard().refreshDetailCard(recipe);
+        }
     }
 
     public static void handleIngredientSearch() {
-//        List<Ingredient> ingredients = IngredientController.getIngredients(
+//        List<Ingredient> ingredients = IngredientController.getIngredientByName(
 //                AddIngredientView.getInstance().getSearchField().getText());
         List<Ingredient> ingredients = IngredientController.getAllIngredients();
         AddIngredientView.getInstance().populateListView(ingredients);
@@ -113,7 +116,12 @@ public class UIService {
      * Sets page selections based on status
      */
     public static void handleProfilePageSelection() {
-        handlePageSelection(Session.getInstance().userAuthorized() ? "Profile" : "Login");
+        if (!Session.getInstance().userAuthorized()) {
+            handlePageSelection("Login");
+        } else {
+            if (Session.getInstance().getAuthorizedUser().isAdmin()) handlePageSelection("Admin");
+            else handlePageSelection("Profile");
+        }
     }
 
     /**
@@ -123,7 +131,7 @@ public class UIService {
         try {
             AuthService.authorize(LoginPage.getUsername(), LoginPage.getPassword());
             Session.getInstance().getAuthorizedUser();
-            UIService.handlePageSelection("Profile");
+            handleProfilePageSelection();
 
         } catch (Exception exception) {
             UIService.logger.error("Invalid login occurred", exception);
@@ -137,4 +145,13 @@ public class UIService {
         UIService.handlePageSelection("Login");
     }
 
+    public static void handleAdvanceSearch() {
+        List<Recipe> recipes = RecipeController.basicAdvancedSearch(
+                AdvanceSearchPage.getInstance().getTitleField().getText(),
+                AdvanceSearchPage.getInstance().getRegionField().getText(),
+                AdvanceSearchPage.getInstance().getTypeField().getText()
+        );
+        RecipeService.loadImages(recipes);
+        AdvanceSearchPage.getInstance().getRecipeListView().populateListView(recipes);
+    }
 }

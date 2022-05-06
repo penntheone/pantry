@@ -57,7 +57,7 @@ public class ProfilePage extends BorderPane {
         HBox allergiesTitle = generateTitle("Allergies", allergiesAddButton);
 
         ObservableList<String> list = FXCollections.observableArrayList(
-                "Beef", "Rice", "Chicken", "Pork", "Fritter", "Things");
+                "Beef", "Rice", "Chicken", "Pork");
         ListView<String> allergiesListView = new ListView<>(list);
 
         allergiesListView.setCellFactory(param -> new IngredientCell("Cross"));

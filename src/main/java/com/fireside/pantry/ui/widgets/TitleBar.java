@@ -69,6 +69,10 @@ public class TitleBar extends HBox {
         titleLabel.setText(title);
     }
 
+    public String getTitle() {
+        return titleLabel.getText();
+    }
+
     public SearchBar getSearchBar() {
         return searchBar;
     }

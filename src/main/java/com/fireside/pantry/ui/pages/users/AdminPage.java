@@ -1,18 +1,25 @@
 package com.fireside.pantry.ui.pages.users;
 
+import com.fireside.pantry.app.control.RequestController;
+import com.fireside.pantry.app.model.RecipeRequests;
 import com.fireside.pantry.service.UIService;
-import com.fireside.pantry.ui.pages.MealPlanningPage;
 import com.fireside.pantry.ui.widgets.AppButton;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import javafx.util.Callback;
 
 /**
  * The admin page which shows what admins can do
  */
 public class AdminPage extends BorderPane {
     private static AdminPage instance;
+    private static TableView<RecipeRequests> table;
+    private static ObservableList<RecipeRequests> data;
 
     /**
      * Private constructor
@@ -30,7 +37,7 @@ public class AdminPage extends BorderPane {
         Label welcomeLabel = new Label("All hail the Pantry Admin!");
         welcomeLabel.setFont(new Font("Arial Bold", 25));
 
-        Label welcomeSubtitle = new Label("Approve and deny recipe requests here.");
+        Label welcomeSubtitle = new Label("Approve and deny recipe requests here. Highlight the recipe, then press the button.");
         welcomeSubtitle.setFont(new Font("Arial", 15));
 
         VBox top = new VBox(welcomeLabel, welcomeSubtitle);
@@ -42,7 +49,7 @@ public class AdminPage extends BorderPane {
         VBox bottom = new VBox(logoutButton);
         bottom.setStyle("-fx-padding: 10");
 
-        TableView<String> center = new TableView<>();
+        table = new TableView();
 
         String[] columnTitles = {
                 "RequestID",
@@ -53,28 +60,34 @@ public class AdminPage extends BorderPane {
                 "Image URL",
                 "Youtube URl",
                 "Instructions",
-                "Ingredients",
-                "Actions"
         };
 
-        //loop all in
-        for (int i = 0; i < 10; i ++) {
-            TableColumn<String, String> column = new TableColumn<>(columnTitles[i]);
-            column.setMinWidth(100);
-            column.setStyle(
-                    "-fx-border-style: solid outside;" +
-                            "-fx-padding: 5;" +
-                            "-fx-border-width: 2;" +
-                            "-fx-border-insets: 3.5;" +
-                            "-fx-border-radius: 5;" +
-                            "-fx-border-color: black;" +
-                            "-fx-background-color: white;"
-            );
+        String[] propertiesTitles = {
+                "id",
+                "user_id",
+                "title",
+                "region",
+                "category",
+                "image_url",
+                "video_url",
+                "instructions",
+        };
 
-            center.getColumns().add(column);
+        ObservableList<RecipeRequests> data = FXCollections.observableArrayList(RequestController.getActiveRequests());
+
+        for (int i = 0; i < 8; i ++) {
+            TableColumn<RecipeRequests, String> column = new TableColumn<RecipeRequests, String>(columnTitles[i]);
+            column.setMinWidth(100);
+            table.getColumns().add(column);
+
+            column.setCellValueFactory(
+                    new PropertyValueFactory<>(propertiesTitles[i]));
         }
 
-        center.setStyle(
+        addButtonToTable();
+        table.setItems(data);
+
+        table.setStyle(
                 "-fx-border-style: solid outside;" + "-fx-border-insets: 5;" +
                         "-fx-border-width: 2;" +
                         "-fx-border-radius: 5;" +
@@ -84,7 +97,7 @@ public class AdminPage extends BorderPane {
         BorderPane pane = new BorderPane();
         pane.setTop     (top);
         pane.setBottom  (bottom);
-        pane.setCenter  (center);
+        pane.setCenter  (table);
         pane.setStyle("-fx-padding: 30;" +
                 "-fx-background-color: white;" +
                 "-fx-focus-color: transparent;" +
@@ -93,139 +106,52 @@ public class AdminPage extends BorderPane {
         return pane;
     }
 
-    /**
-     * A private class which handles requests
-     */
-    private static class Requests {
-        private final SimpleStringProperty requestID;
-        private final SimpleStringProperty userID;
-        private final SimpleStringProperty title;
-        private final SimpleStringProperty region;
-        private final SimpleStringProperty category;
-        private final SimpleStringProperty imageURL;
-        private final SimpleStringProperty youtubeURL;
-        private final SimpleStringProperty instructions;
-        private final SimpleStringProperty ingredients;
+    private void addButtonToTable() {
+        TableColumn<RecipeRequests, Void> colBtn = new TableColumn("Actions");
 
-        public Requests(SimpleStringProperty requestID, SimpleStringProperty userID, SimpleStringProperty title, SimpleStringProperty region, SimpleStringProperty category, SimpleStringProperty imageURL, SimpleStringProperty youtubeURL, SimpleStringProperty instructions, SimpleStringProperty ingredients) {
-            this.requestID = requestID;
-            this.userID = userID;
-            this.title = title;
-            this.region = region;
-            this.category = category;
-            this.imageURL = imageURL;
-            this.youtubeURL = youtubeURL;
-            this.instructions = instructions;
-            this.ingredients = ingredients;
-        }
+        Callback<TableColumn<RecipeRequests, Void>, TableCell<RecipeRequests, Void>> cellFactory = new Callback<>() {
+            @Override
+            public TableCell<RecipeRequests, Void> call(final TableColumn<RecipeRequests, Void> param) {
+                final TableCell<RecipeRequests, Void> cell = new TableCell<>() {
 
-        public String getRequestID() {
-            return requestID.get();
-        }
+                    private final HBox root = new HBox(); {
+                        Button addButton = AppButton.circularButtonNoText("asset/icon/plus.png");
+                        addButton.setOnAction(event -> {
+                            RecipeRequests selectedItem = table.getSelectionModel().getSelectedItem();
+                            table.getItems().remove(selectedItem);
+                        });
 
-        public SimpleStringProperty requestIDProperty() {
-            return requestID;
-        }
+                         Button removeButton = AppButton.circularButtonNoText("asset/icon/cross.png");
+                        removeButton.setOnAction(event -> {
+                            RecipeRequests selectedItem = table.getSelectionModel().getSelectedItem();
+                            table.getItems().remove(selectedItem);
+                        });
 
-        public void setRequestID(String requestID) {
-            this.requestID.set(requestID);
-        }
 
-        public String getUserID() {
-            return userID.get();
-        }
+                        addButton.setStyle("-fx-background-color: transparent");
+                        removeButton.setStyle("-fx-background-color: transparent");
 
-        public SimpleStringProperty userIDProperty() {
-            return userID;
-        }
+                        root.getChildren().addAll(addButton, removeButton);
+                        root.setAlignment(Pos.BASELINE_CENTER);
+                    }
 
-        public void setUserID(String userID) {
-            this.userID.set(userID);
-        }
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(root);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
 
-        public String getTitle() {
-            return title.get();
-        }
+        colBtn.setCellFactory(cellFactory);
 
-        public SimpleStringProperty titleProperty() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title.set(title);
-        }
-
-        public String getRegion() {
-            return region.get();
-        }
-
-        public SimpleStringProperty regionProperty() {
-            return region;
-        }
-
-        public void setRegion(String region) {
-            this.region.set(region);
-        }
-
-        public String getCategory() {
-            return category.get();
-        }
-
-        public SimpleStringProperty categoryProperty() {
-            return category;
-        }
-
-        public void setCategory(String category) {
-            this.category.set(category);
-        }
-
-        public String getImageURL() {
-            return imageURL.get();
-        }
-
-        public SimpleStringProperty imageURLProperty() {
-            return imageURL;
-        }
-
-        public void setImageURL(String imageURL) {
-            this.imageURL.set(imageURL);
-        }
-
-        public String getYoutubeURL() {
-            return youtubeURL.get();
-        }
-
-        public SimpleStringProperty youtubeURLProperty() {
-            return youtubeURL;
-        }
-
-        public void setYoutubeURL(String youtubeURL) {
-            this.youtubeURL.set(youtubeURL);
-        }
-
-        public String getInstructions() {
-            return instructions.get();
-        }
-
-        public SimpleStringProperty instructionsProperty() {
-            return instructions;
-        }
-
-        public void setInstructions(String instructions) {
-            this.instructions.set(instructions);
-        }
-
-        public String getIngredients() {
-            return ingredients.get();
-        }
-
-        public SimpleStringProperty ingredientsProperty() {
-            return ingredients;
-        }
-
-        public void setIngredients(String ingredients) {
-            this.ingredients.set(ingredients);
-        }
+        table.getColumns().add(colBtn);
     }
 
     /**
