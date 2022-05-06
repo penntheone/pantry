@@ -122,7 +122,7 @@ public class UIService {
         try {
             AuthService.authorize(LoginPage.getUsername(), LoginPage.getPassword());
             Session.getInstance().getAuthorizedUser();
-            UIService.handlePageSelection("Profile");
+            handleProfilePageSelection();
 
         } catch (Exception exception) {
             UIService.logger.error("Invalid login occurred", exception);
