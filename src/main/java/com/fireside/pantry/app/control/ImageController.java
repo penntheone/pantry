@@ -10,6 +10,9 @@ import org.slf4j.LoggerFactory;
 import java.io.InputStream;
 import java.util.Map;
 
+/**
+ * Takes care of images
+ */
 public class ImageController {
 
     private static final Logger logger = LoggerFactory.getLogger(ImageController.class);

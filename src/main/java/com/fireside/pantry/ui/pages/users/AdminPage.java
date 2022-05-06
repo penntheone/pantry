@@ -8,13 +8,23 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
+/**
+ * The admin page which shows what admins can do
+ */
 public class AdminPage extends BorderPane {
     private static AdminPage instance;
 
+    /**
+     * Private constructor
+     */
     private AdminPage() {
 
     }
 
+    /**
+     * Builds the page
+     * @return The page itself visually
+     */
     public BorderPane build() {
 //        String firstName = Session.getInstance().getAuthorizedUser().getFirstName();
         Label welcomeLabel = new Label("All hail the Pantry Admin!");
@@ -83,6 +93,9 @@ public class AdminPage extends BorderPane {
         return pane;
     }
 
+    /**
+     * A private class which handles requests
+     */
     private static class Requests {
         private final SimpleStringProperty requestID;
         private final SimpleStringProperty userID;
@@ -215,6 +228,10 @@ public class AdminPage extends BorderPane {
         }
     }
 
+    /**
+     * Returns the object itself if created, will create if not
+     * @return the object itself
+     */
     public static AdminPage getInstance() {
         if (instance == null) instance = new AdminPage();
         return instance;

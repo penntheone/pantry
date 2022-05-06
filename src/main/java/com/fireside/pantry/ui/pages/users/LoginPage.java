@@ -22,12 +22,19 @@ public class LoginPage extends BorderPane {
 
     private static Label status;
 
+    /**
+     * The login page which allows users to log in
+     */
     private LoginPage() {
         usernameField = new TextField();
         passwordField = new PasswordField();
         status = new Label();
     }
 
+    /**
+     * Builds the page
+     * @return The page itself visually
+     */
     public BorderPane build() {
         Label usernameLabel = new Label("Username");
         usernameLabel.setFont(new Font("Arial", 14));
@@ -116,18 +123,34 @@ public class LoginPage extends BorderPane {
         return textFieldHolder;
     }
 
+    /**
+     * Retrieves the username
+     * @return the username
+     */
     public static String getUsername() {
         return usernameField.getText();
     }
 
+    /**
+     * Retrieves the password
+     * @return the password
+     */
     public static String getPassword() {
         return passwordField.getText();
     }
 
+    /**
+     * Sets status to parameter value
+     * @param newStatus the new status
+     */
     public static void setStatus(String newStatus) {
         status.setText(newStatus);
     }
 
+    /**
+     * Returns the object itself if created, will create if not
+     * @return the object itself
+     */
     public static LoginPage getInstance() {
         if (instance == null) instance = new LoginPage();
         return instance;

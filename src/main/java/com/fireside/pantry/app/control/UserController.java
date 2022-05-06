@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Takes care of user information
+ */
 public class UserController {
 
     public static List<User> getAllUsers() {

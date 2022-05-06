@@ -7,6 +7,9 @@ import com.fireside.pantry.app.model.Recipe;
 
 import java.util.List;
 
+/**
+ * Class for finding and showing information on recipes
+ */
 public class RecipeService {
 
     /**

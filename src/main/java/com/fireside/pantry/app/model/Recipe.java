@@ -7,6 +7,9 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for all recipes
+ */
 public class Recipe {
 
     private final int id;

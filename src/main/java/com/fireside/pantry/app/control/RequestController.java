@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Takes care of request information
+ */
 public class RequestController {
 
     public static List<RecipeRequests> getAllRequests() {

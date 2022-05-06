@@ -14,6 +14,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+/**
+ * Class which handles keeping track of ingredients
+ */
 public class IngredientCell extends ListCell<String> {
     HBox root = new HBox();
     Label ingredientName = new Label();
@@ -22,6 +25,10 @@ public class IngredientCell extends ListCell<String> {
     Label status = new Label();
     Button button;
 
+    /**
+     * A constructor that users to add or cross ingredients
+     * @param action the specified action
+     */
     public IngredientCell(String action) {
         ingredientName.setFont(new Font("Arial", 15));
 
@@ -59,6 +66,11 @@ public class IngredientCell extends ListCell<String> {
         HBox.setHgrow(spacer, Priority.ALWAYS);
     }
 
+    /**
+     * updates a specified item based on whether it is empty or not
+     * @param item specified item
+     * @param empty whether it is empty or not
+     */
     @Override
     protected void updateItem(String item, boolean empty) {
         super.updateItem(item, empty);

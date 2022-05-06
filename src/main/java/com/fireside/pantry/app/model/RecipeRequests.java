@@ -3,7 +3,9 @@ package com.fireside.pantry.app.model;
 import com.fireside.pantry.db.Row;
 import com.google.gson.Gson;
 
-
+/**
+ * Class for all recipe requests
+ */
 public class RecipeRequests {
     private int id = -1;
     private int user_id;
