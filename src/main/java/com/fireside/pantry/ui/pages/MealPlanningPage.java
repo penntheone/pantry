@@ -72,7 +72,7 @@ public class MealPlanningPage extends BorderPane {
         );
 
         //left side boxes
-        String[] labels = {"Days & Three Meals","Breakfast", "Lunch", "Dinner", "Daily Calories"};
+        String[] labels = {"Days & Three Meals","Breakfast", "Lunch", "Dinner"};
 
         int times = 0;
         for (String i : labels) {
@@ -80,7 +80,7 @@ public class MealPlanningPage extends BorderPane {
         }
         boxes[0][0].setPrefSize(210, 100);
 
-        for(int i = 0; i<5; i++){
+        for(int i = 0; i<4; i++){
             grid.add(boxes[0][i], 0, i);
         }
 
@@ -100,12 +100,6 @@ public class MealPlanningPage extends BorderPane {
         grid.add(boxes[1][0], 0, 0);
         for(int i =1; i < 7; i++) {
             grid.add(boxes[i+1][0], i, 0);
-        }
-
-        //add cal
-        bottomBoxes();
-        for(int i =0; i < 7; i++) {
-            grid.add(boxes[i+1][4], i, 4);
         }
 
         //default 1-7 days 3 meals
@@ -132,18 +126,6 @@ public class MealPlanningPage extends BorderPane {
             loopBox.setPrefSize(210, 100);
             boxes[times++][0] = loopBox;
         }
-    }
-
-    //this method creat the bottom boxes.
-    private void bottomBoxes(){
-        // this
-        String[] labels = {"Daily Calories:\n 0/0","Daily Calories:\n 0/0","Daily Calories:\n 0/0"
-                , "Daily Calories:\n 0/0","Daily Calories:\n 0/0", "Daily Calories:\n 0/0", "Daily Calories:\n 0/0"};
-        int times = 1;
-        for (String i : labels) {
-            boxes[times++][4] =  labelAndBoxPackge(i, "","",null);
-        }
-
     }
 
     /*the method to build boxes
