@@ -53,7 +53,7 @@ public class UIService {
     }
 
     public static void handleIngredientSearch() {
-//        List<Ingredient> ingredients = IngredientController.getIngredients(
+//        List<Ingredient> ingredients = IngredientController.getIngredientByName(
 //                AddIngredientView.getInstance().getSearchField().getText());
         List<Ingredient> ingredients = IngredientController.getAllIngredients();
         AddIngredientView.getInstance().populateListView(ingredients);

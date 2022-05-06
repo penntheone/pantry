@@ -124,6 +124,7 @@ public class AddIngredientView extends BorderPane {
     public void populateListView(List<Ingredient> ingredients) {
         result.clear();
         for (Ingredient i : ingredients) {
+            System.out.println(i);
             result.add(i.getName());
         }
     }
