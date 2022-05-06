@@ -8,8 +8,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
-import java.util.ArrayList;
-
 
 public class MealPlanningPage extends BorderPane {
     private static MealPlanningPage instance;
@@ -110,7 +108,14 @@ public class MealPlanningPage extends BorderPane {
             grid.add(boxes[i+1][4], i, 4);
         }
 
+        //default 1-7 days 3 meals
+        for(int k = 0; k < 7;k++) {
+            for (int i = 1; i < 4; i++) {
 
+                boxes[k][i] = labelAndBoxPackge("", "", "", null);
+                grid.add(boxes[k][i],k,i);
+            }
+        }
 
         return grid;
 
@@ -129,7 +134,7 @@ public class MealPlanningPage extends BorderPane {
         }
     }
 
-    //working . this method need to be changed.
+    //this method creat the bottom boxes.
     private void bottomBoxes(){
         // this
         String[] labels = {"Daily Calories:\n 0/0","Daily Calories:\n 0/0","Daily Calories:\n 0/0"
@@ -147,7 +152,7 @@ public class MealPlanningPage extends BorderPane {
     if it is ("", "" ,"" , null)
     it will return the default one.
 
-    if forLabel != null or "", it will creat a Vbox.
+    if forLabel != null or "", it will creat a Vbox with the label in the middle.
     */
     private VBox labelAndBoxPackge(String forLabel, String top, String bottom, ImageView ima) {
 
@@ -192,7 +197,7 @@ public class MealPlanningPage extends BorderPane {
 
             ImageView dish = new ImageView(new Image("asset/icon/pngegg.png"));
             dish.setFitHeight(60);
-            dish.setFitWidth(180);
+            dish.setFitWidth(120);
 
             VBox.setVgrow(dish, Priority.ALWAYS);
 
