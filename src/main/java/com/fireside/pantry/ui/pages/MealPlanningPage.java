@@ -107,7 +107,7 @@ public class MealPlanningPage extends BorderPane {
         //add cal
         bottomBoxes();
         for(int i =0; i < 7; i++) {
-            grid.add(boxes[i][4], i, 4);
+            grid.add(boxes[i+1][4], i, 4);
         }
 
 
