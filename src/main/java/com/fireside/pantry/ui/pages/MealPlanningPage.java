@@ -1,26 +1,37 @@
 package com.fireside.pantry.ui.pages;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+
+import java.util.ArrayList;
 
 
 public class MealPlanningPage extends BorderPane {
     private static MealPlanningPage instance;
     //using StackPane in cell
-    private TableView leftSide = new TableView<tableCell>();
-    private TableView table = new TableView<tableCell>();
+    private GridPane leftSide = new GridPane();
+    private GridPane table = new GridPane();
+    private BorderPane pane = new BorderPane();
+
+    //2d array show the grid pane
+    /*
+    [day/meal] [break] [lunch] [dinner] [Daily Calories]
+    [mon]      []      []      [  ]      [cal: 0]
+    [tue]
+   [wed]
+ [tur]
+  [fir]
+  [sat]
+  [sun]
+
+     */
+
+    VBox[][] boxes = new VBox[8][5];
 
 
     private MealPlanningPage() {
@@ -28,89 +39,203 @@ public class MealPlanningPage extends BorderPane {
     }
 
     public BorderPane build() {
+
         //left side
         this.leftSide = leftSideTable();
 
         //right side table
-
         this.table = rightSideTable();
 
-        //table resize and value
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        leftSide.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
-
         //borderpane
-        BorderPane pane = new BorderPane();
-        BorderPane.setMargin(pane, new Insets(5,5,5,5));
-        pane.setCenter(table);
+        BorderPane.setMargin(pane, new Insets(5, 5, 5, 5));
+
+        pane.setStyle(
+                "-fx-border-style: solid outside;" + "-fx-border-insets: 5;" +
+                        "-fx-border-width: 2;" +
+                        "-fx-border-radius: 5;" +
+                        "-fx-border-color: black;" +
+                        "-fx-background-color: white;"
+        );
+
+        //pane.setCenter();
         pane.setLeft(leftSide);
+        pane.setCenter(table);
 
         return pane;
     }
 
-    public TableView leftSideTable(){
+    //build left side
+    public GridPane leftSideTable() {
 
-        TableView leftSideTable = new TableView();
+        GridPane grid = new GridPane();
 
-        TableColumn leftC = new TableColumn<tableCell,String>("Days & Three Meals");
-        leftC.setCellValueFactory(new PropertyValueFactory<>("stPane"));
-        leftSideTable.getColumns().addAll(leftC);
-        leftSideTable.setFixedCellSize(100);
-
-
-        leftSideTable.setStyle(
-                "-fx-border-style: solid outside;" + "-fx-border-insets: 5;" +
-                        "-fx-border-width: 2;" +
-                        "-fx-border-radius: 5;" +
-                        "-fx-border-color: black;"+
-                        "-fx-background-color: white;"
-        );
-        leftSideTable.setMaxWidth(211);
-        leftC.setStyle(
-                "-fx-border-style: solid outside;" +
-                        "-fx-padding: 5;" +
-                        "-fx-border-width: 2;" +
-                        "-fx-border-insets: 3.5;" +
-                        "-fx-border-radius: 5;" +
-                        "-fx-border-color: black;" +
-                        "-fx-background-color: white;"
+        grid.setStyle(
+                "-fx-background-color: white;"
         );
 
-        ObservableList<tableCell> fourCell = FXCollections.observableArrayList();
-        StackPane stPane = new StackPane();
-        fourCell.add( new tableCell(null, "Breakfast",0,stPane));
-        fourCell.add(new tableCell(null, "Lunch",0,stPane));
-        fourCell.add(new tableCell(null, "Dinner",0,stPane));
-        fourCell.add(new tableCell(null, "Daily Calories",0,stPane));
-        leftSideTable.getItems().addAll(fourCell);
+        //left side boxes
+        String[] labels = {"Days & Three Meals","Breakfast", "Lunch", "Dinner", "Daily Calories"};
 
-        return leftSideTable;
-    }
-
-    public TableView rightSideTable(){
-
-        TableView rightSideTable = new TableView();
-
-        String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-        TableColumn[] colu = new TableColumn[7];
-
-        //loop all in
-        for(int i =0 ; i< 7 ;i++){
-            TableColumn curr = CreatColumn(days[i]);
-            colu[i] = curr;
+        int times = 0;
+        for (String i : labels) {
+            boxes[0][times++] = labelAndBoxPackge(i, "","",null);
         }
-        rightSideTable.getColumns().addAll(colu);
+        boxes[0][0].setPrefSize(210, 100);
 
-        rightSideTable.setStyle(
-                "-fx-border-style: solid outside;" + "-fx-border-insets: 5;" +
-                        "-fx-border-width: 2;" +
-                        "-fx-border-radius: 5;" +
-                        "-fx-border-color: black;" +
-                        "-fx-background-color: white;"
-        );
-        return rightSideTable;
+        for(int i = 0; i<5; i++){
+            grid.add(boxes[0][i], 0, i);
+        }
+
+
+        return grid;
     }
+
+    //build right side
+    public GridPane rightSideTable() {
+
+        //gridpane
+        GridPane grid = new GridPane();
+        grid.setStyle("-fx-background-color: white;");
+
+        //add days
+        sevenDays();
+        grid.add(boxes[1][0], 0, 0);
+        for(int i =1; i < 7; i++) {
+            grid.add(boxes[i+1][0], i, 0);
+        }
+
+        //add cal
+        bottomBoxes();
+        for(int i =0; i < 7; i++) {
+            grid.add(boxes[i][4], i, 4);
+        }
+
+
+
+        return grid;
+
+    }
+
+    //set top table
+    private void sevenDays() {
+
+        String[] labels = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+
+        int times = 1;
+        for (String i : labels) {
+            VBox loopBox = labelAndBoxPackge(i, "","",null);
+            loopBox.setPrefSize(210, 100);
+            boxes[times++][0] = loopBox;
+        }
+    }
+
+    //working . this method need to be changed.
+    private void bottomBoxes(){
+        // this
+        String[] labels = {"Daily Calories:\n 0/0","Daily Calories:\n 0/0","Daily Calories:\n 0/0"
+                , "Daily Calories:\n 0/0","Daily Calories:\n 0/0", "Daily Calories:\n 0/0", "Daily Calories:\n 0/0"};
+        int times = 1;
+        for (String i : labels) {
+            boxes[times++][4] =  labelAndBoxPackge(i, "","",null);
+        }
+
+    }
+
+    /*the method to build boxes
+    send label name, top part, bottom, and image.
+
+    if it is ("", "" ,"" , null)
+    it will return the default one.
+
+    if forLabel != null or "", it will creat a Vbox.
+    */
+    private VBox labelAndBoxPackge(String forLabel, String top, String bottom, ImageView ima) {
+
+        VBox returnBox = new VBox();
+
+        if (forLabel.equals("") && top.equals("") && bottom.equals("") && ima == null) {
+
+            Label labelFord = new Label(top);
+            Label Calories = new Label("Calories");
+
+            Calories.setFont(new Font("Arial", 15));
+            labelFord.setFont(new Font("Arial", 15));
+
+            VBox dtm = new VBox(8);
+            dtm.setPadding(new Insets(10, 10, 10, 10));
+            dtm.setPrefSize(210, 300);
+
+            dtm.setStyle(
+                    "-fx-border-style: solid outside;" + "-fx-border-insets: 5;" +
+                            "-fx-padding: 5;" +
+                            "-fx-border-width: 2;" +
+                            "-fx-border-radius: 5;" +
+                            "-fx-border-color: black;" +
+                            "-fx-background-color: white;"
+            );
+
+            VBox.setVgrow(dtm, Priority.ALWAYS);
+            VBox.setVgrow(labelFord, Priority.ALWAYS);
+            dtm.setAlignment(Pos.CENTER);
+
+            labelFord.setMaxWidth(Double.MAX_VALUE);
+            labelFord.setMaxHeight(Double.MAX_VALUE);
+            AnchorPane.setLeftAnchor(labelFord, 0.0);
+            AnchorPane.setRightAnchor(labelFord, 0.0);
+            labelFord.setAlignment(Pos.TOP_CENTER);
+
+            Calories.setMaxWidth(Double.MAX_VALUE);
+            Calories.setMaxHeight(Double.MAX_VALUE);
+            AnchorPane.setLeftAnchor(Calories, 0.0);
+            AnchorPane.setRightAnchor(Calories, 0.0);
+            Calories.setAlignment(Pos.BOTTOM_CENTER);
+
+            ImageView dish = new ImageView(new Image("asset/icon/pngegg.png"));
+            dish.setFitHeight(60);
+            dish.setFitWidth(180);
+
+            VBox.setVgrow(dish, Priority.ALWAYS);
+
+            dtm.getChildren().addAll(labelFord, dish, Calories);
+            returnBox = dtm;
+
+        }
+
+        else if(forLabel != null || !forLabel.equals("")){
+            Label i = new Label(forLabel);
+            i.setFont(new Font("Arial", 20));
+            VBox dtm = new VBox(8);
+            dtm.setPadding(new Insets(10, 10, 10, 10));
+            dtm.setPrefSize(210, 300);
+
+            dtm.setStyle(
+                    "-fx-border-style: solid outside;" + "-fx-border-insets: 5;" +
+                            "-fx-padding: 5;" +
+                            "-fx-border-width: 2;" +
+                            "-fx-border-radius: 5;" +
+                            "-fx-border-color: black;" +
+                            "-fx-background-color: white;"
+            );
+
+            VBox.setVgrow(dtm, Priority.ALWAYS);
+            VBox.setVgrow(i, Priority.ALWAYS);
+
+            dtm.getChildren().addAll(i);
+
+            i.setMaxWidth(Double.MAX_VALUE);
+            i.setMaxHeight(Double.MAX_VALUE);
+            AnchorPane.setLeftAnchor(i, 0.0);
+            AnchorPane.setRightAnchor(i, 0.0);
+            i.setAlignment(Pos.CENTER);
+
+            returnBox = dtm;
+
+        }
+
+
+        return returnBox;
+    }
+
 
     public static MealPlanningPage getInstance() {
         if (instance == null) instance = new MealPlanningPage();
@@ -118,66 +243,6 @@ public class MealPlanningPage extends BorderPane {
     }
 
 
-    //column
-    public TableColumn CreatColumn(String str){
-
-        TableColumn<tableCell,StackPane> returnOne = new TableColumn<>(str);
-        returnOne.setMinWidth(100);
-        returnOne.setStyle(
-                "-fx-border-style: solid outside;" +
-                        "-fx-padding: 5;" +
-                        "-fx-border-width: 2;" +
-                        "-fx-border-insets: 3.5;" +
-                        "-fx-border-radius: 5;" +
-                        "-fx-border-color: black;" +
-                        "-fx-background-color: white;"
-        );
-
-        return returnOne;
-    }
 
 
-    //table cell
-    public class tableCell{
-        private ImageView Image;
-        private String words;
-        private int calorie;
-        private StackPane pane;
-
-        public tableCell(ImageView CenterImage, String BottomWords, int TopCalorie, StackPane stPane){
-            setCenterImage(CenterImage);
-            setBottomWords(BottomWords);
-            setTopCalorie(TopCalorie);
-            setstPane(stPane);
-        }
-
-        public final void setCenterImage(ImageView image) { this.Image = image;  }
-        public final void setBottomWords(String words) { this.words = words; }
-        public final void setTopCalorie(int calorie) { this.calorie = calorie; }
-        public final void setstPane(StackPane stpane){ this.pane = stpane; }
-
-        public ImageView getCenterImage() { return this.Image; }
-        public String getBottomWords() { return this.words; }
-        public int getTopCalorie() { return this.calorie; }
-
-        public StackPane getstPane(){
-            Label Bwords = new Label(this.words);
-            Bwords.setFont(new Font("Arial Bold", 18));
-
-            if (this.Image != null || this.calorie != 0) {
-                Label Tcalorie = new Label("C:" + this.calorie);
-                Tcalorie.setFont(new Font("Arial Bold", 18));
-
-                pane.getChildren().addAll(new Rectangle(100, 50, Color.LIGHTYELLOW),this.Image, Bwords, Tcalorie);
-                pane.setAlignment(Bwords, Pos.BOTTOM_LEFT);
-                pane.setAlignment(Tcalorie, Pos.TOP_RIGHT);
-            }
-
-            else{
-                pane.getChildren().addAll(Bwords);
-            }
-
-            return pane;
-        }
-    }
 }
