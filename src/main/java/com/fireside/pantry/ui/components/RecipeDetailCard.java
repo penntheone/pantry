@@ -12,6 +12,10 @@ import javafx.scene.text.Font;
 
 import java.util.List;
 
+/**
+ * The recipe detail cards which show up when a user clicks
+ * on a specific recipe, only one of these will appear at a time
+ */
 public class RecipeDetailCard extends GridPane {
 
     static final int DIMENSION = 250;
@@ -23,6 +27,10 @@ public class RecipeDetailCard extends GridPane {
     private final GridPane ingredientGrid;
     private final Label instruction;
 
+    /**
+     * Constructor that sets how the detail card is displayed on the app
+     * @param recipe the specified recipe
+     */
     public RecipeDetailCard(Recipe recipe) {
         // Hero Image ------------------------------------------------
         imagePane = new VBox();
@@ -116,6 +124,10 @@ public class RecipeDetailCard extends GridPane {
         getChildren().addAll(imagePane, headerPane, ingredientPane, instructionPane);
     }
 
+    /**
+     * Refreshes the card, allowing it to switch to a different recipe
+     * @param recipe the specified recipe
+     */
     public void refreshDetailCard(Recipe recipe) {
         setThumbnail(imagePane, recipe);
         titleNode.setText(recipe.getTitle());
@@ -125,6 +137,11 @@ public class RecipeDetailCard extends GridPane {
         instruction.setText(recipe.getInstructions());
     }
 
+    /**
+     * Sets ingredient grid based on recipe
+     * @param ingredientGrid the grid
+     * @param recipe the recipe which the ingredients belong to
+     */
     private static void setIngredientGrid(GridPane ingredientGrid, Recipe recipe) {
         ingredientGrid.getChildren().clear();
         try {
@@ -151,6 +168,12 @@ public class RecipeDetailCard extends GridPane {
         }
     }
 
+    /**
+     * Generates label based on nutrition and count
+     * @param nutrition the specified nutrition
+     * @param count the specified count
+     * @return the label based on the information
+     */
     private static VBox generateNutritionLabel(String nutrition, String count) {
         Label nutritionLabel = new Label(nutrition);
         nutritionLabel.setFont(new Font("Arial", 13));
@@ -164,6 +187,11 @@ public class RecipeDetailCard extends GridPane {
         return nutritionBox;
     }
 
+    /**
+     * Sets thumbnail with the specified image pane and recipe
+     * @param imagePane the pane where the thumbnail is placed
+     * @param recipe the recipe it belongs to
+     */
     private static void setThumbnail(VBox imagePane, Recipe recipe) {
         BackgroundImage bImg = new BackgroundImage(
                 ImageController.getInstance().getRecipeImage(recipe),

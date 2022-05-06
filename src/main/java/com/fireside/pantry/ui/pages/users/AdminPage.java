@@ -13,15 +13,25 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.util.Callback;
 
+/**
+ * The admin page which shows what admins can do
+ */
 public class AdminPage extends BorderPane {
     private static AdminPage instance;
     private static TableView<RecipeRequests> table;
     private static ObservableList<RecipeRequests> data;
 
+    /**
+     * Private constructor
+     */
     private AdminPage() {
 
     }
 
+    /**
+     * Builds the page
+     * @return The page itself visually
+     */
     public BorderPane build() {
 //        String firstName = Session.getInstance().getAuthorizedUser().getFirstName();
         Label welcomeLabel = new Label("All hail the Pantry Admin!");
@@ -142,9 +152,12 @@ public class AdminPage extends BorderPane {
         colBtn.setCellFactory(cellFactory);
 
         table.getColumns().add(colBtn);
-
     }
 
+    /**
+     * Returns the object itself if created, will create if not
+     * @return the object itself
+     */
     public static AdminPage getInstance() {
         if (instance == null) instance = new AdminPage();
         return instance;

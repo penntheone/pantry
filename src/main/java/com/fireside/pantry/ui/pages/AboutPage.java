@@ -7,12 +7,22 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
+/**
+ * The about page which contains some background information on the app
+ */
 public class AboutPage extends BorderPane {
     private static AboutPage instance;
 
+    /**
+     * Private constructor which takes care of the key variables
+     */
     private AboutPage() {
     }
 
+    /**
+     * Builds the page
+     * @return The page itself visually
+     */
     public BorderPane build() {
         Label title = new Label("Pantry App");
         title.setFont(new Font("Arial Bold", 20));
@@ -67,6 +77,10 @@ public class AboutPage extends BorderPane {
         return pane;
     }
 
+    /**
+     * Returns the object itself if created, will create if not
+     * @return the object itself
+     */
     public static AboutPage getInstance() {
         if (instance == null) instance = new AboutPage();
         return instance;

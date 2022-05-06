@@ -7,9 +7,16 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
+/**
+ * The recipe cards that are listed in the database page
+ */
 public class RecipeCard extends HBox {
     private final Recipe recipe;
 
+    /**
+     * Constructor that sets how the card is displayed on the app
+     * @param recipe the specified recipe
+     */
     public RecipeCard(Recipe recipe) {
         this.recipe = recipe;
 
@@ -78,6 +85,10 @@ public class RecipeCard extends HBox {
         setOnMouseClicked(click -> UIService.handleRecipeSelect(this.getRecipe()));
     }
 
+    /**
+     * Retrieves the recipe
+     * @return the recipe
+     */
     public Recipe getRecipe() {
         return recipe;
     }

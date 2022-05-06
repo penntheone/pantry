@@ -19,6 +19,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+/**
+ * Class allowing the ui to respond to user actions
+ */
 public class UIService {
 
     private static final Logger logger = LoggerFactory.getLogger(UIService.class);
@@ -109,6 +112,9 @@ public class UIService {
         closeMenu();
     }
 
+    /**
+     * Sets page selections based on status
+     */
     public static void handleProfilePageSelection() {
         if (!Session.getInstance().userAuthorized()) {
             handlePageSelection("Login");
@@ -118,6 +124,9 @@ public class UIService {
         }
     }
 
+    /**
+     * Takes care of logging in and sets status accordingly
+     */
     public static void handleLogin() {
         try {
             AuthService.authorize(LoginPage.getUsername(), LoginPage.getPassword());

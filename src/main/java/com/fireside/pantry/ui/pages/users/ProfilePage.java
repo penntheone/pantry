@@ -18,12 +18,23 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
+/**
+ * The profile page that contains the user's profile and
+ * allows them to add recipes
+ */
 public class ProfilePage extends BorderPane {
     private static ProfilePage instance;
 
+    /**
+     * Private constructor
+     */
     private ProfilePage() {
     }
 
+    /**
+     * Builds the page
+     * @return The page itself visually
+     */
     public BorderPane build() {
         String firstName = Session.getInstance().getAuthorizedUser().getFirstName();
         Label welcomeLabel = new Label("Welcome to Pantry, " + firstName);
@@ -104,6 +115,10 @@ public class ProfilePage extends BorderPane {
         return new HBox(titleLabel, spacer, addButton);
     }
 
+    /**
+     * Returns the object itself if created, will create if not
+     * @return the object itself
+     */
     public static ProfilePage getInstance() {
         if (instance == null) instance = new ProfilePage();
         return instance;

@@ -6,6 +6,9 @@ import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 
+/**
+ * Class for sessions when the user goes onto the app
+ */
 public class Session {
 
     private static final Logger logger = LoggerFactory.getLogger(Session.class);

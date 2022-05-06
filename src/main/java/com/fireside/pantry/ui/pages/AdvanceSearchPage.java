@@ -17,6 +17,9 @@ import javafx.scene.layout.*;
 
 import java.util.List;
 
+/**
+ * The advance search page which allows users to do more advanced searches
+ */
 public class AdvanceSearchPage extends BorderPane {
     private static AdvanceSearchPage instance;
 
@@ -28,12 +31,19 @@ public class AdvanceSearchPage extends BorderPane {
     private TextField regionField;
     private TextField typeField;
 
+    /**
+     * Private constructor
+     */
     private AdvanceSearchPage() {
         List<Recipe> recipes = RecipeService.getHomeRecipes();
         this.recipeListView = new RecipeListView(recipes);
         this.recipeDetailView = new RecipeDetailView(recipes.get(0));
     }
 
+    /**
+     * Builds the page
+     * @return The page itself visually
+     */
     public BorderPane build() {
         HBox top = new HBox();
 
@@ -59,6 +69,7 @@ public class AdvanceSearchPage extends BorderPane {
         pane.setCenter(recipeDetailView);
         return pane;
     }
+
 
     private VBox generateField(TextField searchField, String label) {
         VBox result = new VBox();
@@ -137,9 +148,12 @@ public class AdvanceSearchPage extends BorderPane {
         this.recipeDetailView = recipeDetailView;
     }
 
+    /**
+     * Returns the object itself if created, will create if not
+     * @return the object itself
+     */
     public static AdvanceSearchPage getInstance() {
         if (instance == null) instance = new AdvanceSearchPage();
         return instance;
     }
-
 }

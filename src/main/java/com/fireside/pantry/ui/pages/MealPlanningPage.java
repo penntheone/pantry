@@ -9,6 +9,9 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
 
+/**
+ * Meal planning page which allows users to create meal plans
+ */
 public class MealPlanningPage extends BorderPane {
     private static MealPlanningPage instance;
     //using StackPane in cell
@@ -32,10 +35,17 @@ public class MealPlanningPage extends BorderPane {
     VBox[][] boxes = new VBox[8][5];
 
 
+    /**
+     * Private constructor
+     */
     private MealPlanningPage() {
 
     }
 
+    /**
+     * Builds the page
+     * @return The page itself visually
+     */
     public BorderPane build() {
 
         //left side
@@ -115,6 +125,7 @@ public class MealPlanningPage extends BorderPane {
 
     }
 
+
     //set top table
     private void sevenDays() {
 
@@ -126,6 +137,14 @@ public class MealPlanningPage extends BorderPane {
             loopBox.setPrefSize(210, 100);
             boxes[times++][0] = loopBox;
         }
+
+    /**
+     * Returns the object itself if created, will create if not
+     * @return the object itself
+     */
+    public static MealPlanningPage getInstance() {
+        if (instance == null) instance = new MealPlanningPage();
+        return instance;
     }
 
     /*the method to build boxes
@@ -137,9 +156,7 @@ public class MealPlanningPage extends BorderPane {
     if forLabel != null or "", it will creat a Vbox with the label in the middle.
     */
     private VBox labelAndBoxPackge(String forLabel, String top, String bottom, ImageView ima) {
-
         VBox returnBox = new VBox();
-
         if (forLabel.equals("") && top.equals("") && bottom.equals("") && ima == null) {
 
             Label labelFord = new Label(top);
@@ -218,18 +235,11 @@ public class MealPlanningPage extends BorderPane {
             returnBox = dtm;
 
         }
-
-
         return returnBox;
     }
-
 
     public static MealPlanningPage getInstance() {
         if (instance == null) instance = new MealPlanningPage();
         return instance;
     }
-
-
-
-
 }
