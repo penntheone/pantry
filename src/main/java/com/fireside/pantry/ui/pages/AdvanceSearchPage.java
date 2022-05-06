@@ -5,13 +5,23 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+/**
+ * The advance search page which allows users to do more advanced searches
+ */
 public class AdvanceSearchPage extends BorderPane {
     private static AdvanceSearchPage instance;
 
+    /**
+     * Private constructor
+     */
     private AdvanceSearchPage() {
 
     }
 
+    /**
+     * Builds the page
+     * @return The page itself visually
+     */
     public BorderPane build() {
         VBox center = new VBox();
 
@@ -28,6 +38,10 @@ public class AdvanceSearchPage extends BorderPane {
         return pane;
     }
 
+    /**
+     * Returns the object itself if created, will create if not
+     * @return the object itself
+     */
     public static AdvanceSearchPage getInstance() {
         if (instance == null) instance = new AdvanceSearchPage();
         return instance;

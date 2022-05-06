@@ -10,6 +10,9 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
+/**
+ * Class which allows users to be authorized
+ */
 public class AuthService {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthService.class);

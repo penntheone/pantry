@@ -16,6 +16,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
 
+/**
+ * Meal planning page which allows users to create meal plans
+ */
 public class MealPlanningPage extends BorderPane {
     private static MealPlanningPage instance;
     //using StackPane in cell
@@ -23,10 +26,17 @@ public class MealPlanningPage extends BorderPane {
     private TableView table = new TableView<tableCell>();
 
 
+    /**
+     * Private constructor
+     */
     private MealPlanningPage() {
 
     }
 
+    /**
+     * Builds the page
+     * @return The page itself visually
+     */
     public BorderPane build() {
         //left side
         this.leftSide = leftSideTable();
@@ -116,6 +126,10 @@ public class MealPlanningPage extends BorderPane {
         return rightSideTable;
     }
 
+    /**
+     * Returns the object itself if created, will create if not
+     * @return the object itself
+     */
     public static MealPlanningPage getInstance() {
         if (instance == null) instance = new MealPlanningPage();
         return instance;

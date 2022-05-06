@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Takes care of request information
+ */
 public class RequestController {
 
     public static List<RecipeRequests> getAllRequests() {
@@ -90,6 +93,11 @@ public class RequestController {
     }
 
 
+    /**
+     * retrieves a request based on query
+     * @param query the search query
+     * @return the recipe request
+     */
     private static RecipeRequests getRequest(String query) {
         try {
             List<Row> rows = new DatabaseConnector().query(query);
@@ -102,6 +110,11 @@ public class RequestController {
         }
     }
 
+    /**
+     * retrieves requests based on query
+     * @param query the search query
+     * @return the recipe requests
+     */
     private static List<RecipeRequests> getRequests(String query) {
         try {
             List<Row> rows = new DatabaseConnector().query(query);

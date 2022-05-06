@@ -2,6 +2,9 @@ package com.fireside.pantry.app.model;
 
 import com.google.gson.Gson;
 
+/**
+ * Class for all new ingredients
+ */
 public class NewIngredient {
 
     private int id;

@@ -7,6 +7,9 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for all recipes
+ */
 public class Recipe {
 
     private final int id;
@@ -19,6 +22,9 @@ public class Recipe {
     private List<Ingredient> ingredients;
     private Image image;
 
+    /**
+     * Default constructor
+     */
     public Recipe() {
         this.id = -1;
         this.title = "";
@@ -30,6 +36,16 @@ public class Recipe {
         this.ingredients = new ArrayList<>();
     }
 
+    /**
+     * Workhorse constructor
+     * @param id recipe id
+     * @param title recipe title
+     * @param category recipe category
+     * @param region recipe region
+     * @param instructions recipe instructions
+     * @param thumb_url recipe thumb url
+     * @param youtube_url recipe youtube url
+     */
     public Recipe(int id, String title, String category, String region,
                   String instructions, String thumb_url, String youtube_url) {
         this.id = id;
@@ -41,6 +57,11 @@ public class Recipe {
         this.youtube_url = youtube_url;
     }
 
+    /**
+     * Constructor based on row
+     * @param row row recipe is based on
+     * @throws IllegalArgumentException
+     */
     public Recipe(Row row) throws IllegalArgumentException {
         try {
             this.id = Integer.parseInt(row.get("id"));
@@ -55,50 +76,98 @@ public class Recipe {
         }
     }
 
+    /**
+     * Retrieves recipe id
+     * @return the id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Retrieves recipe title
+     * @return the title
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Retrieves recipe category
+     * @return the category
+     */
     public String getCategory() {
         return category;
     }
 
+    /**
+     * Retrieves recipe category
+     * @return the category
+     */
     public String getRegion() {
         return region;
     }
 
+    /**
+     * Retrieves recipe instructions
+     * @return the instructions
+     */
     public String getInstructions() {
         return instructions;
     }
 
+    /**
+     * Retrieves recipe thumb url
+     * @return the thumb url
+     */
     public String getThumbUrl() {
         return thumb_url;
     }
 
+    /**
+     * Retrieves recipe youtube url
+     * @return the youtube url
+     */
     public String getYoutubeUrl() {
         return youtube_url;
     }
 
+    /**
+     * Retrieves recipe ingredients
+     * @return the ingredients
+     */
     public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
+    /**
+     * Retrieves recipe image
+     * @return the image
+     */
     public Image getImage() {
         return image;
     }
 
+    /**
+     * Sets ingredients to parameter
+     * @param ingredients ingredients for recipe
+     */
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 
+    /**
+     * Sets image to parameter
+     * @param image image for recipe
+     */
     public void setImage(Image image) {
         this.image = image;
     }
 
+    /**
+     * Converts recipe to string
+     * @return recipe as string
+     */
     @Override
     public String toString() {
         return new Gson().toJson(this);

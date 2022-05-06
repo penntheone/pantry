@@ -9,26 +9,46 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The class which handles connections to the database
+ */
 public class DatabaseConnector {
 
     private final DBConfig config;
     private Connection conn;
 
+    /**
+     * Constructor which sets the config to MySQL
+     */
     public DatabaseConnector() {
         this.config = Utils.loadDBConfig("MySQL");
     }
 
     // -- Methods
 
+    /**
+     * Connects to database
+     * @throws SQLException
+     */
     public void connect() throws SQLException {
         this.conn = DriverManager.getConnection(buildUrl());
     }
 
+    /**
+     * Disconnects from database
+     * @throws SQLException
+     */
     public void disconnect() throws SQLException {
         this.conn.close();
         this.conn = null;
     }
 
+    /**
+     * Gets the result as a list of rows based on a query
+     * @param query the query
+     * @return the result
+     * @throws SQLException
+     */
     public List<Row> query(String query) throws SQLException {
         connect();
         Statement statement = conn.createStatement();
@@ -59,6 +79,12 @@ public class DatabaseConnector {
         return rows;
     }
 
+    /**
+     * Gets the images of results based on a query
+     * @param query the query
+     * @return the images of results
+     * @throws SQLException
+     */
     public Map<Integer, InputStream> getImages(String query) throws SQLException {
         connect();
 
@@ -73,6 +99,12 @@ public class DatabaseConnector {
         return images;
     }
 
+    /**
+     * adds image based on recipe id and input stream
+     * @param recipeId the recipe id
+     * @param inputStream the input stream
+     * @throws SQLException
+     */
     public void addImage(int recipeId, InputStream inputStream) throws SQLException {
         PreparedStatement statement = conn.prepareStatement("INSERT INTO RecipeImages(recipe_id, image) VALUES(?, ?);");
         statement.setInt(1, recipeId);
@@ -80,6 +112,10 @@ public class DatabaseConnector {
         statement.executeUpdate();
     }
 
+    /**
+     * Creates an url based on connection and login information
+     * @return the url
+     */
     public String buildUrl() {
         return String.format(
                 "jdbc:mysql://%s:%s/%s?user=%s&password=%s",

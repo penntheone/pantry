@@ -3,6 +3,9 @@ package com.fireside.pantry.app.model;
 import com.fireside.pantry.db.Row;
 import com.google.gson.Gson;
 
+/**
+ * Class for all users
+ */
 public class User {
 
     private int id;
