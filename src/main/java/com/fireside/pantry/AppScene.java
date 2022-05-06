@@ -61,7 +61,7 @@ public class AppScene {
         pane.setTop(top);
 
         // ---------------------- Center: Content
-        UIService.handlePageSelection("Admin");
+        UIService.handlePageSelection("Database");
         pane.setCenter(content);
 
         // ---------------------- Menu styling
