@@ -10,20 +10,10 @@ import java.util.List;
 
 public class RecipeController {
 
-    /**
-     * Retrieves the entire list of recipes
-     * @return all the recipes
-     */
     public static List<Recipe> getAllRecipes() {
         return getRecipes("CALL spGetAllRecipes()");
     }
 
-    /**
-     * Retrieves a range of recipes with a starting and end point given
-     * @param start The first recipe in the range
-     * @param end The last recipe in the range
-     * @return The list of recipes from start to end
-     */
     public static List<Recipe> getRangeOfRecipes(int start, int end) {
         List<Recipe> recipes = new ArrayList<>();
         for (int i = start; i < end + 1; i++) {
@@ -32,21 +22,11 @@ public class RecipeController {
         return recipes;
     }
 
-    /**
-     * Retrieves recipes with the specified ingredient
-     * @param ingredient the specified ingredient
-     * @return all recipes with the ingredients
-     */
     public static List<Recipe> getRecipesByIngredient(String ingredient) {
         String query = String.format("CALL spGetRecipesByIngredient('%s');", ingredient);
         return getRecipes(query);
     }
 
-    /**
-     * Retrieves the recipe with the specified ID
-     * @param recipeId The specific ID
-     * @return The recipe with that ID
-     */
     public static Recipe getRecipeByID(int recipeId) {
         String query = String.format("CALL spGetRecipeByID(%d);", recipeId);
         List<Recipe> recipes = getRecipes(query);
@@ -55,11 +35,6 @@ public class RecipeController {
         return recipes.get(0);
     }
 
-    /**
-     * Retrieves the recipe id based on the entered name
-     * @param name the entered name
-     * @return the id for the named recipe
-     */
     public static int getRecipeIDByName(String name) {
         String query = String.format("CALL spGetRecipeIDByName('%s');", name);
         List<Recipe> recipes = getRecipes(query);
@@ -68,41 +43,48 @@ public class RecipeController {
         return recipes.get(0).getId();
     }
 
-    /**
-     * Retrieves the recipes from a specified region
-     * @param region The specified region
-     * @return The recipes from that region
-     */
     public static List<Recipe> getRecipesByRegion(String region) {
         String query = String.format("CALL spGetRecipeByRegion('%s');", region);
         return getRecipes(query);
     }
 
-    /**
-     * Retrieves the recipes from a specified category
-     * @param category The specified category
-     * @return The recipes from that category
-     */
     public static List<Recipe> getRecipesByCategory(String category) {
         String query = String.format("CALL spGetRecipeByCategory('%s');", category);
         return getRecipes(query);
     }
 
     /**
-     * Retrieves recipes based on an entered title
-     * @param title The entered title
-     * @return the recipes that match with the title
+     * Default parameters as an empty string ("") if empty
+     * @param recipeName - name of recipe
+     * @param region - region
+     * @param category - category
+     * @return list of filtered recipes
      */
+    public static List<Recipe> basicAdvancedSearch(String recipeName, String region, String category) {
+        String query = String.format("CALL spBasicAdvancedSearch('%s', '%s', '%s');", recipeName, region, category);
+        return getRecipes(query);
+    }
+
+    /**
+     * This will filter recipes that contain ingredients the user is allergic to
+     * UserID cannot be empty but all other fields should an empty string ("") if
+     * nothing is there
+     * @param UserId - userid of searcher
+     * @param recName - name of recipe
+     * @param region - region
+     * @param category - category
+     * @return
+     */
+    public static List<Recipe> advancedSearch(int UserId, String recName, String region, String category) {
+        String query = String.format("CALL spBasicAdvancedSearch('%d','%s', '%s', '%s');", UserId, recName, region, category);
+        return getRecipes(query);
+    }
+
     public static List<Recipe> getRecipesByTitle(String title) {
         String query = String.format("CALL spGetRecipeByTitle('%s');", title);
         return getRecipes(query);
     }
 
-    /**
-     * Gets recipes based on a search query
-     * @param query The search query
-     * @return Search results based on query
-     */
     private static List<Recipe> getRecipes(String query) {
         try {
             List<Row> rows = new DatabaseConnector().query(query);

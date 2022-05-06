@@ -45,6 +45,6 @@ public class DatabasePage extends BorderPane {
 
     public static DatabasePage getInstance() {
         if (instance == null) instance = new DatabasePage();
-        return DatabasePage.instance;
+        return instance;
     }
 }

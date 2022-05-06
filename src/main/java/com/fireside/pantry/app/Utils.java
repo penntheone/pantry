@@ -29,7 +29,7 @@ public class Utils {
         return new Gson().fromJson(reader, DBConfig.class);
     }
 
-    private static JsonReader getJsonReader(String resourceName) {
+    public static JsonReader getJsonReader(String resourceName) {
         return new JsonReader(new InputStreamReader(loadResource(resourceName)));
     }
 
