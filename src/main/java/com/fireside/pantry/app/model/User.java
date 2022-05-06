@@ -5,36 +5,17 @@ import com.google.gson.Gson;
 
 public class User {
 
-    private final int id;
-    private final String username;
-    private final String email;
-    private final String firstName;
-    private final String lastName;
-    private final String birthday;
-    private final String authString;
+    private int id;
+    private String username;
+    private String email;
+    private String firstName;
+    private String lastName;
+    private String birthday;
+    private String authString;
+    private boolean isAdmin;
+    private boolean isStaff;
 
-    public User() {
-        this.id = -1;
-        this.username = "";
-        this.email = "";
-        this.firstName = "";
-        this.lastName = "";
-        this.birthday = "";
-        this.authString = "";
-    }
-
-    public User(int id,
-                String username, String email,
-                String firstName, String lastName,
-                String birthday, String authString) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthday = birthday;
-        this.authString = authString;
-    }
+    public User() { }
 
     public User(Row row) throws IllegalArgumentException {
         try {
@@ -45,6 +26,8 @@ public class User {
             this.lastName = row.get("last_name");
             this.birthday = row.get("birthday");
             this.authString = row.get("auth_string");
+            this.isAdmin = row.get("is_admin").equals("1");
+            this.isStaff = row.get("is_staff").equals("2");
         } catch (Exception exception) {
             throw new IllegalArgumentException(exception);
         }
@@ -76,6 +59,48 @@ public class User {
 
     public String getAuthString() {
         return authString;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public boolean isStaff() {
+        return isStaff;
+    }
+
+    // -- Setters
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public void setAuthString(String authString) {
+        this.authString = authString;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    public void setStaff(boolean staff) {
+        isStaff = staff;
     }
 
     @Override
