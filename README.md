@@ -1,8 +1,10 @@
 # Pantry the App
-#### 2022 | Developed for CSE 201 at Miami University by the following fine people:
+#### May 7th, 2022, by Pendleton Pham - @phamsq, for CSE 201 Finals
 
-For CSE 201 Finals, I was the project manager and front-end of a meal management project, scraping 
-recipes from the internet and serving dynamic live from local database.
+For CSE 201 Finals, I was the project manager of a small team developing of a meal manager,
+utilizing best SWE methodology like prototyping and Agile.
+
+The project scrapes recipes from the internet and serving dynamic live from server database.
 
 Front-end in JavaFX, Back-end with Java, MySQL
 
