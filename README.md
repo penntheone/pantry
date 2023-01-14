@@ -1,7 +1,7 @@
 # Pantry the App
 #### May 7th, 2022, by Pendleton Pham - @phamsq, for CSE 201 Finals
 
-<img src="pantry.png" alt="drawing" width="50"/>
+<img src="pantry.png" alt="drawing" width="200"/>
 
 For CSE 201 Finals, I was the project manager of a small team developing of a meal manager,
 utilizing best SWE methodology like prototyping and Agile.
